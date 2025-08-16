@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethan Kunz - Engineering Leader</title>
-    <!-- AOS Scroll Animation Library CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -155,6 +154,10 @@
             gap: 10px;
         }
         
+        .section-title.competencies {
+             justify-content: flex-start;
+        }
+        
         .section-title::before { font-size: 18px; opacity: 0.8; }
         .section-title.summary-title::before { content: '👤'; }
         .section-title.competencies::before { content: '⚡'; }
@@ -194,13 +197,22 @@
             border-left: 4px solid #c41e3a;
         }
         
-        /* Core Competencies */
-        .competencies {
+        /* Competencies Section Styles */
+        .competencies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
         }
         
+        .competency-group h4 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1e2c4c;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+             
         .competency-group ul { list-style: none; padding: 0; }
         
         .competency-group li {
@@ -309,14 +321,18 @@
         .school { font-size: 16px; color: #7f8c8d; }
         
         /* Technical Expertise */
-        .tech-grid { display: grid; gap: 20px; }
+        .tech-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; 
+        }
         .tech-category h4 {
             font-size: 17px;
             font-weight: 600;
             color: #1e2c4c;
             margin-bottom: 15px;
         }
-        .skill { margin-bottom: 12px; }
+        .skill { margin-bottom: 15px; }
         .skill-name { display: block; margin-bottom: 5px; color: #555; }
         .skill-bar {
             height: 8px;
@@ -368,6 +384,7 @@
             .section { padding: 25px 30px; }
             .header h1 { font-size: 36px; }
             .contact-info { flex-direction: column; gap: 10px; }
+            .competencies-grid { grid-template-columns: 1fr; }
         }
 
         /* Print-specific styles */
@@ -394,65 +411,83 @@
 </head>
 <body>
     <div class="resume-container" id="resume-to-print">
-        <!-- Header -->
         <header class="header">
             <canvas id="header-canvas"></canvas>
             <div class="header-content">
                 <div class="header-top">
                     <div>
                         <h1>ETHAN KUNZ</h1>
-                        <div class="title">Engineering Leader</div>
+                        <div class="title">Engineering Leader | Global Security</div>
                     </div>
-                    <!-- Download PDF Button -->
-                    <a class="download-btn" id="download-pdf-btn" title="Download as PDF">Download PDF</a>
+                    <div style="text-align: center;">
+                        <a class="download-btn" id="download-pdf-btn" title="Download as PDF">Download PDF</a>
+                        <img src="KCNSC-logo.jpg" alt="KCNSC Logo" style="display: block; margin-top: 15px; max-width: 150px;">
+                    </div>
                 </div>
                 <div class="contact-info">
                     <span>📍 Pleasant Hill, MO 64080</span>
                     <span>📱 417-920-6774</span>
-                    <span>✉️ <a href="mailto:ethan.douglas.kunz@gmail.com">ethan.douglas.kunz@gmail.com</a></span>
-                    <span>🔗 <a href="https://linkedin.com/in/ethan-douglas-kunz" target="_blank">linkedin.com/in/ethan-douglas-kunz</a></span>
+                    <span>✉️ ethan.douglas.kunz@gmail.com</span>
+                    <span>🔗 linkedin.com/in/ethan-douglas-kunz</span>
                 </div>
             </div>
         </header>
         
-        <!-- Professional Summary -->
         <section class="section" data-aos="fade-up">
             <h2 class="section-title summary-title">Professional Summary</h2>
             <div class="summary-content">
-                Accomplished engineering leader with an MBA and a proven track record of directing complex, high-value technical programs for critical national security missions. Expertise in managing the full project lifecycle, from initial concept and rapid prototyping to final production and delivery. A dedicated and mission-focused leader with a strong foundation in electrical engineering, skilled in managing multi-million dollar budgets, leading cross-functional teams, and fostering key customer relationships.
+                Accomplished Engineer, Project Lead, and Military Leader with an MBA, and a proven record of executing over <strong>$5 million</strong> in complex, high-value technical programs for critical NNSA missions. Expertise in leading matrixed, multi-disciplinary teams through the full project lifecycle, from negotiation to final delivery of novel products. A mission-focused leader with a strong electrical engineering foundation, skilled in mitigating program risk, managing multi-million dollar budgets, and building collaborative relationships with executive-level government and contractor stakeholders.
             </div>
         </section>
 
-        <!-- Core Competencies -->
         <section class="section" data-aos="fade-up">
             <h2 class="section-title competencies">Core Competencies</h2>
-            <div class="competencies">
+            <div class="competencies-grid">
                 <div class="competency-group">
+                     <h4>Program & Portfolio Management</h4>
                     <ul>
-                        <li>Program & Project Management</li>
-                        <li>Customer Relationship Management</li>
-                        <li>Full Project Lifecycle Management</li>
-                        <li>Risk Management & Mitigation</li>
+                        <li>Full Program Lifecycle Management </li>
+                        <li>Cost, Schedule & Resource Planning </li>
+                        <li>Risk Identification & Mitigation </li>
+                        <li>Supply Chain & Asset Coordination </li>
                     </ul>
                 </div>
                 <div class="competency-group">
+                     <h4>Leadership & Communication</h4>
                     <ul>
-                        <li>Budget & Financial Oversight</li>
-                        <li>Cross-Functional Team Leadership</li>
-                        <li>Strategic Planning & Execution</li>
-                        <li>Rapid Prototyping & Agile Methodologies</li>
+                        <li>Matrix & Cross-Functional Teams </li>
+                        <li>Stakeholder Engagement & Liaison </li>
+                        <li>Customer Requirement Management </li>
+                        <li>Negotiation & Mentorship </li>
                     </ul>
                 </div>
+                 <div class="competency-group">
+                     <h4>Strategic & Financial Oversight</h4>
+                    <ul>
+                        <li>Strategic Planning & Execution </li>
+                        <li>Budget & Financial Management </li>
+                        <li>Business Process Improvement </li>
+                        <li>Quality Program Development </li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                    <h4>Technical Execution & Innovation</h4>
+                   <ul>
+                       <li>Full-Cycle Product Development </li>
+                       <li>Rapid Prototyping & Quick React Contracts </li>
+                       <li>R&D of Novel Technologies </li>
+                       <li>Complex Technical Problem-Solving </li>
+                   </ul>
+               </div>
             </div>
         </section>
         
-        <!-- Professional Experience -->
         <section class="section" data-aos="fade-up">
             <h2 class="section-title experience">Professional Experience</h2>
             
             <div class="experience-item">
                 <div class="company-header">
-                    <div class="company-name">Global Security (KCNSC)<span class="company-location">Kansas City, MO</span></div>
+                    <div class="company-name">Honeywell FM&T / KCNSC<span class="company-location">Kansas City, MO</span></div>
                 </div>
                 
                 <div class="position-block">
@@ -461,9 +496,10 @@
                         <span class="position-date">May 2024 – Present</span>
                     </div>
                     <ul class="achievements">
-                        <li><strong>Portfolio Management:</strong> Direct a <strong>$1.4M+</strong> project portfolio for multiple SP1 customers, ensuring alignment with strategic objectives.</li>
-                        <li><strong>Program Leadership:</strong> Oversee <strong>6 concurrent</strong> high-priority projects, managing budget, resources, and risk mitigation.</li>
-                        <li><strong>Customer Excellence:</strong> Serve as primary liaison for key customers, leading biannual training on critical operational integration.</li>
+                        <li><strong>Portfolio & Financial Management:</strong> Directed <strong>$5,000,000</strong> in project execution across 7+ programs for the Special Projects 1 pulse power team, personally delivering <strong>$4.7M</strong> in novel products vital to national security missions.</li>
+                        <li><strong>Program Leadership & Stakeholder Liaison:</strong> Act as technical lead for a bi-annual <strong>$300k</strong> training program, coordinating over 50 personnel to train and coordinate with up to 50 executive-level sponsors per year.</li>
+                        <li><strong>Strategic Development:</strong> Contributed to a strategic task force to develop and author a new, comprehensive quality program for the SP1 directorate.</li>
+                        <li><strong>Talent Development:</strong> Mentored 5 junior engineers across multiple high-stakes projects, successfully helping 7 teammates become backups for critical program roles through strategic budgeting and planning.</li>
                     </ul>
                 </div>
                 
@@ -473,137 +509,144 @@
                         <span class="position-date">May 2020 – May 2024</span>
                     </div>
                     <ul class="achievements">
-                        <li><strong>Legacy Platform Management:</strong> Guided <strong>9 critical milestones</strong> for NNSA platforms, ensuring project continuity and on-time delivery.</li>
-                        <li><strong>Product Development:</strong> Led the complete lifecycle for <strong>5 new</strong> Global Security deliverables, from design through production.</li>
-                        <li><strong>Innovation Leadership:</strong> Pioneered communications technology across <strong>3 research projects</strong>, contributing to strategic roadmap goals.</li>
-                        <li><strong>Cross-Functional Collaboration:</strong> Managed <strong>10+ projects</strong> from concept to production, navigating all design gates (DCR to AR).</li>
-                        <li><strong>Rapid Response:</strong> Solved complex technical challenges for rapid prototyping and quick-react contracts to meet urgent mission deadlines.</li>
+                        <li>Managed the complete lifecycle for <strong>6 new program deliverables</strong>, including a <strong>$2M project</strong> that culminated in a 100-day rapid-reaction delivery of 30 full-scale systems.</li>
+                        <li>Acted as a primary liaison between customers, suppliers, and internal departments to resolve complex technical and logistical issues.</li>
+                        <li>Led project planning and execution across 15 departments, delegating over 100 action items using JIRA and MS Projects to migrate 3 legacy NNSA components and meet 9 critical milestones.</li>
+                        <li>Spearheaded research and development across 5 projects, resulting in <strong>2 patent disclosures</strong> in Li-Fi technology aligned with COE roadmaps.</li>
                     </ul>
                 </div>
             </div>
             
             <div class="experience-item">
                 <div class="company-header">
-                    <div class="company-name">Nucor Steel Longview (NSLV)<span class="company-location">Longview, TX</span></div>
+                    <div class="company-name">Nucor Corporation<span class="company-location">Longview, TX & Blytheville, AR</span></div>
                 </div>
                 <div class="position-block">
                     <div class="position-title">
-                        <span class="position-name">Electrical Projects Lead</span>
-                        <span class="position-date">December 2019 – April 2020</span>
+                        <span class="position-name">Electrical Projects Lead / Industrial Technician</span>
+                        <span class="position-date">May 2018 – April 2020</span>
                     </div>
                     <ul class="achievements">
-                        <li><strong>Operations Leadership:</strong> As sole electrical projects day lead, implemented advanced control systems across Roll Mill and Finishing departments.</li>
-                        <li><strong>Process Optimization:</strong> Oversaw high-impact initiatives contributing to <strong>multi-million dollar</strong> profitability increases.</li>
+                        <li>Led capital improvement projects for Rolling and Finishing Mills, including a new steel Quench process, redesign of power feeds, and implementation of new automation systems.</li>
+                        <li>Designed and managed critical modernization projects for Electric Arc Furnace (EAF) systems to improve efficiency and safety.</li>
+                        <li>Engineered and deployed a novel infrared monitoring system for steel tap streams, enhancing process control and visibility.</li>
+                        <li>Served as an electrical technician responsible for preventative maintenance, troubleshooting, and modernization projects across industrial VFD, PID, PLC, and HMI systems.</li>
                     </ul>
                 </div>
             </div>
         </section>
         
-        <!-- Military Service -->
         <section class="section page-break" data-aos="fade-up">
             <h2 class="section-title military">Military Service</h2>
             <div class="experience-item">
                 <div class="company-header">
-                    <div class="company-name">US Army, 325th Field Hospital<span class="company-location">Independence, MO & Soto Cano, Honduras</span></div>
+                    <div class="company-name">US Army Reserves<span class="company-location">Kansas City, MO & Honduras</span></div>
                 </div>
                 <div class="position-block">
                     <div class="position-title">
-                        <span class="position-name">Biomedical Specialist / NCOIC / Platoon Sergeant (E5)</span>
-                        <span class="position-date">July 2012 – June 2021</span>
+                        <span class="position-name">Biomedical Equipment Technician (E5)</span>
+                        <span class="position-date">Jul 2012 – Jun 2012</span>
                     </div>
                     <ul class="achievements">
-                        <li><strong>Leadership Excellence:</strong> Led and mentored a team of <strong>6 BMET soldiers</strong> and a platoon of <strong>22 Medical Augment soldiers</strong>.</li>
-                        <li><strong>Operations Management:</strong> Managed all operational logistics for a field hospital, including work orders, mission coordination, and personnel.</li>
+                        <li>Served in key leadership roles including <strong>Platoon Sergeant</strong> for 22 soldiers and <strong>NCOIC</strong> for a biomedical section of 8 soldiers.</li>
+                        <li>Completed a 9-month deployment to Honduras, facilitating humanitarian missions roles as a Customs Agent, SOUTHCOM Knowledge Manager, Biomed, and Pharmacy Augment.</li>
+                        <li>Coordinated missions, funding, scheduling, and personnel for a 325th Combat Hospital across a 10-year career.</li>
                     </ul>
                 </div>
             </div>
         </section>
         
-        <!-- Education -->
         <section class="section" data-aos="fade-up">
             <h2 class="section-title education">Education</h2>
             <div class="education-grid">
                 <div class="education-item">
                     <div class="degree">Master of Business Administration<span class="gpa">GPA: 4.0/4.0</span></div>
-                    <div class="school">LeTourneau University | Longview, TX</div>
+                    <div class="school">LeTourneau University | Longview, TX </div>
                 </div>
                 <div class="education-item">
                     <div class="degree">Bachelor of Science, Electrical Engineering<span class="gpa">Cum Laude</span></div>
-                    <div class="school">Missouri University of Science and Technology | Rolla, MO</div>
+                    <div class="school">Missouri University of Science and Technology | Rolla, MO </div>
                 </div>
                 <div class="education-item">
                     <div class="degree">Biomedical Technician Certification (BMET)</div>
-                    <div class="school">Medical Education and Training Campus, CCAF | Fort Sam Houston, TX</div>
+                    <div class="school">Medical Education and Training Campus, CCAF | Fort Sam Houston, TX </div>
                 </div>
             </div>
         </section>
         
-        <!-- Technical Expertise -->
         <section class="section" data-aos="fade-up" id="skills-section">
             <h2 class="section-title technical">Technical Expertise</h2>
             <div class="tech-grid">
                 <div class="tech-category">
-                    <h4>Programming & Development</h4>
+                    <h4>Program Management</h4>
                     <div class="skill">
-                        <span class="skill-name">C / C++ / C#</span>
-                        <div class="skill-bar"><div class="skill-level" data-level="60%"></div></div>
-                    </div>
-                    <div class="skill">
-                        <span class="skill-name">HTML / JavaScript / SQL</span>
-                        <div class="skill-bar"><div class="skill-level" data-level="55%"></div></div>
-                    </div>
-                </div>
-                <div class="tech-category">
-                    <h4>Embedded Systems</h4>
-                    <div class="skill">
-                        <span class="skill-name">Microcontrollers (STM32, AVR, ESP)</span>
-                        <div class="skill-bar"><div class="skill-level" data-level="80%"></div></div>
-                    </div>
-                     <div class="skill">
-                        <span class="skill-name">Development Tools (VS, MPLAB)</span>
-                        <div class="skill-bar"><div class="skill-level" data-level="80%"></div></div>
-                    </div>
-                </div>
-                <div class="tech-category">
-                    <h4>Hardware & Controls</h4>
-                     <div class="skill">
-                        <span class="skill-name">Altium Designer & Schematic Design</span>
+                        <span class="skill-name">PM Methodologies (JIRA, MS Project) </span>
                         <div class="skill-bar"><div class="skill-level" data-level="90%"></div></div>
                     </div>
                     <div class="skill">
-                        <span class="skill-name">PLC / HMI & Automation</span>
+                        <span class="skill-name">Budgeting & Financial Oversight </span>
+                        <div class="skill-bar"><div class="skill-level" data-level="80%"></div></div>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4>Embedded Systems & Software</h4>
+                    <div class="skill">
+                        <span class="skill-name">C++ / C# / VB / SQL </span>
+                        <div class="skill-bar"><div class="skill-level" data-level="70%"></div></div>
+                    </div>
+                     <div class="skill">
+                        <span class="skill-name">Embedded Systems (ESP/STM/MSP) </span>
                         <div class="skill-bar"><div class="skill-level" data-level="75%"></div></div>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4>Hardware & Design</h4>
+                     <div class="skill">
+                        <span class="skill-name">Hardware Design (Altium, Mentor) </span>
+                        <div class="skill-bar"><div class="skill-level" data-level="65%"></div></div>
+                    </div>
+                    <div class="skill">
+                        <span class="skill-name">Pulsed Power & High-Voltage Systems </span>
+                        <div class="skill-bar"><div class="skill-level" data-level="85%"></div></div>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4>Industrial Controls</h4>
+                    <div class="skill">
+                        <span class="skill-name">Full Scale Manufacturing Controls </span>
+                        <div class="skill-bar"><div class="skill-level" data-level="90%"></div></div>
+                    </div>
+                     <div class="skill">
+                        <span class="skill-name">PLC / HMI / VFD Systems </span>
+                        <div class="skill-bar"><div class="skill-level" data-level="995%"></div></div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Honors & Awards -->
         <section class="section" data-aos="fade-up">
             <h2 class="section-title awards">Honors & Awards</h2>
             <div class="awards-grid">
                 <div class="award-category">
-                    <h4>KCNSC</h4>
+                    <h4>Honeywell FM&T / KCNSC</h4>
                     <ul>
-                        <li>5 BRAVO Awards for supporting SP1 Mission</li>
-                        <li>2 Block Rating HPD 2023</li>
+                        <li>5 BRAVO Awards for R&D and SP1 Mission Support </li>
+                        <li>2 Patent Submission Recognitions </li>
                     </ul>
                 </div>
                 <div class="award-category">
                     <h4>Military</h4>
                     <ul>
-                        <li>Army Commendation Medal</li>
-                        <li>Multiple Army Achievement Medals</li>
-                        <li>Distinguished Honor Graduate</li>
+                        <li>Army Commendation Medal </li>
+                        <li>Multiple Army Achievement Medals </li>
+                        <li>Distinguished Honor Graduate, Biomedical Specialist Course </li>
                     </ul>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Three.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- AOS Scroll Animation Library JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Initialize AOS
