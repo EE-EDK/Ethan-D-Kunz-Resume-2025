@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethan Kunz - Engineering Leader</title>
+    <!-- AOS Scroll Animation Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f5f6f7;
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .resume-container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            box-shadow: 0 0 40px rgba(0,0,0,0.08);
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .resume-container::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #c41e3a 0%, #c41e3a 40%, #1e2c4c 60%, #1e2c4c 100%);
+        }
+        
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #1e2c4c 0%, #2c3e5f 100%);
+            color: white;
+            padding: 45px 50px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #header-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 46px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .header .title {
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.95;
+            text-transform: uppercase;
+        }
+
+        .download-btn {
+            background-color: #c41e3a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background-color: #a3182f;
+            transform: translateY(-2px);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 16px;
+        }
+        
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            opacity: 0.9;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            border-bottom-color: white;
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 35px 50px;
+            position: relative;
+        }
+        
+        .section:nth-child(even) {
+            background: #fafbfc;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e2c4c;
+            border-bottom: 2px solid #1e2c4c;
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before { font-size: 18px; opacity: 0.8; }
+        .section-title.summary-title::before { content: '👤'; }
+        .section-title.competencies::before { content: '⚡'; }
+        .section-title.experience::before { content: '💼'; }
+        .section-title.military::before { content: '🎖️'; }
+        .section-title.education::before { content: '🎓'; }
+        .section-title.technical::before { content: '⚙️'; }
+        .section-title.awards::before { content: '🏆'; }
+
+        /* Title Animation */
+        .animate-title {
+            animation: highlight-expand 0.8s ease-out forwards;
+        }
+
+        @keyframes highlight-expand {
+            0% {
+                transform: scale(1);
+                color: #1e2c4c;
+            }
+            50% {
+                transform: scale(1.05);
+                color: #c41e3a;
+            }
+            100% {
+                transform: scale(1);
+                color: #1e2c4c;
+            }
+        }
+        
+        /* Professional Summary */
+        .summary-content {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #34495e;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #c41e3a;
+        }
+        
+        /* Core Competencies */
+        .competencies {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .competency-group ul { list-style: none; padding: 0; }
+        
+        .competency-group li {
+            padding: 5px 0 5px 20px;
+            position: relative;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .competency-group li:before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #c41e3a;
+            font-weight: bold;
+        }
+        
+        /* Experience Section */
+        .experience-item {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(30, 44, 76, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
+        
+        .experience-item:last-child { border-bottom: none; padding-bottom: 0; }
+        
+        .company-header { margin-bottom: 15px; }
+        
+        .company-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .company-location {
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-left: 8px;
+            font-weight: normal;
+        }
+        
+        .position-block { margin-bottom: 18px; }
+        .position-block:last-child { margin-bottom: 0; }
+        
+        .position-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .position-name {
+            font-size: 18px;
+            font-weight: 500;
+            color: #34495e;
+        }
+        
+        .position-date {
+            font-size: 16px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .achievements { list-style: none; padding: 0; }
+        
+        .achievements li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .achievements li:before {
+            content: '•';
+            position: absolute;
+            left: 8px;
+            color: #c41e3a;
+            font-weight: bold;
+        }
+        
+        .achievements li strong { color: #2c3e50; font-weight: 500; }
+        
+        /* Education Section */
+        .education-grid { display: grid; gap: 20px; }
+        
+        .education-item { padding: 15px 0; border-bottom: 1px solid rgba(30, 44, 76, 0.1); }
+        .education-item:last-child { border-bottom: none; }
+        
+        .degree {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .gpa { color: #c41e3a; font-weight: 500; margin-left: 10px; }
+        .school { font-size: 16px; color: #7f8c8d; }
+        
+        /* Technical Expertise */
+        .tech-grid { display: grid; gap: 20px; }
+        .tech-category h4 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1e2c4c;
+            margin-bottom: 15px;
+        }
+        .skill { margin-bottom: 12px; }
+        .skill-name { display: block; margin-bottom: 5px; color: #555; }
+        .skill-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, #1e2c4c, #2c3e5f);
+            border-radius: 4px;
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+        
+        /* Awards Section */
+        .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .award-category h4 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .award-category ul { list-style: none; padding: 0; }
+        .award-category li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            font-size: 16px;
+            color: #555;
+        }
+        .award-category li:before {
+            content: '★';
+            position: absolute;
+            left: 0;
+            color: #c41e3a;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .resume-container { margin: 0; border-radius: 0; }
+            .header { padding: 30px; }
+            .header-top { flex-direction: column; gap: 20px; }
+            .section { padding: 25px 30px; }
+            .header h1 { font-size: 36px; }
+            .contact-info { flex-direction: column; gap: 10px; }
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body { background: white; }
+            .resume-container { box-shadow: none; margin: 0; border-radius: 0; }
+            .download-btn, #header-canvas { display: none !important; }
+            .header {
+                background: #1e2c4c !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .section:nth-child(even) {
+                background: #fafbfc !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .experience-item:hover { transform: none; box-shadow: none; }
+            .animate-title { animation: none; transform: none; color: #1e2c4c !important; }
+            [data-aos] { opacity: 1 !important; transform: none !important; }
+            .page-break { page-break-before: always; }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container" id="resume-to-print">
+        <!-- Header -->
+        <header class="header">
+            <canvas id="header-canvas"></canvas>
+            <div class="header-content">
+                <div class="header-top">
+                    <div>
+                        <h1>ETHAN KUNZ</h1>
+                        <div class="title">Engineering Leader</div>
+                    </div>
+                    <!-- Download PDF Button -->
+                    <a class="download-btn" id="download-pdf-btn" title="Download as PDF">Download PDF</a>
+                </div>
+                <div class="contact-info">
+                    <span>📍 Pleasant Hill, MO 64080</span>
+                    <span>📱 417-920-6774</span>
+                    <span>✉️ <a href="mailto:ethan.douglas.kunz@gmail.com">ethan.douglas.kunz@gmail.com</a></span>
+                    <span>🔗 <a href="https://linkedin.com/in/ethan-douglas-kunz" target="_blank">linkedin.com/in/ethan-douglas-kunz</a></span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Professional Summary -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title summary-title">Professional Summary</h2>
+            <div class="summary-content">
+                Accomplished engineering leader with an MBA and a proven track record of directing complex, high-value technical programs for critical national security missions. Expertise in managing the full project lifecycle, from initial concept and rapid prototyping to final production and delivery. A dedicated and mission-focused leader with a strong foundation in electrical engineering, skilled in managing multi-million dollar budgets, leading cross-functional teams, and fostering key customer relationships.
+            </div>
+        </section>
+
+        <!-- Core Competencies -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title competencies">Core Competencies</h2>
+            <div class="competencies">
+                <div class="competency-group">
+                    <ul>
+                        <li>Program & Project Management</li>
+                        <li>Customer Relationship Management</li>
+                        <li>Full Project Lifecycle Management</li>
+                        <li>Risk Management & Mitigation</li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                    <ul>
+                        <li>Budget & Financial Oversight</li>
+                        <li>Cross-Functional Team Leadership</li>
+                        <li>Strategic Planning & Execution</li>
+                        <li>Rapid Prototyping & Agile Methodologies</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Professional Experience -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title experience">Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">Global Security (KCNSC)<span class="company-location">Kansas City, MO</span></div>
+                </div>
+                
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Senior Electrical Engineer</span>
+                        <span class="position-date">May 2024 – Present</span>
+                    </div>
+                    <ul class="achievements">
+                        <li><strong>Portfolio Management:</strong> Direct a <strong>$1.4M+</strong> project portfolio for multiple SP1 customers, ensuring alignment with strategic objectives.</li>
+                        <li><strong>Program Leadership:</strong> Oversee <strong>6 concurrent</strong> high-priority projects, managing budget, resources, and risk mitigation.</li>
+                        <li><strong>Customer Excellence:</strong> Serve as primary liaison for key customers, leading biannual training on critical operational integration.</li>
+                    </ul>
+                </div>
+                
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Electrical Engineer II & III</span>
+                        <span class="position-date">May 2020 – May 2024</span>
+                    </div>
+                    <ul class="achievements">
+                        <li><strong>Legacy Platform Management:</strong> Guided <strong>9 critical milestones</strong> for NNSA platforms, ensuring project continuity and on-time delivery.</li>
+                        <li><strong>Product Development:</strong> Led the complete lifecycle for <strong>5 new</strong> Global Security deliverables, from design through production.</li>
+                        <li><strong>Innovation Leadership:</strong> Pioneered communications technology across <strong>3 research projects</strong>, contributing to strategic roadmap goals.</li>
+                        <li><strong>Cross-Functional Collaboration:</strong> Managed <strong>10+ projects</strong> from concept to production, navigating all design gates (DCR to AR).</li>
+                        <li><strong>Rapid Response:</strong> Solved complex technical challenges for rapid prototyping and quick-react contracts to meet urgent mission deadlines.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">Nucor Steel Longview (NSLV)<span class="company-location">Longview, TX</span></div>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Electrical Projects Lead</span>
+                        <span class="position-date">December 2019 – April 2020</span>
+                    </div>
+                    <ul class="achievements">
+                        <li><strong>Operations Leadership:</strong> As sole electrical projects day lead, implemented advanced control systems across Roll Mill and Finishing departments.</li>
+                        <li><strong>Process Optimization:</strong> Oversaw high-impact initiatives contributing to <strong>multi-million dollar</strong> profitability increases.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Military Service -->
+        <section class="section page-break" data-aos="fade-up">
+            <h2 class="section-title military">Military Service</h2>
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">US Army, 325th Field Hospital<span class="company-location">Independence, MO & Soto Cano, Honduras</span></div>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Biomedical Specialist / NCOIC / Platoon Sergeant (E5)</span>
+                        <span class="position-date">July 2012 – June 2021</span>
+                    </div>
+                    <ul class="achievements">
+                        <li><strong>Leadership Excellence:</strong> Led and mentored a team of <strong>6 BMET soldiers</strong> and a platoon of <strong>22 Medical Augment soldiers</strong>.</li>
+                        <li><strong>Operations Management:</strong> Managed all operational logistics for a field hospital, including work orders, mission coordination, and personnel.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title education">Education</h2>
+            <div class="education-grid">
+                <div class="education-item">
+                    <div class="degree">Master of Business Administration<span class="gpa">GPA: 4.0/4.0</span></div>
+                    <div class="school">LeTourneau University | Longview, TX</div>
+                </div>
+                <div class="education-item">
+                    <div class="degree">Bachelor of Science, Electrical Engineering<span class="gpa">Cum Laude</span></div>
+                    <div class="school">Missouri University of Science and Technology | Rolla, MO</div>
+                </div>
+                <div class="education-item">
+                    <div class="degree">Biomedical Technician Certification (BMET)</div>
+                    <div class="school">Medical Education and Training Campus, CCAF | Fort Sam Houston, TX</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Technical Expertise -->
+        <section class="section" data-aos="fade-up" id="skills-section">
+            <h2 class="section-title technical">Technical Expertise</h2>
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h4>Programming & Development</h4>
+                    <div class="skill">
+                        <span class="skill-name">C / C++ / C#</span>
+                        <div class="skill-bar"><div class="skill-level" data-level="60%"></div></div>
+                    </div>
+                    <div class="skill">
+                        <span class="skill-name">HTML / JavaScript / SQL</span>
+                        <div class="skill-bar"><div class="skill-level" data-level="55%"></div></div>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4>Embedded Systems</h4>
+                    <div class="skill">
+                        <span class="skill-name">Microcontrollers (STM32, AVR, ESP)</span>
+                        <div class="skill-bar"><div class="skill-level" data-level="80%"></div></div>
+                    </div>
+                     <div class="skill">
+                        <span class="skill-name">Development Tools (VS, MPLAB)</span>
+                        <div class="skill-bar"><div class="skill-level" data-level="80%"></div></div>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4>Hardware & Controls</h4>
+                     <div class="skill">
+                        <span class="skill-name">Altium Designer & Schematic Design</span>
+                        <div class="skill-bar"><div class="skill-level" data-level="90%"></div></div>
+                    </div>
+                    <div class="skill">
+                        <span class="skill-name">PLC / HMI & Automation</span>
+                        <div class="skill-bar"><div class="skill-level" data-level="75%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Honors & Awards -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title awards">Honors & Awards</h2>
+            <div class="awards-grid">
+                <div class="award-category">
+                    <h4>KCNSC</h4>
+                    <ul>
+                        <li>5 BRAVO Awards for supporting SP1 Mission</li>
+                        <li>2 Block Rating HPD 2023</li>
+                    </ul>
+                </div>
+                <div class="award-category">
+                    <h4>Military</h4>
+                    <ul>
+                        <li>Army Commendation Medal</li>
+                        <li>Multiple Army Achievement Medals</li>
+                        <li>Distinguished Honor Graduate</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- AOS Scroll Animation Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800, // animation duration
+            once: true, // whether animation should happen only once - while scrolling down
+        });
+
+        // Intersection Observer for Skill Bars
+        const skillsSection = document.getElementById('skills-section');
+        const skillLevels = document.querySelectorAll('.skill-level');
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    skillLevels.forEach(skill => {
+                        skill.style.width = skill.getAttribute('data-level');
+                    });
+                    skillObserver.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+
+        skillObserver.observe(skillsSection);
+
+        // Intersection Observer for Section Titles
+        const titles = document.querySelectorAll('.section-title');
+
+        const titleObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-title');
+                    titleObserver.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, { threshold: 0.8 }); // Trigger when 80% of the title is visible
+
+        titles.forEach(title => {
+            titleObserver.observe(title);
+        });
+
+
+        // --- Three.js Background Animation ---
+        const canvas = document.getElementById('header-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+        
+        renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        // Create particles
+        const particlesGeometry = new THREE.BufferGeometry;
+        const particlesCount = 3000;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for (let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.008,
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        camera.position.z = 5;
+
+        // Mouse tracking for interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Animation loop
+        const clock = new THREE.Clock();
+        const animate = () => {
+            const elapsedTime = clock.getElapsedTime();
+            
+            // Animate particles
+            particlesMesh.rotation.y = -0.05 * elapsedTime;
+            
+            // Make particles react to mouse
+             camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.02;
+             camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.02;
+             camera.lookAt(scene.position);
+            
+            renderer.render(scene, camera);
+            window.requestAnimationFrame(animate);
+        };
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+            camera.aspect = canvas.offsetWidth / canvas.offsetHeight;
+            camera.updateProjectionMatrix();
+            renderer.setPixelRatio(window.devicePixelRatio);
+        });
+
+        // --- PDF Download Functionality ---
+        document.getElementById('download-pdf-btn').addEventListener('click', function() {
+            window.print();
+        });
+
+    </script>
+</body>
+</html>
