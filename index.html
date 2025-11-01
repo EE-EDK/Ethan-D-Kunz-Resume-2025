@@ -162,10 +162,13 @@
         .section-title.summary-title::before { content: '👤'; }
         .section-title.competencies::before { content: '⚡'; }
         .section-title.experience::before { content: '💼'; }
+        .section-title.leadership::before { content: '🤝'; }
+        .section-title.work-style::before { content: '🎯'; }
         .section-title.military::before { content: '🎖️'; }
         .section-title.education::before { content: '🎓'; }
         .section-title.technical::before { content: '⚙️'; }
         .section-title.awards::before { content: '🏆'; }
+        .section-title.volunteer::before { content: '❤️'; }
 
         /* Title Animation */
         .animate-title {
@@ -197,6 +200,13 @@
             border-left: 4px solid #c41e3a;
         }
         
+        .summary-content p {
+            margin-bottom: 15px;
+        }
+        .summary-content p:last-child {
+            margin-bottom: 0;
+        }
+        
         /* Competencies Section Styles */
         .competencies-grid {
             display: grid;
@@ -204,6 +214,10 @@
             gap: 30px;
         }
         
+        .competency-group {
+            position: relative;
+        }
+
         .competency-group h4 {
             font-size: 17px;
             font-weight: 600;
@@ -220,14 +234,22 @@
             position: relative;
             font-size: 16px;
             color: #555;
+            margin-bottom: 5px;
+            line-height: 1.7;
         }
         
         .competency-group li:before {
             content: '▸';
             position: absolute;
             left: 0;
+            top: 6px;
             color: #c41e3a;
             font-weight: bold;
+        }
+
+        .competency-group li strong {
+            color: #34495e;
+            font-weight: 600;
         }
         
         /* Experience Section */
@@ -245,7 +267,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.07);
         }
         
-        .experience-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .experience-item:last-child { 
+            border-bottom: none; 
+            padding-bottom: 0; 
+            margin-bottom: 0;
+        }
         
         .company-header { margin-bottom: 15px; }
         
@@ -270,6 +296,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
+            flex-wrap: wrap;
         }
         
         .position-name {
@@ -282,12 +309,14 @@
             font-size: 16px;
             color: #7f8c8d;
             font-style: italic;
+            flex-shrink: 0;
+            margin-left: 15px;
         }
         
         .achievements { list-style: none; padding: 0; }
         
         .achievements li {
-            padding: 8px 0 8px 25px;
+            padding: 8px 0 8px 20px;
             position: relative;
             font-size: 16px;
             line-height: 1.7;
@@ -295,14 +324,34 @@
         }
         
         .achievements li:before {
-            content: '•';
+            content: '▸';
             position: absolute;
-            left: 8px;
+            left: 0;
+            top: 14px;
             color: #c41e3a;
             font-weight: bold;
         }
         
+        .achievements li.list-header {
+            padding-left: 8px;
+            padding-top: 10px;
+            list-style: none;
+        }
+    
+        .achievements li.list-header:before {
+            content: none;
+        }
+        
+        .achievements li.indented-li {
+            padding-left: 45px;
+        }
+    
+        .achievements li.indented-li:before {
+            left: 25px;
+        }
+
         .achievements li strong { color: #2c3e50; font-weight: 500; }
+        .achievements li em { color: #34495e; font-style: italic; }
         
         /* Education Section */
         .education-grid { display: grid; gap: 20px; }
@@ -349,7 +398,14 @@
         }
         
         /* Awards Section */
-        .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .awards-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
+
+        @media (min-width: 768px) {
+            .awards-grid { 
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            }
+        }
+        
         .award-category h4 {
             font-size: 17px;
             font-weight: 600;
@@ -364,12 +420,22 @@
             position: relative;
             font-size: 16px;
             color: #555;
+            margin-bottom: 8px;
+            line-height: 1.7;
         }
         .award-category li:before {
-            content: '★';
+            content: '▸';
             position: absolute;
             left: 0;
+            top: 7px;
             color: #c41e3a;
+        }
+        .award-category li em {
+            display: block;
+            margin-left: -20px;
+            padding-left: 20px;
+            font-size: 0.95em;
+            color: #34495e;
         }
 
         .page-break {
@@ -417,7 +483,7 @@
                 <div class="header-top">
                     <div>
                         <h1>ETHAN KUNZ</h1>
-                        <div class="title">Engineering Leader | Global Security</div>
+                        <div class="title">Engineering Leader | Rapid Prototyping</div>
                     </div>
                     <div style="text-align: center;">
                         <a class="download-btn" id="download-pdf-btn" title="Download as PDF">Download PDF</a>
@@ -436,7 +502,7 @@
         <section class="section" data-aos="fade-up">
             <h2 class="section-title summary-title">Professional Summary</h2>
             <div class="summary-content">
-                Accomplished Engineer, Project Lead, and Military Leader with an MBA, and a proven record of executing <strong>multi-million</strong> dollar complex, high-value technical programs for critical missions partners. Expertise in leading and performing in matrixed, multi-disciplinary teams through the full project lifecycle, from negotiation to final delivery of novel products. A mission-focused leader with a strong electrical engineering foundation, skilled in mitigating program risk, managing large-scale budgets, and building collaborative relationships with executive-level government and contractor stakeholders.
+                <p>An accomplished Engineer, Project Lead, and Military Leader with an MBA, a B.S. in Electrical Engineering (Cum Laude), and an Active Security Clearance. Combines a decade of high-stakes technical experience—from extreme industrial environments at Nucor to leading many millions of dollars in national security programs at Honeywell/KCNSC—with a "servant-leader" philosophy. Possesses a proven record of executing complex project work and thrives in fast-paced, demanding QRC (Quick React Contract) environments. A full-scope R&D engineer at heart, passionate about owning the entire project lifecycle, from novel concept and board design to firmware programming, testing, manufacturing, and final delivery with quality paperwork.</p>
             </div>
         </section>
 
@@ -495,24 +561,36 @@
                         <span class="position-name">Senior Electrical Engineer</span>
                         <span class="position-date">May 2024 – Present</span>
                     </div>
-                    <ul class="achievements">
-                        <li><strong>Portfolio & Financial Management:</strong> Directed <strong>millions</strong> in project execution across 7+ programs for the Special Projects pulse power team, executing hundreds of hours toward novel products vital to national security missions.</li>
-                        <li><strong>Program Leadership & Stakeholder Liaison:</strong> Act as technical lead for a bi-annual training program, coordinating over 50 personnel to train and coordinate with up to 50 executive-level sponsors per year.</li>
-                        <li><strong>Strategic Development:</strong> Contributed to a strategic task force to develop and author a new, comprehensive quality program for the SP1 directorate.</li>
-                        <li><strong>Talent Development:</strong> Mentored 5 junior engineers across multiple high-stakes projects, successfully helping 7 teammates become backups for critical program roles through strategic budgeting and planning.</li>
-                    </ul>
-                </div>
-                
-                <div class="position-block">
-                    <div class="position-title">
-                        <span class="position-name">Electrical Engineer II & III</span>
-                        <span class="position-date">May 2020 – May 2024</span>
+                    <div class="position-title" style="margin-top: -10px;">
+                        <span class="position-name">Electrical Engineer III</span>
+                        <span class="position-date">May 2022 – May 2024</span>
                     </div>
+                    <div class="position-title" style="margin-top: -10px; margin-bottom: 20px;">
+                        <span class="position-name">Electrical Engineer II</span>
+                        <span class="position-date">May 2020 – May 2022</span>
+                    </div>
+                    
                     <ul class="achievements">
-                        <li>Managed the complete lifecycle for <strong>6 new program deliverables</strong>, including a <strong>$2M project</strong> that culminated in a 100-day rapid-reaction delivery of 30 fully qualified systems.</li>
-                        <li>Acted as a primary liaison between customers, suppliers, and internal departments to resolve complex technical and logistical issues.</li>
-                        <li>Led project planning and execution across 15 departments, delegating over 100 action items using JIRA and MS Projects to migrate 3 legacy NNSA components and meet 9 critical milestones.</li>
-                        <li>Spearheaded research and development across 5 projects, resulting in <strong>2 patent disclosures</strong> in Li-Fi technology aligned with COE roadmaps.</li>
+                        <li>Serves as a technical leader and project manager for the Special Projects pulse power team, directing project execution and R&D for critical national security partners.</li>
+                        
+                        <li class="list-header"><strong>Financial & Programmatic Impact:</strong></li>
+                        <li>Contributed <strong>thousands</strong> of direct hours and <strong>many millions</strong> of dollars in project execution to the pulse power team.</li>
+                        <li>Served as the technical or sub-component lead on numerous key projects (including an NNSA program modernization effort), executing <strong>millions</strong> of dollars in successful product deliveries.</li>
+                        <li>Led multiple projects from initial concept to full CDR or final product delivery.</li>
+                        <li>Successfully delivered a significant <strong>six-figure project</strong> (requiring over a thousand personal hours), which built sponsor confidence and led directly to a follow-on <strong>multi-million dollar QRC</strong>.</li>
+
+                        <li class="list-header"><strong>Leadership & Mentorship:</strong></li>
+                        <li>Acts as the technical lead for a highly technical, <strong>significant six-figure</strong> bi-annual training program, coordinating over 50 internal personnel and managing engagement with up to 50 executive-level sponsors per year.</li>
+                        <li>Led an NNSA program's design and testing for three legacy components, successfully navigating nine milestones past Final Design Review (FDR) to a complete design hand-off.</li>
+                        <li>Successfully cross-trained <strong>7 teammates</strong> for critical program roles by carefully budgeting and justifying the cost to the sponsor.</li>
+                        <li>Mentored multiple junior engineers by integrating them into critical projects, including unit testing for a major QRC.</li>
+                        
+                        <li class="list-header"><strong>Initiative & Problem-Solving:</strong></li>
+                        <li>Proactively took control of a strategic <strong>six-figure R&D project</strong> as the electrical lead, driving a major collaboration with the Micro-Electronics team that resulted in novel designs and three alternate designs beyond the original scope.</li>
+                        <li>Stepped in to assist another program by fixing critical software, filling a personnel gap, saving weeks of troubleshooting, and keeping a rapid delivery project on schedule.</li>
+                        <li><strong>Saved an estimated thousands of labor hours</strong> on efforts valued at over a <strong>million dollars</strong> by assisting in the design of a security-compliant local network setup for a CMM room.</li>
+                        <li>Executed a grueling multi-month QRC working 11-hour days to deliver 30 full-scale systems and worked hundreds of hours in less than two weeks on another QRC to conduct last-minute software testing, saving half of the products.</li>
+                        <li>Led R&D across 5 projects, resulting in <strong>2 patent disclosures</strong> in Li-Fi technology.</li>
                     </ul>
                 </div>
             </div>
@@ -523,16 +601,91 @@
                 </div>
                 <div class="position-block">
                     <div class="position-title">
-                        <span class="position-name">Electrical Projects Lead / Industrial Technician</span>
-                        <span class="position-date">May 2018 – April 2020</span>
-                        <span class="position-date">May 2016 - September 2016</span>
-                        <span class="position-date">May 2015 - December 2015</span>
+                        <span class="position-name">Electrical Projects Lead</span>
+                        <span class="position-date">Dec 2019 – Apr 2020</span>
                     </div>
                     <ul class="achievements">
-                        <li>Led capital improvement projects for Rolling and Finishing Mills, including a new steel Quench process, redesign of power feeds, and implementation of new automation systems.</li>
-                        <li>Designed and managed critical modernization projects for Electric Arc Furnace (EAF) systems to improve efficiency and safety.</li>
-                        <li>Engineered and deployed a novel infrared monitoring system for steel tap streams, enhancing process control and visibility.</li>
-                        <li>Served as an electrical technician responsible for preventative maintenance, troubleshooting, and modernization projects across industrial VFD, PID, PLC, and HMI systems.</li>
+                        <li>Responsible for modernization projects across three departments of 200 people at a 100,000 ton/year plate steel facility.</li>
+                        <li>Specific Projects: Added a steel Quench process, redesigned power feed to 9 furnaces, implemented a new ABB drive system.</li>
+                    </ul>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Industrial Electrical Technician</span>
+                        <span class="position-date">May 2018 – Dec 2019</span>
+                    </div>
+                    <ul class="achievements">
+                        <li>Worked long 12-hour rotating shifts as the sole electrical technician for the rolling mill and finishing departments.</li>
+                    </ul>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Co-op/Internship</span>
+                        <span class="position-date">May 2015-Dec 2015; May 2016-Sep 2016</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">Global Rescue Systems<span class="company-location">Columbia, MO</span></div>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Electrical Design Engineer</span>
+                        <span class="position-date">Aug 2017 – Mar 2018</span>
+                    </div>
+                    <ul class="achievements">
+                        <li>Worked as a non-profit consultant to design life-saving devices for various systems.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title leadership">Leadership & Mentorship</h2>
+            <div class="summary-content" style="margin-bottom: 30px;">
+                Core Philosophy: A "servant leader" model inspired by family and exceptional military commanders. This philosophy is built on a foundation of being down-to-earth, human, caring, and empathetic, with integrity as a paramount value.
+            </div>
+            <div class="competencies-grid">
+                <div class="competency-group">
+                     <h4>Mentorship in Practice</h4>
+                    <ul>
+                        <li>Actively mentor junior engineers by providing them with "tools you didn't have".</li>
+                        <li>Integrated a new Software Engineer II into unit testing on a major QRC.</li>
+                        <li>Mentored multiple Engineer I teammates across research and rapid projects.</li>
+                        <li>Successfully cross-trained 7 teammates for critical program roles by carefully budgeting and justifying the cost to the sponsor.</li>
+                        <li>Acts as a judge and mentor for FIRST Robotics teams.</li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                     <h4>Team Dynamics & Influence</h4>
+                    <ul>
+                        <li>Works to "level load" team responsibilities, such as taking direct ownership of GUI requirements on a project to reduce cost and balance software tasks.</li>
+                        <li>Consistently "touches base" with diverse groups across science and engineering.</li>
+                        <li>This cross-pollination of ideas (e.g., material science) directly seeds new concepts for rapid prototyping and brings new work to the team.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title work-style">Work Style & Environment</h2>
+            <div class="competencies-grid">
+                <div class="competency-group">
+                     <h4>Pace & Resilience</h4>
+                    <ul>
+                        <li>Prefers to "stay busy and balance a few things at a time," identifying three projects as an ideal workload.</li>
+                        <li>Accustomed to grueling, non-stop work schedules (e.g., multi-month QRCs working 11-hour days).</li>
+                        <li>Forged in environments like Nucor, working 16+ hour days in extreme heat, dust, and danger.</li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                     <h4>Ideal Role & Interests</h4>
+                    <ul>
+                        <li>Ideal Role: A full-scope R&D position focused on embedded systems.</li>
+                        <li>Technical Interests: Primary professional interests lie in embedded sensor arrays, advanced algorithms, and sensor fusion.</li>
+                        <li>Maintains a "massive" home laboratory for prototyping, including an $8,000 computer, 5k monitor, 16-channel Saleae, digital microscope, and Metcal soldering system.</li>
                     </ul>
                 </div>
             </div>
@@ -547,12 +700,14 @@
                 <div class="position-block">
                     <div class="position-title">
                         <span class="position-name">Biomedical Equipment Technician (E5)</span>
-                        <span class="position-date">Jul 2012 – Jun 2021</span>
+                        <span class="position-date">May 2011 – Jun 2021</span>
                     </div>
                     <ul class="achievements">
-                        <li>Served in key leadership roles including <strong>Platoon Sergeant</strong> for 22 soldiers and <strong>NCOIC</strong> for a biomedical section of 8 soldiers while supporting dozens of hot missions state side.</li>
-                        <li>Completed a 9-month deployment to Honduras, facilitating humanitarian missions roles as a Customs Agent, SOUTHCOM Knowledge Manager, Biomed, and Pharmacy Augment.</li>
-                        <li>Coordinated missions, funding, scheduling, and personnel for a 325th Combat Hospital across a 10-year career.</li>
+                        <li>Served 10 years, several of which were active, in key leadership roles including:</li>
+                        <li class="indented-li"><strong>1st Platoon Sergeant (2020 – 2021):</strong> Oversaw a platoon of 22 soldiers.</li>
+                        <li class="indented-li"><strong>NCOIC of Biomedical Section (Feb 2018 – Jun 2021):</strong> Oversaw a shop of 8 soldiers.</li>
+                        <li>Completed a 9-month deployment to Honduras, supporting JTF-B and humanitarian missions.</li>
+                        <li>Coordinated missions, funding, scheduling, training, and personnel issues for a 325th Combat Hospital.</li>
                     </ul>
                 </div>
             </div>
@@ -576,8 +731,26 @@
             </div>
         </section>
         
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title technical">Licenses & Certifications</h2>
+            <div class="awards-grid">
+                <div class="award-category" style="grid-column: 1 / -1;">
+                    <ul>
+                        <li><strong>Active Security Clearance</strong> (Issuer: United States Federal Government, Issued: Jun 2020, Expires: 2030)</li>
+                        <li><strong>Bio-medical Equipment Technician</strong> (Issuer: METC, Issued: Aug 2012, Credential ID: 4B-F2/198-68A10)</li>
+                        <li><strong>U.S. Customs Border Clearance Agent</strong> (Issuer: United States Department of War, Issued: Feb 2017)</li>
+                        <li><strong>Knowledge Management</strong> (Issuer: SOUTHCOM)</li>
+                        <li><strong>Forklift and Aerial Manlift Operator</strong> (Issuer: Southland Safety, LLC., Issued: Jun 2018)</li>
+                        <li><strong>Confined and Open Water Diving</strong> (Issuer: PADI, Issued: Feb 2017)</li>
+                        <li><strong>Military Drivers License (Humvee, M35)</strong> (Issuer: US Army, Issued: Jan 2019)</li>
+                        <li><strong>Range Safety Officer (RSO)</strong> (Issuer: A CO Det. 1 US ARMY 325th CSH, Issued: Jan 2019)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <section class="section" data-aos="fade-up" id="skills-section">
-            <h2 class="section-title technical">Technical Expertise</h2>
+            <h2 class="section-title technical">Technical Expertise (Snapshot)</h2>
             <div class="tech-grid">
                 <div class="tech-category">
                     <h4>Program Management</h4>
@@ -593,7 +766,7 @@
                 <div class="tech-category">
                     <h4>Embedded Systems & Software</h4>
                     <div class="skill">
-                        <span class="skill-name">C++ / C# / VB / SQL </span>
+                        <span class="skill-name">C++ / C# / Python / VBA </span>
                         <div class="skill-bar"><div class="skill-level" data-level="70%"></div></div>
                     </div>
                      <div class="skill">
@@ -604,7 +777,7 @@
                 <div class="tech-category">
                     <h4>Hardware & Design</h4>
                      <div class="skill">
-                        <span class="skill-name">Hardware Design (Altium, Mentor) </span>
+                        <span class="skill-name">Hardware Design (Altium, KiCad, LTSpice) </span>
                         <div class="skill-bar"><div class="skill-level" data-level="65%"></div></div>
                     </div>
                     <div class="skill">
@@ -619,32 +792,207 @@
                         <div class="skill-bar"><div class="skill-level" data-level="90%"></div></div>
                     </div>
                      <div class="skill">
-                        <span class="skill-name">PLC / HMI / VFD Systems </span>
-                        <div class="skill-bar"><div class="skill-level" data-level="995%"></div></div>
+                        <span class="skill-name">PLC / HMI / VFD Systems (FactoryTalk, Siemens)</span>
+                        <div class="skill-bar"><div class="skill-level" data-level="95%"></div></div>
                     </div>
                 </div>
             </div>
         </section>
         
         <section class="section" data-aos="fade-up">
-            <h2 class="section-title awards">Honors & Awards</h2>
-            <div class="awards-grid">
-                <div class="award-category">
-                    <h4>Honeywell FM&T / KCNSC</h4>
+            <h2 class="section-title competencies">Comprehensive Skills & Expertise</h2>
+            <div class="competencies-grid">
+                <div class="competency-group">
+                    <h4>Leadership & Interpersonal</h4>
                     <ul>
-                        <li>5 BRAVO Awards for R&D and SP1 Mission Support </li>
-                        <li>2 Patent Submission Recognitions </li>
+                        <li>Management & Mentorship</li>
+                        <li>Complex Project Management</li>
+                        <li>Product Management</li>
+                        <li>Technical Writing & Training</li>
                     </ul>
                 </div>
-                <div class="award-category">
-                    <h4>Military</h4>
+                <div class="competency-group">
+                    <h4>Hardware Design & Analysis (EDA)</h4>
                     <ul>
-                        <li>Army Commendation Medal </li>
-                        <li>Multiple Army Achievement Medals </li>
-                        <li>Distinguished Honor Graduate, Biomedical Specialist Course </li>
+                        <li>Altium</li>
+                        <li>KiCad</li>
+                        <li>LTSpice</li>
+                        <li>Logic 2.4</li>
+                        <li>Mentor Graphics</li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                    <h4>Software & Programming</h4>
+                    <ul>
+                        <li>C++, C#, Python, VBA</li>
+                        <li><strong>Web/DB:</strong> HTML/JS/CSS, ASP.NET Web API, MS SQL Server, T-SQL, MySQL</li>
+                        <li><strong>DevOps/IT:</strong> MS Office, Cisco Tech, Computer Hardware Troubleshooting</li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                    <h4>IDEs & Development Environments</h4>
+                    <ul>
+                        <li>Visual Studio</li>
+                        <li>Keil uVision5</li>
+                        <li>STM32Cube</li>
+                        <li>Arduino, Eclipse, MEMS Studio, Microchip Studio, MPlabs, Spyder 6</li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                    <h4>AI, Models & Platforms</h4>
+                    <ul>
+                        <li><strong>Tools:</strong> LM Studio, Docker, n8n, ollama, cuda</li>
+                        <li><strong>Models:</strong> Familiarity with DeepSeek, Sonnet, Opus, Haiku, Gemini Pro, Grok, ChatGPT</li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                    <h4>Embedded Systems & MCUs</h4>
+                    <ul>
+                        <li>ESP32, STM32, MSP TI</li>
+                        <li>RP2040, Atmega / Attiny</li>
+                        <li>Teensy 4.1, Beaglebone Black</li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                    <h4>Industrial Controls</h4>
+                    <ul>
+                        <li>Wonderware</li>
+                        <li>Proficy Machine Edition</li>
+                        <li>FactoryTalk</li>
+                        <li>Portal S7 Siemens</li>
+                        <li>Controllogix 5000, SLC500</li>
+                    </ul>
+                </div>
+                <div class="competency-group">
+                    <h4>Specialized Domains</h4>
+                    <ul>
+                        <li>Safety Critical Systems</li>
+                        <li>Pulse Power & High-Voltage</li>
+                        <li>Li-Fi Technology</li>
+                        <li>Biomedical Electronics</li>
+                        <li>Pneumatics & Hydraulic Systems</li>
+                        <li>Fiber Optics</li>
                     </ul>
                 </div>
             </div>
+        </section>
+
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title awards">Honors & Awards</h2>
+            <div class="awards-grid">
+                <div class="award-category">
+                    <h4>Civilian Honors</h4>
+                    <ul>
+                        <li><strong>5 BRAVO Awards</strong> - <em>Honeywell FM&T</em></li>
+                        <li><strong>2 Patent Submission Recognitions</strong> - <em>Honeywell FM&T</em></li>
+                    </ul>
+                </div>
+                <div class="award-category">
+                    <h4>Military Honors</h4>
+                    <ul>
+                        <li><strong>Certificate of Appreciation (Aug 2020)</strong>
+                            <em>Issued by Pentagon, DiLorenzo TRICARE Health Clinic. For enhancing patient experiences during assistance in August 2020.</em>
+                        </li>
+                        <li><strong>Army Achievement Medal (Jul 2017)</strong>
+                            <em>Issued for service as a Medical Maintenance NCO in Honduras. Citation Highlights: Acted as SME for the U.S. Embassy; Demonstrated versatility by drafting a CAD-based survey layout for a potential new hospital; Optimized the maintenance section by acquiring over 100 technical manuals.</em>
+                        </li>
+                        <li><strong>The Army Commendation Medal & Brigade Coin (Jun 2014)</strong>
+                            <em>Issued for actions during "Operation Appalachia Care." Citation Highlights: Redesigned duct ports, saving tens of thousands of dollars; Designed an optical phoropter counterbalance, increasing patient flow; Contributed to a record-breaking 8,000+ patients served.</em>
+                        </li>
+                        <li><strong>SGM Coin (Jun 2016)</strong>
+                            <em>Awarded for scoring expert marksmanship proficiency.</em>
+                        </li>
+                        <li><strong>The Army Achievement Medal (Aug 2012)</strong>
+                            <em>For meritorious achievement in being selected as the Distinguished Honor Graduate for the Biomedical Equipment Specialist Course.</em>
+                        </li>
+                        <li><strong>Certificate of Achievement (Jul 2012)</strong>
+                            <em>For scoring an exceptionally high score (296/300) on the Army Physical Fitness Test.</em>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title volunteer">Volunteer & Community Involvement</h2>
+            
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">FIRST in Missouri</div>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Judge</span>
+                        <span class="position-date">Oct 2022 – Present</span>
+                    </div>
+                    <ul class="achievements">
+                        <li>Acted as a judge for FIRST Robotics Competitions, judging teams on long-term projects and robotics design. Assisted in deciding which teams advanced to regionals and assigned awards.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">Asociación Hogar Nazareth<span class="company-location">Honduras</span></div>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Volunteer</span>
+                        <span class="position-date">Sep 2016 – Aug 2017</span>
+                    </div>
+                    <ul class="achievements">
+                        <li>Performed work during military deployment free time. Purchased and installed washing equipment, showers, and other hardware fixes.</li>
+                        <li>Set up a computer and internet network to enhance schooling for the girls' home.</li>
+                        <li>Provided security recommendations (e.g., higher walls, electric fencing) after a security incident.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">Combined Federal Campaign (CFC)</div>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">CFC Manager</span>
+                        <span class="position-date">Nov 2016 – Aug 2017</span>
+                    </div>
+                    <ul class="achievements">
+                        <li>Promoted, tracked, managed, and sponsored events and donations for the campaign.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">Operation Appalachia Care</div>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Biomedical Technician</span>
+                        <span class="position-date">May 2014 – Jun 2014</span>
+                    </div>
+                    <ul class="achievements">
+                        <li>Provided medical aid to low-income areas of the Appalachias as part of a joint state and federal cooperative (aligns with Army Commendation Medal).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="company-header">
+                    <div class="company-name">Teen Challenge NY & Dream Center LA</div>
+                </div>
+                <div class="position-block">
+                    <div class="position-title">
+                        <span class="position-name">Child & Homeless Outreach</span>
+                        <span class="position-date">2009 – 2010</span>
+                    </div>
+                    <ul class="achievements">
+                        <li>Assisted at-risk children and homeless populations, including gang violence and prostitution outreach.</li>
+                    </ul>
+                </div>
+            </div>
+
         </section>
     </div>
 
