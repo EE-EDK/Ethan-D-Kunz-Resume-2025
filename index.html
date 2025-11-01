@@ -198,6 +198,13 @@
             padding: 20px;
             background: #f8f9fa;
             border-left: 4px solid #c41e3a;
+            border-radius: 5px; /* Added */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added */
+        }
+        
+        .summary-content:hover { /* Added */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
         }
         
         .summary-content p {
@@ -212,6 +219,15 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
+            padding: 20px; /* Added */
+            border-radius: 5px; /* Added */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added */
+            background: #fff; /* Added */
+        }
+        
+        .competencies-grid:hover { /* Added */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
         }
         
         .competency-group {
@@ -354,7 +370,19 @@
         .achievements li em { color: #34495e; font-style: italic; }
         
         /* Education Section */
-        .education-grid { display: grid; gap: 20px; }
+        .education-grid { 
+            display: grid; 
+            gap: 20px; 
+            padding: 20px; /* Added */
+            border-radius: 5px; /* Added */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added */
+            background: #fff; /* Added */
+        }
+        
+        .education-grid:hover { /* Added */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
         
         .education-item { padding: 15px 0; border-bottom: 1px solid rgba(30, 44, 76, 0.1); }
         .education-item:last-child { border-bottom: none; }
@@ -374,7 +402,17 @@
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px; 
+            padding: 20px; /* Added */
+            border-radius: 5px; /* Added */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added */
+            background: #fff; /* Added */
         }
+        
+        .tech-grid:hover { /* Added */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
+        
         .tech-category h4 {
             font-size: 17px;
             font-weight: 600;
@@ -398,7 +436,20 @@
         }
         
         /* Awards Section */
-        .awards-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        .awards-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 30px; 
+            padding: 20px; /* Added */
+            border-radius: 5px; /* Added */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added */
+            background: #fff; /* Added */
+        }
+        
+        .awards-grid:hover { /* Added */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
 
         @media (min-width: 768px) {
             .awards-grid { 
@@ -483,11 +534,11 @@
                 <div class="header-top">
                     <div>
                         <h1>ETHAN KUNZ</h1>
-                        <div class="title">Engineering Leader | Rapid Prototyping</div>
+                        <div class="title">Engineering Leader | Global Security & Rapid Prototyping</div>
                     </div>
                     <div style="text-align: center;">
                         <a class="download-btn" id="download-pdf-btn" title="Download as PDF">Download PDF</a>
-                        <img src="KCNSC-logo.jpg" alt="KCNSC Logo" style="display: block; margin-top: 15px; max-width: 150px;">
+                        <img src="https://placehold.co/150x50/1e2c4c/ffffff?text=KCNSC" alt="KCNSC Logo" style="display: block; margin-top: 15px; max-width: 150px;">
                     </div>
                 </div>
                 <div class="contact-info">
