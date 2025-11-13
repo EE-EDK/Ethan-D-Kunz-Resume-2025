@@ -1107,9 +1107,12 @@
 
         </section>
 
-        <!-- 3D Showcase Section -->
-        <section class="section" style="padding: 0; margin-top: 40px; border-top: 2px solid #e0e0e0;">
-            <canvas id="metallic-scene" style="width: 100%; height: 400px; display: block;"></canvas>
+        <!-- Interactive Particle VFX Section -->
+        <section class="section" style="padding: 0; margin-top: 40px; position: relative;">
+            <canvas id="particle-vfx" style="width: 100%; height: 200vh; display: block; background: linear-gradient(180deg, #0a0e1a 0%, #1a1f3a 50%, #0a0e1a 100%);"></canvas>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.3); font-size: 24px; font-weight: 300; text-align: center; pointer-events: none; letter-spacing: 4px;">
+                INTERACTIVE PARTICLE FIELD
+            </div>
         </section>
     </div>
 
@@ -1677,106 +1680,205 @@
         });
 
         // ========================================
-        // METALLIC TORUS KNOT SCENE (Bottom of Resume)
+        // LINKED PARTICLES VFX (Bottom of Resume - 2 Page Scroll)
         // ========================================
         window.addEventListener('load', () => {
-            const metallicCanvas = document.getElementById('metallic-scene');
-            if (!metallicCanvas) return;
+            const vfxCanvas = document.getElementById('particle-vfx');
+            if (!vfxCanvas) return;
 
             // Scene setup
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(
-                45,
-                metallicCanvas.clientWidth / metallicCanvas.clientHeight,
+                75,
+                vfxCanvas.clientWidth / vfxCanvas.clientHeight,
                 0.1,
-                1000
+                2000
             );
-            camera.position.set(0, 0, 5);
+            camera.position.z = 400;
 
             const renderer = new THREE.WebGLRenderer({
-                canvas: metallicCanvas,
+                canvas: vfxCanvas,
                 antialias: true,
-                alpha: false
+                alpha: true
             });
-            renderer.setSize(metallicCanvas.clientWidth, metallicCanvas.clientHeight);
+            renderer.setSize(vfxCanvas.clientWidth, vfxCanvas.clientHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            renderer.toneMappingExposure = 0.65;
-            renderer.outputEncoding = THREE.sRGBEncoding;
 
-            // Create torus knot geometry
-            const geometry = new THREE.TorusKnotGeometry(1, 0.4, 120, 32);
-            const material = new THREE.MeshStandardMaterial({
-                metalness: 1.0,
-                roughness: 0.0,
-                envMapIntensity: 1.0
+            // Particle system
+            const particleCount = 500;
+            const particles = [];
+            const maxDistance = 150;
+            const mouse = new THREE.Vector3();
+            const raycaster = new THREE.Raycaster();
+            const mousePos = { x: 0, y: 0 };
+
+            // Particle class
+            class Particle {
+                constructor() {
+                    this.position = new THREE.Vector3(
+                        Math.random() * 1600 - 800,
+                        Math.random() * 1200 - 600,
+                        Math.random() * 400 - 200
+                    );
+                    this.velocity = new THREE.Vector3(
+                        Math.random() * 2 - 1,
+                        Math.random() * 2 - 1,
+                        Math.random() * 2 - 1
+                    );
+                    this.baseVelocity = this.velocity.clone();
+                    this.acceleration = new THREE.Vector3();
+                }
+
+                update() {
+                    // Apply acceleration
+                    this.velocity.add(this.acceleration);
+                    this.velocity.lerp(this.baseVelocity, 0.01);
+                    this.position.add(this.velocity);
+
+                    // Boundary wrapping
+                    if (Math.abs(this.position.x) > 800) this.position.x *= -0.99;
+                    if (Math.abs(this.position.y) > 600) this.position.y *= -0.99;
+                    if (Math.abs(this.position.z) > 200) this.position.z *= -0.99;
+
+                    this.acceleration.multiplyScalar(0);
+                }
+
+                applyForce(force) {
+                    this.acceleration.add(force);
+                }
+            }
+
+            // Create particles
+            const particleGeometry = new THREE.BufferGeometry();
+            const particlePositions = new Float32Array(particleCount * 3);
+            const particleColors = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+                particleColors[i * 3] = 0.3 + Math.random() * 0.7;
+                particleColors[i * 3 + 1] = 0.5 + Math.random() * 0.5;
+                particleColors[i * 3 + 2] = 1.0;
+            }
+
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+            particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 4,
+                vertexColors: true,
+                blending: THREE.AdditiveBlending,
+                transparent: true,
+                opacity: 0.8
             });
 
-            const torusKnot = new THREE.Mesh(geometry, material);
-            scene.add(torusKnot);
+            const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(particleSystem);
 
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
+            // Line connections
+            const lineGeometry = new THREE.BufferGeometry();
+            const linePositions = new Float32Array(particleCount * particleCount * 6);
+            const lineColors = new Float32Array(particleCount * particleCount * 6);
 
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-            directionalLight.position.set(5, 5, 5);
-            scene.add(directionalLight);
+            lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+            lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
 
-            // Try to load HDR environment
-            const rgbeLoader = new THREE.RGBELoader();
-            rgbeLoader.load(
-                'https://threejs.org/examples/textures/equirectangular/spruit_sunrise_4k.hdr.jpg',
-                function(texture) {
-                    texture.mapping = THREE.EquirectangularReflectionMapping;
-                    scene.environment = texture;
-                    scene.background = texture;
-                },
-                undefined,
-                function(error) {
-                    // Fallback: Create procedural gradient environment
-                    console.log('HDR load failed, using fallback environment');
-                    const gradientCanvas = document.createElement('canvas');
-                    gradientCanvas.width = 2048;
-                    gradientCanvas.height = 1024;
-                    const ctx = gradientCanvas.getContext('2d');
+            const lineMaterial = new THREE.LineBasicMaterial({
+                vertexColors: true,
+                blending: THREE.AdditiveBlending,
+                transparent: true,
+                opacity: 0.3
+            });
 
-                    const gradient = ctx.createLinearGradient(0, 0, 0, 1024);
-                    gradient.addColorStop(0, '#87CEEB');
-                    gradient.addColorStop(0.5, '#FFE4B5');
-                    gradient.addColorStop(1, '#FFA500');
+            const lineSystem = new THREE.LineSegments(lineGeometry, lineMaterial);
+            scene.add(lineSystem);
 
-                    ctx.fillStyle = gradient;
-                    ctx.fillRect(0, 0, 2048, 1024);
+            // Mouse tracking
+            vfxCanvas.addEventListener('mousemove', (event) => {
+                const rect = vfxCanvas.getBoundingClientRect();
+                mousePos.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                mousePos.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-                    const fallbackTexture = new THREE.CanvasTexture(gradientCanvas);
-                    fallbackTexture.mapping = THREE.EquirectangularReflectionMapping;
-                    scene.environment = fallbackTexture;
-                    scene.background = fallbackTexture;
-                }
-            );
-
-            // Orbit Controls
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = 2;
-            controls.enableZoom = true;
-            controls.enablePan = false;
+                raycaster.setFromCamera(mousePos, camera);
+                const intersects = raycaster.ray.origin.clone().add(
+                    raycaster.ray.direction.multiplyScalar(camera.position.z)
+                );
+                mouse.copy(intersects);
+            });
 
             // Animation loop
             function animate() {
                 requestAnimationFrame(animate);
-                controls.update();
+
+                // Update particles
+                const positions = particleGeometry.attributes.position.array;
+                let lineIndex = 0;
+                const linePos = lineGeometry.attributes.position.array;
+                const lineCol = lineGeometry.attributes.color.array;
+
+                particles.forEach((particle, i) => {
+                    // Mouse interaction
+                    const toMouse = new THREE.Vector3().subVectors(mouse, particle.position);
+                    const distance = toMouse.length();
+                    if (distance < 200 && distance > 0) {
+                        const force = toMouse.normalize().multiplyScalar(0.5 / distance);
+                        particle.applyForce(force);
+                    }
+
+                    particle.update();
+
+                    positions[i * 3] = particle.position.x;
+                    positions[i * 3 + 1] = particle.position.y;
+                    positions[i * 3 + 2] = particle.position.z;
+
+                    // Find nearby particles and draw connections
+                    for (let j = i + 1; j < particleCount; j++) {
+                        const other = particles[j];
+                        const dx = particle.position.x - other.position.x;
+                        const dy = particle.position.y - other.position.y;
+                        const dz = particle.position.z - other.position.z;
+                        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                        if (dist < maxDistance) {
+                            const alpha = 1 - (dist / maxDistance);
+
+                            linePos[lineIndex * 6] = particle.position.x;
+                            linePos[lineIndex * 6 + 1] = particle.position.y;
+                            linePos[lineIndex * 6 + 2] = particle.position.z;
+                            linePos[lineIndex * 6 + 3] = other.position.x;
+                            linePos[lineIndex * 6 + 4] = other.position.y;
+                            linePos[lineIndex * 6 + 5] = other.position.z;
+
+                            const color = 0.5 + alpha * 0.5;
+                            lineCol[lineIndex * 6] = color * 0.4;
+                            lineCol[lineIndex * 6 + 1] = color * 0.7;
+                            lineCol[lineIndex * 6 + 2] = color;
+                            lineCol[lineIndex * 6 + 3] = color * 0.4;
+                            lineCol[lineIndex * 6 + 4] = color * 0.7;
+                            lineCol[lineIndex * 6 + 5] = color;
+
+                            lineIndex++;
+                        }
+                    }
+                });
+
+                particleGeometry.attributes.position.needsUpdate = true;
+                lineGeometry.setDrawRange(0, lineIndex * 2);
+                lineGeometry.attributes.position.needsUpdate = true;
+                lineGeometry.attributes.color.needsUpdate = true;
+
+                // Gentle camera rotation
+                const time = Date.now() * 0.0001;
+                camera.position.x = Math.sin(time) * 100;
+                camera.lookAt(scene.position);
+
                 renderer.render(scene, camera);
             }
             animate();
 
             // Handle resize
             function onWindowResize() {
-                const width = metallicCanvas.clientWidth;
-                const height = metallicCanvas.clientHeight;
+                const width = vfxCanvas.clientWidth;
+                const height = vfxCanvas.clientHeight;
                 camera.aspect = width / height;
                 camera.updateProjectionMatrix();
                 renderer.setSize(width, height);
