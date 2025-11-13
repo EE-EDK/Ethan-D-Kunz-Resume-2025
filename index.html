@@ -206,17 +206,14 @@
              justify-content: flex-start;
         }
         
-        .section-title::before { font-size: 18px; opacity: 0.8; }
-        .section-title.summary-title::before { content: '👤'; }
-        .section-title.competencies::before { content: '⚡'; }
-        .section-title.experience::before { content: '💼'; }
-        .section-title.leadership::before { content: '🤝'; }
-        .section-title.work-style::before { content: '🎯'; }
-        .section-title.military::before { content: '🎖️'; }
-        .section-title.education::before { content: '🎓'; }
-        .section-title.technical::before { content: '⚙️'; }
-        .section-title.awards::before { content: '🏆'; }
-        .section-title.volunteer::before { content: '❤️'; }
+        /* 3D icon canvases */
+        .section-icon-3d {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
 
         /* Title Animation */
         .animate-title {
@@ -1214,11 +1211,189 @@
     </script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         // Initialize AOS
         AOS.init({
             duration: 800,
             once: true,
+        });
+
+        // Initialize 3D Section Icons
+        window.addEventListener('DOMContentLoaded', () => {
+            const iconConfig = {
+                'summary-title': { type: 'sphere', color: 0x4a90e2 },
+                'competencies': { type: 'bolt', color: 0xffd700 },
+                'experience': { type: 'box', color: 0x8b4513 },
+                'leadership': { type: 'torus', color: 0x32cd32 },
+                'work-style': { type: 'target', color: 0xff4500 },
+                'military': { type: 'star', color: 0xc41e3a },
+                'education': { type: 'pyramid', color: 0x9b59b6 },
+                'technical': { type: 'gear', color: 0x708090 },
+                'awards': { type: 'trophy', color: 0xffd700 },
+                'volunteer': { type: 'heart', color: 0xff69b4 }
+            };
+
+            const scenes = [];
+
+            document.querySelectorAll('.section-title').forEach(title => {
+                // Find which class this title has
+                let iconType = null;
+                for (let key in iconConfig) {
+                    if (title.classList.contains(key)) {
+                        iconType = key;
+                        break;
+                    }
+                }
+
+                if (!iconType) return;
+
+                // Create canvas
+                const canvas = document.createElement('canvas');
+                canvas.className = 'section-icon-3d';
+                canvas.width = 60;
+                canvas.height = 60;
+                title.insertBefore(canvas, title.firstChild);
+
+                // Setup Three.js scene
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+                camera.position.z = 2.5;
+
+                const renderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    alpha: true,
+                    antialias: true
+                });
+                renderer.setSize(60, 60);
+                renderer.setClearColor(0x000000, 0);
+
+                // Add lighting
+                const light = new THREE.DirectionalLight(0xffffff, 1);
+                light.position.set(1, 1, 1);
+                scene.add(light);
+
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                scene.add(ambientLight);
+
+                // Create mesh based on type
+                let mesh;
+                const config = iconConfig[iconType];
+                const material = new THREE.MeshPhongMaterial({
+                    color: config.color,
+                    shininess: 100
+                });
+
+                switch(config.type) {
+                    case 'sphere':
+                        mesh = new THREE.Mesh(new THREE.SphereGeometry(0.8, 32, 32), material);
+                        break;
+                    case 'bolt':
+                        // Lightning bolt shape using extrusion
+                        const boltShape = new THREE.Shape();
+                        boltShape.moveTo(0, 1);
+                        boltShape.lineTo(0.3, 0.2);
+                        boltShape.lineTo(0.1, 0.1);
+                        boltShape.lineTo(0.4, -1);
+                        boltShape.lineTo(0, -0.2);
+                        boltShape.lineTo(-0.2, -0.1);
+                        boltShape.lineTo(0, 1);
+                        mesh = new THREE.Mesh(
+                            new THREE.ExtrudeGeometry(boltShape, { depth: 0.2, bevelEnabled: false }),
+                            material
+                        );
+                        mesh.scale.set(0.6, 0.6, 0.6);
+                        break;
+                    case 'box':
+                        mesh = new THREE.Mesh(new THREE.BoxGeometry(1, 0.7, 0.5), material);
+                        break;
+                    case 'torus':
+                        mesh = new THREE.Mesh(new THREE.TorusGeometry(0.6, 0.2, 16, 32), material);
+                        break;
+                    case 'target':
+                        const group = new THREE.Group();
+                        group.add(new THREE.Mesh(new THREE.TorusGeometry(0.7, 0.05, 8, 32), material));
+                        group.add(new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.05, 8, 32), material));
+                        group.add(new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.05, 8, 32), material));
+                        mesh = group;
+                        break;
+                    case 'star':
+                        const starShape = new THREE.Shape();
+                        const outerRadius = 0.8;
+                        const innerRadius = 0.4;
+                        for (let i = 0; i < 10; i++) {
+                            const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                            const angle = (i / 10) * Math.PI * 2;
+                            const x = Math.cos(angle) * radius;
+                            const y = Math.sin(angle) * radius;
+                            if (i === 0) starShape.moveTo(x, y);
+                            else starShape.lineTo(x, y);
+                        }
+                        starShape.closePath();
+                        mesh = new THREE.Mesh(
+                            new THREE.ExtrudeGeometry(starShape, { depth: 0.2, bevelEnabled: true, bevelThickness: 0.05 }),
+                            material
+                        );
+                        mesh.scale.set(0.8, 0.8, 0.8);
+                        break;
+                    case 'pyramid':
+                        mesh = new THREE.Mesh(new THREE.ConeGeometry(0.7, 1.2, 4), material);
+                        break;
+                    case 'gear':
+                        const gearGroup = new THREE.Group();
+                        const core = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.2, 32), material);
+                        gearGroup.add(core);
+                        for (let i = 0; i < 8; i++) {
+                            const tooth = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.3, 0.2), material);
+                            const angle = (i / 8) * Math.PI * 2;
+                            tooth.position.x = Math.cos(angle) * 0.55;
+                            tooth.position.y = Math.sin(angle) * 0.55;
+                            gearGroup.add(tooth);
+                        }
+                        mesh = gearGroup;
+                        mesh.rotation.x = Math.PI / 2;
+                        break;
+                    case 'trophy':
+                        const trophyGroup = new THREE.Group();
+                        const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.3, 0.7, 32), material);
+                        cup.position.y = 0.3;
+                        trophyGroup.add(cup);
+                        const base = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.2, 32), material);
+                        base.position.y = -0.2;
+                        trophyGroup.add(base);
+                        mesh = trophyGroup;
+                        break;
+                    case 'heart':
+                        const heartShape = new THREE.Shape();
+                        heartShape.moveTo(0, 0.5);
+                        heartShape.bezierCurveTo(0, 0.8, -0.8, 0.8, -0.8, 0.3);
+                        heartShape.bezierCurveTo(-0.8, 0, -0.5, -0.3, 0, -1);
+                        heartShape.bezierCurveTo(0.5, -0.3, 0.8, 0, 0.8, 0.3);
+                        heartShape.bezierCurveTo(0.8, 0.8, 0, 0.8, 0, 0.5);
+                        mesh = new THREE.Mesh(
+                            new THREE.ExtrudeGeometry(heartShape, { depth: 0.3, bevelEnabled: true, bevelThickness: 0.05 }),
+                            material
+                        );
+                        mesh.scale.set(0.5, 0.5, 0.5);
+                        break;
+                }
+
+                scene.add(mesh);
+
+                // Store for animation
+                scenes.push({ scene, camera, renderer, mesh });
+            });
+
+            // Animation loop
+            function animate() {
+                scenes.forEach(({ scene, camera, renderer, mesh }) => {
+                    mesh.rotation.y += 0.01;
+                    if (mesh.rotation) mesh.rotation.x += 0.005;
+                    renderer.render(scene, camera);
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
         });
 
         // Intersection Observer for Skill Bars
