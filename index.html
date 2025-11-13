@@ -514,7 +514,7 @@
         @media print {
             body { background: white; }
             .resume-container { box-shadow: none; margin: 0; border-radius: 0; }
-            .download-btn, #header-canvas { display: none !important; }
+            .download-btn, #header-canvas, #three-bg { display: none !important; }
             .header {
                 background: #1e2c4c !important;
                 -webkit-print-color-adjust: exact;
@@ -531,71 +531,22 @@
             .page-break { page-break-before: always; }
         }
 
-        /* --- Added Starfield CSS --- */
-        #stars, #stars2, #stars3 {
-            position: fixed; /* Use fixed to keep stars in place on scroll */
+        /* --- Three.js Canvas Styles --- */
+        #three-bg {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
             width: 100%;
             height: 100%;
+            z-index: -1;
             display: block;
-            background: transparent;
-            z-index: -1; /* Place behind the resume container */
         }
-
-        #stars {
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            animation: animStar 50s linear infinite;
-        }
-
-        #stars2 {
-            background-image: 
-                radial-gradient(2px 2px at 40px 40px, #eee, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 80px 140px, #fff, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 120px 240px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 160px 80px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 180px 180px, #fff, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 300px 300px;
-            animation: animStar 100s linear infinite;
-        }
-
-        #stars3 {
-            background-image: 
-                radial-gradient(3px 3px at 80px 80px, #eee, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 160px 280px, #fff, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 240px 120px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 320px 160px, #fff, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 400px 400px;
-            animation: animStar 150s linear infinite;
-        }
-
-        @keyframes animStar {
-            from {
-                transform: translateY(0px);
-            }
-            to {
-                transform: translateY(-2000px);
-            }
-        }
-        /* --- End Starfield CSS --- */
+        /* --- End Three.js Canvas Styles --- */
     </style>
 </head>
 <body>
-    <!-- Added Starfield Divs --><div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>
+    <!-- Three.js Background Canvas -->
+    <canvas id="three-bg"></canvas>
 
     <div class="resume-container" id="resume-to-print">
         <header class="header">
@@ -1116,12 +1067,13 @@
         </section>
     </div>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> --><!-- REMOVED --><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Initialize AOS
         AOS.init({
-            duration: 800, // animation duration
-            once: true, // whether animation should happen only once - while scrolling down
+            duration: 800,
+            once: true,
         });
 
         // Intersection Observer for Skill Bars
@@ -1134,10 +1086,10 @@
                     skillLevels.forEach(skill => {
                         skill.style.width = skill.getAttribute('data-level');
                     });
-                    skillObserver.unobserve(entry.target); // Stop observing once animated
+                    skillObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+        }, { threshold: 0.5 });
 
         skillObserver.observe(skillsSection);
 
@@ -1148,24 +1100,391 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate-title');
-                    titleObserver.unobserve(entry.target); // Stop observing once animated
+                    titleObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.8 }); // Trigger when 80% of the title is visible
+        }, { threshold: 0.8 });
 
         titles.forEach(title => {
             titleObserver.observe(title);
         });
 
+        // ========================================
+        // THREE.JS INTERACTIVE 3D BACKGROUND
+        // ========================================
 
-        /* REMOVED THE ENTIRE 
-        // --- Three.js Background Animation ---
-        BLOCK OF JAVASCRIPT
-        
-        */
+        const canvas = document.getElementById('three-bg');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
 
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        camera.position.z = 50;
 
-        // --- PDF Download Functionality ---
+        // Mouse tracking
+        const mouse = { x: 0, y: 0 };
+        const targetMouse = { x: 0, y: 0 };
+
+        document.addEventListener('mousemove', (event) => {
+            targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Scroll tracking
+        let scrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+        });
+
+        // ========================================
+        // LIGHTING
+        // ========================================
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(10, 10, 10);
+        scene.add(directionalLight);
+
+        const pointLight1 = new THREE.PointLight(0xc41e3a, 1, 100);
+        pointLight1.position.set(-30, 20, 20);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0x1e2c4c, 1, 100);
+        pointLight2.position.set(30, -20, 20);
+        scene.add(pointLight2);
+
+        // ========================================
+        // PARTICLE NETWORK SYSTEM
+        // ========================================
+
+        const particleCount = 150;
+        const particleGeometry = new THREE.BufferGeometry();
+        const particlePositions = new Float32Array(particleCount * 3);
+        const particleVelocities = [];
+
+        for (let i = 0; i < particleCount; i++) {
+            particlePositions[i * 3] = (Math.random() - 0.5) * 150;
+            particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 150;
+            particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 80;
+
+            particleVelocities.push({
+                x: (Math.random() - 0.5) * 0.02,
+                y: (Math.random() - 0.5) * 0.02,
+                z: (Math.random() - 0.5) * 0.02
+            });
+        }
+
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.4,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particles = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(particles);
+
+        // Connection lines between particles
+        const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x1e2c4c,
+            transparent: true,
+            opacity: 0.15,
+            blending: THREE.AdditiveBlending
+        });
+
+        const lineGeometry = new THREE.BufferGeometry();
+        const linePositions = new Float32Array(particleCount * particleCount * 3);
+        lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+        const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+        scene.add(lines);
+
+        // ========================================
+        // FLOATING 3D TECH OBJECTS
+        // ========================================
+
+        const techObjects = [];
+
+        // Create various geometric shapes representing tech
+        function createTechObject(geometry, color, position, scale = 1) {
+            const material = new THREE.MeshStandardMaterial({
+                color: color,
+                metalness: 0.7,
+                roughness: 0.3,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(position.x, position.y, position.z);
+            mesh.scale.set(scale, scale, scale);
+
+            mesh.rotation.x = Math.random() * Math.PI;
+            mesh.rotation.y = Math.random() * Math.PI;
+
+            mesh.userData = {
+                initialPosition: { ...position },
+                rotationSpeed: {
+                    x: (Math.random() - 0.5) * 0.01,
+                    y: (Math.random() - 0.5) * 0.01,
+                    z: (Math.random() - 0.5) * 0.01
+                },
+                floatSpeed: Math.random() * 0.0005 + 0.0002,
+                floatRange: Math.random() * 3 + 1
+            };
+
+            scene.add(mesh);
+            techObjects.push(mesh);
+            return mesh;
+        }
+
+        // Microchips (Boxes)
+        for (let i = 0; i < 6; i++) {
+            const geometry = new THREE.BoxGeometry(2, 0.3, 2);
+            createTechObject(
+                geometry,
+                i % 2 === 0 ? 0x1e2c4c : 0xc41e3a,
+                {
+                    x: (Math.random() - 0.5) * 80,
+                    y: (Math.random() - 0.5) * 60,
+                    z: (Math.random() - 0.5) * 40
+                },
+                1 + Math.random()
+            );
+        }
+
+        // Circuit Board Elements (Toruses)
+        for (let i = 0; i < 5; i++) {
+            const geometry = new THREE.TorusGeometry(1.5, 0.3, 16, 100);
+            createTechObject(
+                geometry,
+                0x2c3e5f,
+                {
+                    x: (Math.random() - 0.5) * 80,
+                    y: (Math.random() - 0.5) * 60,
+                    z: (Math.random() - 0.5) * 40
+                },
+                1 + Math.random() * 0.5
+            );
+        }
+
+        // Gears (Octahedrons representing gears)
+        for (let i = 0; i < 8; i++) {
+            const geometry = new THREE.OctahedronGeometry(1.2);
+            createTechObject(
+                geometry,
+                0xc41e3a,
+                {
+                    x: (Math.random() - 0.5) * 90,
+                    y: (Math.random() - 0.5) * 70,
+                    z: (Math.random() - 0.5) * 50
+                },
+                0.8 + Math.random() * 0.7
+            );
+        }
+
+        // Dodecahedrons (Complex tech components)
+        for (let i = 0; i < 4; i++) {
+            const geometry = new THREE.DodecahedronGeometry(1.5);
+            createTechObject(
+                geometry,
+                0x1e2c4c,
+                {
+                    x: (Math.random() - 0.5) * 70,
+                    y: (Math.random() - 0.5) * 60,
+                    z: (Math.random() - 0.5) * 40
+                },
+                1 + Math.random() * 0.5
+            );
+        }
+
+        // Tetrahedrons (Signal/data elements)
+        for (let i = 0; i < 10; i++) {
+            const geometry = new THREE.TetrahedronGeometry(0.8);
+            createTechObject(
+                geometry,
+                0x2c3e5f,
+                {
+                    x: (Math.random() - 0.5) * 100,
+                    y: (Math.random() - 0.5) * 80,
+                    z: (Math.random() - 0.5) * 60
+                },
+                0.6 + Math.random() * 0.6
+            );
+        }
+
+        // Icosahedrons (Network nodes)
+        for (let i = 0; i < 6; i++) {
+            const geometry = new THREE.IcosahedronGeometry(1);
+            createTechObject(
+                geometry,
+                i % 2 === 0 ? 0xc41e3a : 0x1e2c4c,
+                {
+                    x: (Math.random() - 0.5) * 85,
+                    y: (Math.random() - 0.5) * 65,
+                    z: (Math.random() - 0.5) * 45
+                },
+                0.7 + Math.random() * 0.8
+            );
+        }
+
+        // ========================================
+        // RAYCASTER FOR INTERACTIVITY
+        // ========================================
+
+        const raycaster = new THREE.Raycaster();
+        const pointer = new THREE.Vector2();
+        let hoveredObject = null;
+
+        canvas.addEventListener('mousemove', (event) => {
+            pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+            pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            raycaster.setFromCamera(pointer, camera);
+            const intersects = raycaster.intersectObjects(techObjects);
+
+            // Reset previous hovered object
+            if (hoveredObject) {
+                hoveredObject.material.emissive.setHex(0x000000);
+                hoveredObject.scale.setScalar(hoveredObject.userData.originalScale);
+            }
+
+            if (intersects.length > 0) {
+                hoveredObject = intersects[0].object;
+                if (!hoveredObject.userData.originalScale) {
+                    hoveredObject.userData.originalScale = hoveredObject.scale.x;
+                }
+                hoveredObject.material.emissive.setHex(0xc41e3a);
+                hoveredObject.scale.setScalar(hoveredObject.userData.originalScale * 1.2);
+                canvas.style.cursor = 'pointer';
+            } else {
+                hoveredObject = null;
+                canvas.style.cursor = 'default';
+            }
+        });
+
+        // Click interaction - make objects spin faster temporarily
+        canvas.addEventListener('click', (event) => {
+            raycaster.setFromCamera(pointer, camera);
+            const intersects = raycaster.intersectObjects(techObjects);
+
+            if (intersects.length > 0) {
+                const obj = intersects[0].object;
+                obj.userData.rotationSpeed.x *= 5;
+                obj.userData.rotationSpeed.y *= 5;
+                obj.userData.rotationSpeed.z *= 5;
+
+                setTimeout(() => {
+                    obj.userData.rotationSpeed.x /= 5;
+                    obj.userData.rotationSpeed.y /= 5;
+                    obj.userData.rotationSpeed.z /= 5;
+                }, 1500);
+            }
+        });
+
+        // ========================================
+        // ANIMATION LOOP
+        // ========================================
+
+        let time = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.01;
+
+            // Smooth mouse parallax
+            mouse.x += (targetMouse.x - mouse.x) * 0.05;
+            mouse.y += (targetMouse.y - mouse.y) * 0.05;
+
+            // Camera parallax based on mouse
+            camera.position.x = mouse.x * 3;
+            camera.position.y = mouse.y * 3;
+            camera.lookAt(0, 0, 0);
+
+            // Animate particles
+            const positions = particles.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3] += particleVelocities[i].x;
+                positions[i * 3 + 1] += particleVelocities[i].y;
+                positions[i * 3 + 2] += particleVelocities[i].z;
+
+                // Boundary check
+                if (Math.abs(positions[i * 3]) > 75) particleVelocities[i].x *= -1;
+                if (Math.abs(positions[i * 3 + 1]) > 75) particleVelocities[i].y *= -1;
+                if (Math.abs(positions[i * 3 + 2]) > 40) particleVelocities[i].z *= -1;
+            }
+            particles.geometry.attributes.position.needsUpdate = true;
+
+            // Update particle connection lines
+            const linePos = lines.geometry.attributes.position.array;
+            let lineIndex = 0;
+            const maxDistance = 15;
+
+            for (let i = 0; i < particleCount; i++) {
+                for (let j = i + 1; j < particleCount; j++) {
+                    const dx = positions[i * 3] - positions[j * 3];
+                    const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
+                    const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
+                    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                    if (distance < maxDistance) {
+                        linePos[lineIndex++] = positions[i * 3];
+                        linePos[lineIndex++] = positions[i * 3 + 1];
+                        linePos[lineIndex++] = positions[i * 3 + 2];
+                        linePos[lineIndex++] = positions[j * 3];
+                        linePos[lineIndex++] = positions[j * 3 + 1];
+                        linePos[lineIndex++] = positions[j * 3 + 2];
+                    }
+                }
+            }
+
+            lines.geometry.setDrawRange(0, lineIndex / 3);
+            lines.geometry.attributes.position.needsUpdate = true;
+
+            // Animate tech objects
+            techObjects.forEach((obj, index) => {
+                // Rotation
+                obj.rotation.x += obj.userData.rotationSpeed.x;
+                obj.rotation.y += obj.userData.rotationSpeed.y;
+                obj.rotation.z += obj.userData.rotationSpeed.z;
+
+                // Floating motion
+                const floatOffset = Math.sin(time * obj.userData.floatSpeed * 100 + index) * obj.userData.floatRange;
+                obj.position.y = obj.userData.initialPosition.y + floatOffset;
+
+                // Slight drift
+                obj.position.x = obj.userData.initialPosition.x + Math.cos(time * 0.3 + index) * 2;
+                obj.position.z = obj.userData.initialPosition.z + Math.sin(time * 0.2 + index) * 1.5;
+
+                // Scroll-based movement
+                obj.position.y -= scrollY * 0.01;
+            });
+
+            // Animate lights
+            pointLight1.position.x = Math.sin(time * 0.5) * 30;
+            pointLight1.position.y = Math.cos(time * 0.3) * 20;
+
+            pointLight2.position.x = Math.cos(time * 0.4) * 30;
+            pointLight2.position.y = Math.sin(time * 0.6) * 20;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // PDF Download Functionality
         document.getElementById('download-pdf-btn').addEventListener('click', function() {
             window.print();
         });
