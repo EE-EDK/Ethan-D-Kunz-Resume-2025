@@ -569,7 +569,8 @@
 
     <div class="resume-container" id="resume-to-print">
         <header class="header">
-            <!-- <canvas id="header-canvas"></canvas> --><!-- REMOVED --><div class="header-content">
+            <canvas id="header-canvas"></canvas>
+            <div class="header-content">
                 <div class="header-top">
                     <div>
                         <h1>ETHAN KUNZ</h1>
@@ -1086,6 +1087,126 @@
         </section>
     </div>
 
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js';
+
+        // Header lens flare effect
+        const headerCanvas = document.getElementById('header-canvas');
+        const headerContainer = headerCanvas.parentElement;
+
+        // Set canvas size
+        function resizeHeaderCanvas() {
+            headerCanvas.width = headerContainer.offsetWidth;
+            headerCanvas.height = headerContainer.offsetHeight;
+            if (headerCamera) {
+                headerCamera.aspect = headerCanvas.width / headerCanvas.height;
+                headerCamera.updateProjectionMatrix();
+                headerRenderer.setSize(headerCanvas.width, headerCanvas.height);
+            }
+        }
+        resizeHeaderCanvas();
+
+        // Three.js scene setup
+        const headerScene = new THREE.Scene();
+        const headerCamera = new THREE.PerspectiveCamera(
+            40,
+            headerCanvas.width / headerCanvas.height,
+            1,
+            2000
+        );
+        headerCamera.position.z = 200;
+
+        const headerRenderer = new THREE.WebGLRenderer({
+            canvas: headerCanvas,
+            alpha: true,
+            antialias: true
+        });
+        headerRenderer.setSize(headerCanvas.width, headerCanvas.height);
+
+        // Create lens flare texture using canvas
+        function createLensFlareTexture() {
+            const size = 512;
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Create radial gradient
+            const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+            gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+            gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.8)');
+            gradient.addColorStop(0.4, 'rgba(100, 200, 255, 0.4)');
+            gradient.addColorStop(0.7, 'rgba(100, 200, 255, 0.1)');
+            gradient.addColorStop(1, 'rgba(100, 200, 255, 0)');
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            return new THREE.CanvasTexture(canvas);
+        }
+
+        function createSecondaryFlareTexture() {
+            const size = 256;
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Create hexagonal shape
+            const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/3);
+            gradient.addColorStop(0, 'rgba(100, 200, 255, 0.6)');
+            gradient.addColorStop(0.5, 'rgba(100, 200, 255, 0.3)');
+            gradient.addColorStop(1, 'rgba(100, 200, 255, 0)');
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            return new THREE.CanvasTexture(canvas);
+        }
+
+        const textureFlare0 = createLensFlareTexture();
+        const textureFlare3 = createSecondaryFlareTexture();
+
+        // Create light with lens flare
+        const light = new THREE.PointLight(0xffffff, 1.5, 2000);
+        light.position.set(150, 50, 100);
+        headerScene.add(light);
+
+        const lensflare = new Lensflare();
+        lensflare.addElement(new LensflareElement(textureFlare0, 350, 0));
+        lensflare.addElement(new LensflareElement(textureFlare3, 60, 0.6));
+        lensflare.addElement(new LensflareElement(textureFlare3, 70, 0.7));
+        lensflare.addElement(new LensflareElement(textureFlare3, 120, 0.9));
+        lensflare.addElement(new LensflareElement(textureFlare3, 70, 1));
+        light.add(lensflare);
+
+        // Animate
+        function animateHeader() {
+            requestAnimationFrame(animateHeader);
+
+            // Subtle light movement
+            const time = Date.now() * 0.0005;
+            light.position.x = Math.cos(time) * 50 + 100;
+            light.position.y = Math.sin(time * 0.7) * 20 + 30;
+
+            headerRenderer.render(headerScene, headerCamera);
+        }
+        animateHeader();
+
+        // Handle resize
+        window.addEventListener('resize', resizeHeaderCanvas);
+    </script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
