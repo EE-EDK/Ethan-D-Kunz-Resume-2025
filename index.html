@@ -1101,111 +1101,119 @@
         import * as THREE from 'three';
         import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js';
 
-        // Header lens flare effect
-        const headerCanvas = document.getElementById('header-canvas');
-        const headerContainer = headerCanvas.parentElement;
-
-        // Set canvas size
-        function resizeHeaderCanvas() {
-            headerCanvas.width = headerContainer.offsetWidth;
-            headerCanvas.height = headerContainer.offsetHeight;
-            if (headerCamera) {
-                headerCamera.aspect = headerCanvas.width / headerCanvas.height;
-                headerCamera.updateProjectionMatrix();
-                headerRenderer.setSize(headerCanvas.width, headerCanvas.height);
+        // Wait for DOM to be ready
+        window.addEventListener('DOMContentLoaded', () => {
+            // Header lens flare effect
+            const headerCanvas = document.getElementById('header-canvas');
+            if (!headerCanvas) {
+                console.error('Header canvas not found');
+                return;
             }
-        }
-        resizeHeaderCanvas();
 
-        // Three.js scene setup
-        const headerScene = new THREE.Scene();
-        const headerCamera = new THREE.PerspectiveCamera(
-            40,
-            headerCanvas.width / headerCanvas.height,
-            1,
-            2000
-        );
-        headerCamera.position.z = 200;
+            const headerContainer = headerCanvas.parentElement;
 
-        const headerRenderer = new THREE.WebGLRenderer({
-            canvas: headerCanvas,
-            alpha: true,
-            antialias: true
+            // Set canvas size
+            function resizeHeaderCanvas() {
+                headerCanvas.width = headerContainer.offsetWidth;
+                headerCanvas.height = headerContainer.offsetHeight;
+                if (camera) {
+                    camera.aspect = headerCanvas.width / headerCanvas.height;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(headerCanvas.width, headerCanvas.height);
+                }
+            }
+            resizeHeaderCanvas();
+
+            // Three.js scene setup
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(
+                50,
+                headerCanvas.width / headerCanvas.height,
+                1,
+                3000
+            );
+            camera.position.set(0, 0, 100);
+
+            const renderer = new THREE.WebGLRenderer({
+                canvas: headerCanvas,
+                alpha: true,
+                antialias: true
+            });
+            renderer.setSize(headerCanvas.width, headerCanvas.height);
+
+            // Create lens flare texture using canvas
+            function createLensFlareTexture() {
+                const size = 512;
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                // Create radial gradient
+                const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+                gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+                gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.8)');
+                gradient.addColorStop(0.4, 'rgba(150, 220, 255, 0.5)');
+                gradient.addColorStop(0.7, 'rgba(100, 200, 255, 0.2)');
+                gradient.addColorStop(1, 'rgba(100, 200, 255, 0)');
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, size, size);
+
+                return new THREE.CanvasTexture(canvas);
+            }
+
+            function createSecondaryFlareTexture() {
+                const size = 128;
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                // Create smaller flare element
+                const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+                gradient.addColorStop(0, 'rgba(150, 220, 255, 0.8)');
+                gradient.addColorStop(0.5, 'rgba(100, 200, 255, 0.4)');
+                gradient.addColorStop(1, 'rgba(100, 200, 255, 0)');
+
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, size, size);
+
+                return new THREE.CanvasTexture(canvas);
+            }
+
+            const textureFlare0 = createLensFlareTexture();
+            const textureFlare3 = createSecondaryFlareTexture();
+
+            // Create light with lens flare positioned in top right area
+            const light = new THREE.PointLight(0xffffff, 1.5, 2000);
+            light.position.set(200, 80, -50);
+            scene.add(light);
+
+            const lensflare = new Lensflare();
+            lensflare.addElement(new LensflareElement(textureFlare0, 500, 0));
+            lensflare.addElement(new LensflareElement(textureFlare3, 80, 0.6));
+            lensflare.addElement(new LensflareElement(textureFlare3, 100, 0.7));
+            lensflare.addElement(new LensflareElement(textureFlare3, 150, 0.9));
+            lensflare.addElement(new LensflareElement(textureFlare3, 90, 1));
+            light.add(lensflare);
+
+            // Animate
+            function animateHeader() {
+                requestAnimationFrame(animateHeader);
+
+                // Gentle movement
+                const time = Date.now() * 0.0003;
+                light.position.x = Math.cos(time) * 30 + 200;
+                light.position.y = Math.sin(time * 0.7) * 15 + 70;
+
+                renderer.render(scene, camera);
+            }
+            animateHeader();
+
+            // Handle resize
+            window.addEventListener('resize', resizeHeaderCanvas);
         });
-        headerRenderer.setSize(headerCanvas.width, headerCanvas.height);
-
-        // Create lens flare texture using canvas
-        function createLensFlareTexture() {
-            const size = 512;
-            const canvas = document.createElement('canvas');
-            canvas.width = size;
-            canvas.height = size;
-            const ctx = canvas.getContext('2d');
-
-            // Create radial gradient
-            const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-            gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-            gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.8)');
-            gradient.addColorStop(0.4, 'rgba(100, 200, 255, 0.4)');
-            gradient.addColorStop(0.7, 'rgba(100, 200, 255, 0.1)');
-            gradient.addColorStop(1, 'rgba(100, 200, 255, 0)');
-
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, size, size);
-
-            return new THREE.CanvasTexture(canvas);
-        }
-
-        function createSecondaryFlareTexture() {
-            const size = 256;
-            const canvas = document.createElement('canvas');
-            canvas.width = size;
-            canvas.height = size;
-            const ctx = canvas.getContext('2d');
-
-            // Create hexagonal shape
-            const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/3);
-            gradient.addColorStop(0, 'rgba(100, 200, 255, 0.6)');
-            gradient.addColorStop(0.5, 'rgba(100, 200, 255, 0.3)');
-            gradient.addColorStop(1, 'rgba(100, 200, 255, 0)');
-
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, size, size);
-
-            return new THREE.CanvasTexture(canvas);
-        }
-
-        const textureFlare0 = createLensFlareTexture();
-        const textureFlare3 = createSecondaryFlareTexture();
-
-        // Create light with lens flare
-        const light = new THREE.PointLight(0xffffff, 1.5, 2000);
-        light.position.set(150, 50, 100);
-        headerScene.add(light);
-
-        const lensflare = new Lensflare();
-        lensflare.addElement(new LensflareElement(textureFlare0, 350, 0));
-        lensflare.addElement(new LensflareElement(textureFlare3, 60, 0.6));
-        lensflare.addElement(new LensflareElement(textureFlare3, 70, 0.7));
-        lensflare.addElement(new LensflareElement(textureFlare3, 120, 0.9));
-        lensflare.addElement(new LensflareElement(textureFlare3, 70, 1));
-        light.add(lensflare);
-
-        // Animate
-        function animateHeader() {
-            requestAnimationFrame(animateHeader);
-
-            // Subtle light movement
-            const time = Date.now() * 0.0005;
-            light.position.x = Math.cos(time) * 50 + 100;
-            light.position.y = Math.sin(time * 0.7) * 20 + 30;
-
-            headerRenderer.render(headerScene, headerCamera);
-        }
-        animateHeader();
-
-        // Handle resize
-        window.addEventListener('resize', resizeHeaderCanvas);
     </script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
