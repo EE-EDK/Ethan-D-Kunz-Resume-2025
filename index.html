@@ -1203,7 +1203,6 @@
                     ? Math.random() * edgeWidth
                     : canvas.width - Math.random() * edgeWidth;
                 this.nodes = [];
-                this.dataPackets = [];
 
                 // Create connection nodes along the trace
                 for (let i = 0; i < 6; i++) {
@@ -1211,16 +1210,6 @@
                         y: (canvas.height / 6) * i + Math.random() * 50,
                         pulsePhase: Math.random() * Math.PI * 2,
                         size: 3
-                    });
-                }
-
-                // Create data packets
-                for (let i = 0; i < 2; i++) {
-                    this.dataPackets.push({
-                        y: Math.random() * canvas.height,
-                        speed: 0.5 + Math.random() * 1,
-                        size: 4,
-                        trail: []
                     });
                 }
             }
@@ -1248,39 +1237,6 @@
                     ctx.beginPath();
                     ctx.arc(this.x, node.y, node.size, 0, Math.PI * 2);
                     ctx.fillStyle = `rgba(150, 220, 255, ${0.6 + pulse * 0.4})`;
-                    ctx.fill();
-                });
-
-                // Draw and update data packets
-                this.dataPackets.forEach(packet => {
-                    packet.y += packet.speed;
-
-                    // Wrap around
-                    if (packet.y > canvas.height) packet.y = 0;
-
-                    // Add to trail
-                    packet.trail.unshift({ x: this.x, y: packet.y });
-                    if (packet.trail.length > 15) packet.trail.pop();
-
-                    // Draw trail
-                    packet.trail.forEach((pos, index) => {
-                        const alpha = (1 - index / packet.trail.length) * 0.6;
-                        ctx.beginPath();
-                        ctx.arc(pos.x, pos.y, packet.size * (1 - index / packet.trail.length), 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(150, 230, 255, ${alpha})`;
-                        ctx.fill();
-                    });
-
-                    // Draw main packet
-                    ctx.beginPath();
-                    ctx.arc(this.x, packet.y, packet.size, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(200, 240, 255, 0.9)';
-                    ctx.fill();
-
-                    // Glow
-                    ctx.beginPath();
-                    ctx.arc(this.x, packet.y, packet.size + 2, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(100, 200, 255, 0.3)';
                     ctx.fill();
                 });
             }
@@ -1325,38 +1281,11 @@
             }
         }
 
-        // Scanning line effect
-        let scanY = 0;
-        function drawScanLine() {
-            scanY = (scanY + 2) % canvas.height;
-
-            // Left edge scan
-            const gradientLeft = ctx.createLinearGradient(0, scanY - 100, 0, scanY + 100);
-            gradientLeft.addColorStop(0, 'rgba(100, 200, 255, 0)');
-            gradientLeft.addColorStop(0.5, 'rgba(100, 200, 255, 0.1)');
-            gradientLeft.addColorStop(1, 'rgba(100, 200, 255, 0)');
-
-            ctx.fillStyle = gradientLeft;
-            ctx.fillRect(0, scanY - 100, edgeWidth, 200);
-
-            // Right edge scan
-            const gradientRight = ctx.createLinearGradient(canvas.width - edgeWidth, scanY - 100, canvas.width, scanY + 100);
-            gradientRight.addColorStop(0, 'rgba(100, 200, 255, 0)');
-            gradientRight.addColorStop(0.5, 'rgba(100, 200, 255, 0.1)');
-            gradientRight.addColorStop(1, 'rgba(100, 200, 255, 0)');
-
-            ctx.fillStyle = gradientRight;
-            ctx.fillRect(canvas.width - edgeWidth, scanY - 100, edgeWidth, 200);
-        }
-
         function animateCircuitBoard() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Draw hex grid (static)
             drawHexGrid();
-
-            // Draw scanning line
-            drawScanLine();
 
             // Draw all circuit traces
             traces.forEach(trace => trace.draw());
