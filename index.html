@@ -18,28 +18,22 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
             color: #2c3e50;
-
-            /* --- Dark Background for 3D Effects --- */
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0d1225 100%);
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            /* --- End Dark Background --- */
-
+            background: linear-gradient(135deg, #0d1227 0%, #1a1f3a 100%);
+            overflow-x: hidden;
             padding: 0;
             margin: 0;
             font-size: 16px;
         }
-        
+
         .resume-container {
             max-width: 900px;
             margin: 30px auto;
-            background: rgba(240, 240, 240, 0.85); /* Semi-transparent */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 0 40px rgba(0,0,0,0.2);
+            background: #ffffff;
+            box-shadow: 0 0 60px rgba(0,0,0,0.3);
             position: relative;
             border-radius: 8px;
-            overflow: hidden;
-            z-index: 1; /* Ensure resume is above background stars */
+            overflow: visible;
+            z-index: 1;
         }
         
         .resume-container::before {
@@ -142,11 +136,11 @@
         .section {
             padding: 35px 50px;
             position: relative;
-            background: rgba(255, 255, 255, 0.3);
+            background: #ffffff;
         }
 
         .section:nth-child(even) {
-            background: rgba(233, 233, 233, 0.4); /* Slightly more opaque */
+            background: #fafbfc;
         }
         
         .section-title {
@@ -205,9 +199,7 @@
             line-height: 1.8;
             color: #2c3e50;
             padding: 20px;
-            background: rgba(224, 224, 224, 0.6);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: #f8f9fa;
             border-left: 4px solid #c41e3a;
             border-radius: 5px;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -233,14 +225,12 @@
             padding: 20px;
             border-radius: 5px;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            background: rgba(224, 224, 224, 0.6);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: #f8f9fa;
         }
 
         .competencies-grid:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
         .competency-group {
@@ -289,15 +279,12 @@
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             border-radius: 5px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            background: #f8f9fa;
         }
 
         .experience-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
         .experience-item:last-child { 
@@ -393,14 +380,12 @@
             padding: 20px;
             border-radius: 5px;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            background: rgba(224, 224, 224, 0.6);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: #f8f9fa;
         }
 
         .education-grid:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
         .education-item { padding: 15px 0; border-bottom: 1px solid rgba(30, 44, 76, 0.1); }
@@ -424,14 +409,12 @@
             padding: 20px;
             border-radius: 5px;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            background: rgba(224, 224, 224, 0.6);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: #f8f9fa;
         }
 
         .tech-grid:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
         .tech-category h4 {
@@ -464,14 +447,12 @@
             padding: 20px;
             border-radius: 5px;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            background: rgba(224, 224, 224, 0.6);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: #f8f9fa;
         }
 
         .awards-grid:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         @media (min-width: 768px) {
@@ -531,7 +512,7 @@
         @media print {
             body { background: white; }
             .resume-container { box-shadow: none; margin: 0; border-radius: 0; }
-            .download-btn, #header-canvas, #three-bg, #loading-screen { display: none !important; }
+            .download-btn, #edge-particles { display: none !important; }
             .header {
                 background: #1e2c4c !important;
                 -webkit-print-color-adjust: exact;
@@ -548,104 +529,22 @@
             .page-break { page-break-before: always; }
         }
 
-        /* --- Three.js Canvas Styles --- */
-        #three-bg {
+        /* --- Edge Particles Canvas --- */
+        #edge-particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            display: block;
-        }
-
-        /* Loading Screen */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0a0e27 0%, #1e2c4c 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out;
-        }
-
-        #loading-screen.hidden {
-            opacity: 0;
+            z-index: 0;
             pointer-events: none;
         }
-
-        .loader-container {
-            text-align: center;
-        }
-
-        .loader-title {
-            color: white;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-        }
-
-        .loader-bar {
-            width: 300px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .loader-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #c41e3a, #ff4d6d);
-            width: 0%;
-            transition: width 0.3s ease-out;
-            box-shadow: 0 0 10px rgba(196, 30, 58, 0.5);
-        }
-
-        .loader-text {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            letter-spacing: 1px;
-        }
-
-        .loader-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #c41e3a;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        /* --- End Three.js Canvas Styles --- */
+        /* --- End Edge Particles Canvas --- */
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader-container">
-            <div class="loader-title">ETHAN KUNZ</div>
-            <div class="loader-spinner"></div>
-            <div class="loader-bar">
-                <div class="loader-progress" id="loader-progress"></div>
-            </div>
-            <div class="loader-text" id="loader-text">Initializing 3D Environment...</div>
-        </div>
-    </div>
-
-    <!-- Three.js Background Canvas -->
-    <canvas id="three-bg"></canvas>
+    <!-- Minimal edge particle canvas -->
+    <canvas id="edge-particles"></canvas>
 
     <div class="resume-container" id="resume-to-print">
         <header class="header">
@@ -1166,40 +1065,14 @@
         </section>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // ========================================
-        // LOADING SCREEN MANAGEMENT
-        // ========================================
-
-        let loadingProgress = 0;
-        const loadingScreen = document.getElementById('loading-screen');
-        const loaderProgress = document.getElementById('loader-progress');
-        const loaderText = document.getElementById('loader-text');
-
-        function updateLoading(progress, text) {
-            loadingProgress = progress;
-            loaderProgress.style.width = progress + '%';
-            loaderText.textContent = text;
-
-            if (progress >= 100) {
-                setTimeout(() => {
-                    loadingScreen.classList.add('hidden');
-                    setTimeout(() => {
-                        loadingScreen.style.display = 'none';
-                    }, 500);
-                }, 300);
-            }
-        }
-
         // Initialize AOS
         AOS.init({
             duration: 800,
             once: true,
         });
-
-        updateLoading(10, 'Loading libraries...');
 
         // Intersection Observer for Skill Bars
         const skillsSection = document.getElementById('skills-section');
@@ -1235,759 +1108,68 @@
         });
 
         // ========================================
-        // THREE.JS INTERACTIVE 3D BACKGROUND
+        // MINIMAL EDGE PARTICLES (Pure Canvas)
         // ========================================
 
-        updateLoading(20, 'Initializing 3D scene...');
+        const canvas = document.getElementById('edge-particles');
+        const ctx = canvas.getContext('2d');
 
-        const canvas = document.getElementById('three-bg');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        camera.position.z = 50;
+        const particles = [];
+        const particleCount = 30;
+        const edgeWidth = 150; // Only show particles in 150px from edges
 
-        // Mobile detection
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const isTablet = /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(navigator.userAgent);
-
-        // Mouse and touch tracking
-        const mouse = { x: 0, y: 0 };
-        const targetMouse = { x: 0, y: 0 };
-
-        document.addEventListener('mousemove', (event) => {
-            targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        // Touch support
-        document.addEventListener('touchmove', (event) => {
-            if (event.touches.length > 0) {
-                const touch = event.touches[0];
-                targetMouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
-                targetMouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+        class Particle {
+            constructor() {
+                // Random on left or right edge
+                this.side = Math.random() < 0.5 ? 'left' : 'right';
+                this.x = this.side === 'left' ? Math.random() * edgeWidth : canvas.width - Math.random() * edgeWidth;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.3;
             }
-        });
 
-        // Gyroscope support for mobile
-        if (isMobile && window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', (event) => {
-                targetMouse.x = (event.gamma || 0) / 45;
-                targetMouse.y = (event.beta || 0) / 45;
-            });
+            update() {
+                this.y += this.speedY;
+
+                // Wrap around
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(196, 30, 58, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        // Scroll tracking
-        let scrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-            scrollY = window.scrollY;
-        });
-
-        // Current section tracking
-        let currentSection = 'summary';
-
-        // ========================================
-        // LIGHTING
-        // ========================================
-
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-        scene.add(ambientLight);
-
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        directionalLight.position.set(10, 10, 10);
-        scene.add(directionalLight);
-
-        const pointLight1 = new THREE.PointLight(0xc41e3a, 1, 100);
-        pointLight1.position.set(-30, 20, 20);
-        scene.add(pointLight1);
-
-        const pointLight2 = new THREE.PointLight(0x1e2c4c, 1, 100);
-        pointLight2.position.set(30, -20, 20);
-        scene.add(pointLight2);
-
-        updateLoading(40, 'Creating particle network...');
-
-        // ========================================
-        // PARTICLE NETWORK SYSTEM
-        // ========================================
-
-        // Adjust particle count based on device
-        const particleCount = isMobile ? 75 : (isTablet ? 100 : 150);
-        const particleGeometry = new THREE.BufferGeometry();
-        const particlePositions = new Float32Array(particleCount * 3);
-        const particleVelocities = [];
-
+        // Create particles
         for (let i = 0; i < particleCount; i++) {
-            particlePositions[i * 3] = (Math.random() - 0.5) * 150;
-            particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 150;
-            particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 80;
-
-            particleVelocities.push({
-                x: (Math.random() - 0.5) * 0.02,
-                y: (Math.random() - 0.5) * 0.02,
-                z: (Math.random() - 0.5) * 0.02
-            });
+            particles.push(new Particle());
         }
 
-        particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const particleMaterial = new THREE.PointsMaterial({
-            color: 0xffffff,
-            size: 0.4,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
-        });
-
-        const particles = new THREE.Points(particleGeometry, particleMaterial);
-        scene.add(particles);
-
-        // Connection lines between particles
-        const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0x1e2c4c,
-            transparent: true,
-            opacity: 0.15,
-            blending: THREE.AdditiveBlending
-        });
-
-        const lineGeometry = new THREE.BufferGeometry();
-        const linePositions = new Float32Array(particleCount * particleCount * 3);
-        lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-        const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-        scene.add(lines);
-
-        // ========================================
-        // MOUSE TRAIL PARTICLES
-        // ========================================
-
-        const trailParticles = [];
-        const maxTrailParticles = isMobile ? 20 : 40;
-
-        function createTrailParticle(x, y) {
-            const geometry = new THREE.SphereGeometry(0.2, 8, 8);
-            const material = new THREE.MeshBasicMaterial({
-                color: 0xc41e3a,
-                transparent: true,
-                opacity: 0.8
-            });
-            const particle = new THREE.Mesh(geometry, material);
-
-            const vector = new THREE.Vector3(x, y, 0);
-            vector.unproject(camera);
-            const dir = vector.sub(camera.position).normalize();
-            const distance = -camera.position.z / dir.z;
-            const pos = camera.position.clone().add(dir.multiplyScalar(distance));
-
-            particle.position.copy(pos);
-            particle.userData.life = 1.0;
-
-            scene.add(particle);
-            trailParticles.push(particle);
-
-            if (trailParticles.length > maxTrailParticles) {
-                const oldParticle = trailParticles.shift();
-                scene.remove(oldParticle);
-                oldParticle.geometry.dispose();
-                oldParticle.material.dispose();
-            }
-        }
-
-        let lastTrailTime = 0;
-        document.addEventListener('mousemove', (event) => {
-            const now = Date.now();
-            if (now - lastTrailTime > 50) {
-                const x = (event.clientX / window.innerWidth) * 2 - 1;
-                const y = -(event.clientY / window.innerHeight) * 2 + 1;
-                createTrailParticle(x, y);
-                lastTrailTime = now;
-            }
-        });
-
-        // ========================================
-        // DNA HELIX STRUCTURE
-        // ========================================
-
-        updateLoading(50, 'Building DNA helix...');
-
-        const helixObjects = [];
-        const helixRadius = 3;
-        const helixHeight = 60;
-        const helixPoints = 40;
-
-        for (let i = 0; i < helixPoints; i++) {
-            const angle = (i / helixPoints) * Math.PI * 4;
-            const y = (i / helixPoints) * helixHeight - helixHeight / 2;
-
-            // First strand
-            const sphere1 = new THREE.Mesh(
-                new THREE.SphereGeometry(0.3, 8, 8),
-                new THREE.MeshStandardMaterial({
-                    color: 0xc41e3a,
-                    transparent: true,
-                    opacity: 0.6,
-                    emissive: 0xc41e3a,
-                    emissiveIntensity: 0.2
-                })
-            );
-            sphere1.position.set(
-                Math.cos(angle) * helixRadius - 40,
-                y,
-                Math.sin(angle) * helixRadius - 30
-            );
-            scene.add(sphere1);
-            helixObjects.push(sphere1);
-
-            // Second strand (opposite)
-            const sphere2 = new THREE.Mesh(
-                new THREE.SphereGeometry(0.3, 8, 8),
-                new THREE.MeshStandardMaterial({
-                    color: 0x1e2c4c,
-                    transparent: true,
-                    opacity: 0.6,
-                    emissive: 0x1e2c4c,
-                    emissiveIntensity: 0.2
-                })
-            );
-            sphere2.position.set(
-                Math.cos(angle + Math.PI) * helixRadius - 40,
-                y,
-                Math.sin(angle + Math.PI) * helixRadius - 30
-            );
-            scene.add(sphere2);
-            helixObjects.push(sphere2);
-
-            // Connection lines between strands
-            if (i % 3 === 0) {
-                const lineGeo = new THREE.BufferGeometry().setFromPoints([
-                    sphere1.position,
-                    sphere2.position
-                ]);
-                const lineMat = new THREE.LineBasicMaterial({
-                    color: 0x2c3e5f,
-                    transparent: true,
-                    opacity: 0.3
-                });
-                const line = new THREE.Line(lineGeo, lineMat);
-                scene.add(line);
-                helixObjects.push(line);
-            }
-        }
-
-        // ========================================
-        // FLOATING 3D TECH OBJECTS
-        // ========================================
-
-        updateLoading(60, 'Generating tech objects...');
-
-        const techObjects = [];
-
-        // Create various geometric shapes representing tech
-        function createTechObject(geometry, color, position, scale = 1) {
-            const material = new THREE.MeshStandardMaterial({
-                color: color,
-                metalness: 0.7,
-                roughness: 0.3,
-                transparent: true,
-                opacity: 0.8
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
             });
 
-            const mesh = new THREE.Mesh(geometry, material);
-            mesh.position.set(position.x, position.y, position.z);
-            mesh.scale.set(scale, scale, scale);
-
-            mesh.rotation.x = Math.random() * Math.PI;
-            mesh.rotation.y = Math.random() * Math.PI;
-
-            mesh.userData = {
-                initialPosition: { ...position },
-                rotationSpeed: {
-                    x: (Math.random() - 0.5) * 0.01,
-                    y: (Math.random() - 0.5) * 0.01,
-                    z: (Math.random() - 0.5) * 0.01
-                },
-                floatSpeed: Math.random() * 0.0005 + 0.0002,
-                floatRange: Math.random() * 3 + 1
-            };
-
-            scene.add(mesh);
-            techObjects.push(mesh);
-            return mesh;
+            requestAnimationFrame(animateParticles);
         }
 
-        // Microchips (Boxes)
-        for (let i = 0; i < 6; i++) {
-            const geometry = new THREE.BoxGeometry(2, 0.3, 2);
-            createTechObject(
-                geometry,
-                i % 2 === 0 ? 0x1e2c4c : 0xc41e3a,
-                {
-                    x: (Math.random() - 0.5) * 80,
-                    y: (Math.random() - 0.5) * 60,
-                    z: (Math.random() - 0.5) * 40
-                },
-                1 + Math.random()
-            );
-        }
-
-        // Circuit Board Elements (Toruses)
-        for (let i = 0; i < 5; i++) {
-            const geometry = new THREE.TorusGeometry(1.5, 0.3, 16, 100);
-            createTechObject(
-                geometry,
-                0x2c3e5f,
-                {
-                    x: (Math.random() - 0.5) * 80,
-                    y: (Math.random() - 0.5) * 60,
-                    z: (Math.random() - 0.5) * 40
-                },
-                1 + Math.random() * 0.5
-            );
-        }
-
-        // Gears (Octahedrons representing gears)
-        for (let i = 0; i < 8; i++) {
-            const geometry = new THREE.OctahedronGeometry(1.2);
-            createTechObject(
-                geometry,
-                0xc41e3a,
-                {
-                    x: (Math.random() - 0.5) * 90,
-                    y: (Math.random() - 0.5) * 70,
-                    z: (Math.random() - 0.5) * 50
-                },
-                0.8 + Math.random() * 0.7
-            );
-        }
-
-        // Dodecahedrons (Complex tech components)
-        for (let i = 0; i < 4; i++) {
-            const geometry = new THREE.DodecahedronGeometry(1.5);
-            createTechObject(
-                geometry,
-                0x1e2c4c,
-                {
-                    x: (Math.random() - 0.5) * 70,
-                    y: (Math.random() - 0.5) * 60,
-                    z: (Math.random() - 0.5) * 40
-                },
-                1 + Math.random() * 0.5
-            );
-        }
-
-        // Tetrahedrons (Signal/data elements)
-        for (let i = 0; i < 10; i++) {
-            const geometry = new THREE.TetrahedronGeometry(0.8);
-            createTechObject(
-                geometry,
-                0x2c3e5f,
-                {
-                    x: (Math.random() - 0.5) * 100,
-                    y: (Math.random() - 0.5) * 80,
-                    z: (Math.random() - 0.5) * 60
-                },
-                0.6 + Math.random() * 0.6
-            );
-        }
-
-        // Icosahedrons (Network nodes)
-        for (let i = 0; i < 6; i++) {
-            const geometry = new THREE.IcosahedronGeometry(1);
-            createTechObject(
-                geometry,
-                i % 2 === 0 ? 0xc41e3a : 0x1e2c4c,
-                {
-                    x: (Math.random() - 0.5) * 85,
-                    y: (Math.random() - 0.5) * 65,
-                    z: (Math.random() - 0.5) * 45
-                },
-                0.7 + Math.random() * 0.8
-            );
-        }
-
-        updateLoading(70, 'Creating electrical arcs...');
-
-        // ========================================
-        // ELECTRICAL ARC EFFECTS
-        // ========================================
-
-        const electricalArcs = [];
-        const maxArcs = isMobile ? 3 : 6;
-
-        function createArc(obj1, obj2) {
-            const points = [];
-            const segments = 20;
-            const start = obj1.position.clone();
-            const end = obj2.position.clone();
-
-            for (let i = 0; i <= segments; i++) {
-                const t = i / segments;
-                const point = new THREE.Vector3();
-                point.lerpVectors(start, end, t);
-
-                // Add randomness for arc effect
-                const perpendicular = new THREE.Vector3(
-                    Math.random() - 0.5,
-                    Math.random() - 0.5,
-                    Math.random() - 0.5
-                ).normalize();
-
-                const arcHeight = Math.sin(t * Math.PI) * 2;
-                point.add(perpendicular.multiplyScalar(arcHeight));
-
-                points.push(point);
-            }
-
-            const arcGeometry = new THREE.BufferGeometry().setFromPoints(points);
-            const arcMaterial = new THREE.LineBasicMaterial({
-                color: 0x00ffff,
-                transparent: true,
-                opacity: 0.6,
-                linewidth: 2
-            });
-
-            const arc = new THREE.Line(arcGeometry, arcMaterial);
-            arc.userData.life = 1.0;
-            arc.userData.maxLife = 1.0;
-
-            scene.add(arc);
-            return arc;
-        }
-
-        function updateArcs() {
-            // Occasionally create new arcs between nearby objects
-            if (Math.random() < 0.02 && electricalArcs.length < maxArcs) {
-                const obj1 = techObjects[Math.floor(Math.random() * techObjects.length)];
-                const obj2 = techObjects[Math.floor(Math.random() * techObjects.length)];
-
-                if (obj1 !== obj2 && obj1.position.distanceTo(obj2.position) < 30) {
-                    const arc = createArc(obj1, obj2);
-                    electricalArcs.push(arc);
-                }
-            }
-
-            // Update and remove old arcs
-            for (let i = electricalArcs.length - 1; i >= 0; i--) {
-                const arc = electricalArcs[i];
-                arc.userData.life -= 0.02;
-
-                arc.material.opacity = arc.userData.life * 0.6;
-
-                if (arc.userData.life <= 0) {
-                    scene.remove(arc);
-                    arc.geometry.dispose();
-                    arc.material.dispose();
-                    electricalArcs.splice(i, 1);
-                }
-            }
-        }
-
-        // ========================================
-        // SECTION-RESPONSIVE BEHAVIORS
-        // ========================================
-
-        updateLoading(80, 'Setting up interactions...');
-
-        const sections = document.querySelectorAll('.section');
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const title = entry.target.querySelector('.section-title');
-                    if (title) {
-                        if (title.classList.contains('summary-title')) {
-                            currentSection = 'summary';
-                        } else if (title.classList.contains('competencies')) {
-                            currentSection = 'competencies';
-                        } else if (title.classList.contains('technical')) {
-                            currentSection = 'technical';
-                        } else if (title.classList.contains('military')) {
-                            currentSection = 'military';
-                        } else if (title.classList.contains('awards')) {
-                            currentSection = 'awards';
-                        }
-                    }
-                }
-            });
-        }, { threshold: 0.3 });
-
-        sections.forEach(section => {
-            sectionObserver.observe(section);
-        });
-
-        // ========================================
-        // RAYCASTER FOR INTERACTIVITY
-        // ========================================
-
-        const raycaster = new THREE.Raycaster();
-        const pointer = new THREE.Vector2();
-        let hoveredObject = null;
-
-        canvas.addEventListener('mousemove', (event) => {
-            pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-            pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-            raycaster.setFromCamera(pointer, camera);
-            const intersects = raycaster.intersectObjects(techObjects);
-
-            // Reset previous hovered object
-            if (hoveredObject) {
-                hoveredObject.material.emissive.setHex(0x000000);
-                hoveredObject.scale.setScalar(hoveredObject.userData.originalScale);
-            }
-
-            if (intersects.length > 0) {
-                hoveredObject = intersects[0].object;
-                if (!hoveredObject.userData.originalScale) {
-                    hoveredObject.userData.originalScale = hoveredObject.scale.x;
-                }
-                hoveredObject.material.emissive.setHex(0xc41e3a);
-                hoveredObject.scale.setScalar(hoveredObject.userData.originalScale * 1.2);
-                canvas.style.cursor = 'pointer';
-            } else {
-                hoveredObject = null;
-                canvas.style.cursor = 'default';
-            }
-        });
-
-        // Click and touch interaction - make objects spin faster temporarily
-        function spinObject(event) {
-            raycaster.setFromCamera(pointer, camera);
-            const intersects = raycaster.intersectObjects(techObjects);
-
-            if (intersects.length > 0) {
-                const obj = intersects[0].object;
-                obj.userData.rotationSpeed.x *= 5;
-                obj.userData.rotationSpeed.y *= 5;
-                obj.userData.rotationSpeed.z *= 5;
-
-                setTimeout(() => {
-                    obj.userData.rotationSpeed.x /= 5;
-                    obj.userData.rotationSpeed.y /= 5;
-                    obj.userData.rotationSpeed.z /= 5;
-                }, 1500);
-            }
-        }
-
-        canvas.addEventListener('click', spinObject);
-        canvas.addEventListener('touchstart', (event) => {
-            if (event.touches.length > 0) {
-                const touch = event.touches[0];
-                pointer.x = (touch.clientX / window.innerWidth) * 2 - 1;
-                pointer.y = -(touch.clientY / window.innerHeight) * 2 + 1;
-                spinObject(event);
-            }
-        });
-
-        // ========================================
-        // ANIMATION LOOP
-        // ========================================
-
-        updateLoading(90, 'Starting animation...');
-
-        let time = 0;
-        let militaryFormation = false;
-        let awardsAnimation = false;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            time += 0.01;
-
-            // Smooth mouse parallax
-            mouse.x += (targetMouse.x - mouse.x) * 0.05;
-            mouse.y += (targetMouse.y - mouse.y) * 0.05;
-
-            // Camera parallax based on mouse
-            camera.position.x = mouse.x * 3;
-            camera.position.y = mouse.y * 3;
-            camera.lookAt(0, 0, 0);
-
-            // Animate particles with section-responsive colors
-            const positions = particles.geometry.attributes.position.array;
-            for (let i = 0; i < particleCount; i++) {
-                positions[i * 3] += particleVelocities[i].x;
-                positions[i * 3 + 1] += particleVelocities[i].y;
-                positions[i * 3 + 2] += particleVelocities[i].z;
-
-                // Boundary check
-                if (Math.abs(positions[i * 3]) > 75) particleVelocities[i].x *= -1;
-                if (Math.abs(positions[i * 3 + 1]) > 75) particleVelocities[i].y *= -1;
-                if (Math.abs(positions[i * 3 + 2]) > 40) particleVelocities[i].z *= -1;
-            }
-            particles.geometry.attributes.position.needsUpdate = true;
-
-            // Section-responsive particle appearance
-            if (currentSection === 'technical' || currentSection === 'competencies') {
-                particles.material.size = 0.6;
-                particles.material.opacity = 1.0;
-            } else {
-                particles.material.size = 0.4;
-                particles.material.opacity = 0.8;
-            }
-
-            // Update particle connection lines
-            const linePos = lines.geometry.attributes.position.array;
-            let lineIndex = 0;
-            const maxDistance = 15;
-
-            for (let i = 0; i < particleCount; i++) {
-                for (let j = i + 1; j < particleCount; j++) {
-                    const dx = positions[i * 3] - positions[j * 3];
-                    const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
-                    const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
-                    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                    if (distance < maxDistance) {
-                        linePos[lineIndex++] = positions[i * 3];
-                        linePos[lineIndex++] = positions[i * 3 + 1];
-                        linePos[lineIndex++] = positions[i * 3 + 2];
-                        linePos[lineIndex++] = positions[j * 3];
-                        linePos[lineIndex++] = positions[j * 3 + 1];
-                        linePos[lineIndex++] = positions[j * 3 + 2];
-                    }
-                }
-            }
-
-            lines.geometry.setDrawRange(0, lineIndex / 3);
-            lines.geometry.attributes.position.needsUpdate = true;
-
-            // Update trail particles
-            trailParticles.forEach((particle, index) => {
-                particle.userData.life -= 0.02;
-                particle.material.opacity = particle.userData.life * 0.8;
-                particle.scale.setScalar(particle.userData.life);
-
-                if (particle.userData.life <= 0) {
-                    scene.remove(particle);
-                    particle.geometry.dispose();
-                    particle.material.dispose();
-                    trailParticles.splice(index, 1);
-                }
-            });
-
-            // Update electrical arcs
-            updateArcs();
-
-            // Rotate DNA helix
-            helixObjects.forEach(obj => {
-                if (obj.type === 'Mesh') {
-                    obj.rotation.y += 0.005;
-                }
-            });
-
-            // Military formation pattern
-            if (currentSection === 'military' && !militaryFormation) {
-                militaryFormation = true;
-                // Arrange objects in V-formation
-                techObjects.forEach((obj, index) => {
-                    const row = Math.floor(index / 6);
-                    const col = index % 6;
-                    const targetX = (col - 3) * 10;
-                    const targetY = -row * 8;
-                    const targetZ = Math.abs(col - 3) * -5;
-
-                    const animateToFormation = () => {
-                        obj.position.x += (targetX - obj.position.x) * 0.02;
-                        obj.position.y += (targetY - obj.position.y) * 0.02;
-                        obj.position.z += (targetZ - obj.position.z) * 0.02;
-                    };
-
-                    obj.userData.formationUpdate = animateToFormation;
-                });
-            } else if (currentSection !== 'military' && militaryFormation) {
-                militaryFormation = false;
-                // Reset to original positions
-                techObjects.forEach(obj => {
-                    obj.userData.formationUpdate = null;
-                });
-            }
-
-            // Awards achievement animation
-            if (currentSection === 'awards' && !awardsAnimation) {
-                awardsAnimation = true;
-                techObjects.forEach((obj, index) => {
-                    setTimeout(() => {
-                        obj.material.emissive.setHex(0xFFD700);
-                        obj.material.emissiveIntensity = 0.5;
-                        setTimeout(() => {
-                            obj.material.emissive.setHex(0x000000);
-                            obj.material.emissiveIntensity = 0;
-                        }, 1000);
-                    }, index * 100);
-                });
-                // Create golden particles
-                for (let i = 0; i < 20; i++) {
-                    setTimeout(() => {
-                        const goldenParticle = new THREE.Mesh(
-                            new THREE.SphereGeometry(0.3, 8, 8),
-                            new THREE.MeshBasicMaterial({ color: 0xFFD700, transparent: true, opacity: 1 })
-                        );
-                        goldenParticle.position.set(
-                            (Math.random() - 0.5) * 50,
-                            Math.random() * 30 + 10,
-                            (Math.random() - 0.5) * 30
-                        );
-                        goldenParticle.userData.life = 2.0;
-                        scene.add(goldenParticle);
-                        trailParticles.push(goldenParticle);
-                    }, i * 100);
-                }
-            } else if (currentSection !== 'awards' && awardsAnimation) {
-                awardsAnimation = false;
-            }
-
-            // Animate tech objects
-            techObjects.forEach((obj, index) => {
-                // Apply formation update if exists
-                if (obj.userData.formationUpdate) {
-                    obj.userData.formationUpdate();
-                } else {
-                    // Normal floating motion
-                    const floatOffset = Math.sin(time * obj.userData.floatSpeed * 100 + index) * obj.userData.floatRange;
-                    obj.position.y = obj.userData.initialPosition.y + floatOffset;
-
-                    // Slight drift
-                    obj.position.x = obj.userData.initialPosition.x + Math.cos(time * 0.3 + index) * 2;
-                    obj.position.z = obj.userData.initialPosition.z + Math.sin(time * 0.2 + index) * 1.5;
-
-                    // Scroll-based movement
-                    obj.position.y -= scrollY * 0.01;
-                }
-
-                // Rotation
-                obj.rotation.x += obj.userData.rotationSpeed.x;
-                obj.rotation.y += obj.userData.rotationSpeed.y;
-                obj.rotation.z += obj.userData.rotationSpeed.z;
-
-                // Section-responsive glow
-                if (currentSection === 'technical') {
-                    obj.material.emissiveIntensity = 0.3;
-                } else {
-                    obj.material.emissiveIntensity = 0;
-                }
-            });
-
-            // Animate lights
-            pointLight1.position.x = Math.sin(time * 0.5) * 30;
-            pointLight1.position.y = Math.cos(time * 0.3) * 20;
-
-            pointLight2.position.x = Math.cos(time * 0.4) * 30;
-            pointLight2.position.y = Math.sin(time * 0.6) * 20;
-
-            renderer.render(scene, camera);
-        }
-
-        // Start animation after a brief delay
-        setTimeout(() => {
-            animate();
-            updateLoading(100, 'Complete!');
-        }, 500);
+        animateParticles();
 
         // Handle window resize
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
 
         // PDF Download Functionality
@@ -1998,4 +1180,3 @@
     </script>
 </body>
 </html>
-
