@@ -188,42 +188,8 @@
                 color: #c41e3a;
             }
             100% {
-                transform: scale(1.03);
+                transform: scale(1);
                 color: #1e2c4c;
-            }
-        }
-
-        /* Active section title with rotating glow */
-        .section-title.active-title {
-            transform: scale(1.03);
-            position: relative;
-        }
-
-        .section-title.active-title::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 8px;
-            background: linear-gradient(45deg,
-                transparent 0%,
-                transparent 40%,
-                rgba(30, 44, 76, 0.3) 50%,
-                transparent 60%,
-                transparent 100%);
-            animation: rotate-glow 3s linear infinite;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        @keyframes rotate-glow {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
             }
         }
         
@@ -1125,7 +1091,7 @@
 
         skillObserver.observe(skillsSection);
 
-        // Intersection Observer for Section Titles (initial animation)
+        // Intersection Observer for Section Titles
         const titles = document.querySelectorAll('.section-title');
 
         const titleObserver = new IntersectionObserver((entries) => {
@@ -1139,42 +1105,6 @@
 
         titles.forEach(title => {
             titleObserver.observe(title);
-        });
-
-        // Active Section Observer (for rotating glow)
-        const sections = document.querySelectorAll('.section');
-        let activeTitle = null;
-
-        const activeSectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const title = entry.target.querySelector('.section-title');
-
-                if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-                    // Remove active class from previous title
-                    if (activeTitle && activeTitle !== title) {
-                        activeTitle.classList.remove('active-title');
-                    }
-
-                    // Add active class to current title
-                    if (title) {
-                        title.classList.add('active-title');
-                        activeTitle = title;
-                    }
-                } else if (!entry.isIntersecting && title === activeTitle) {
-                    // Remove active class when section leaves viewport
-                    title.classList.remove('active-title');
-                    if (activeTitle === title) {
-                        activeTitle = null;
-                    }
-                }
-            });
-        }, {
-            threshold: [0, 0.3, 0.5, 0.7, 1.0],
-            rootMargin: '-20% 0px -20% 0px'
-        });
-
-        sections.forEach(section => {
-            activeSectionObserver.observe(section);
         });
 
         // ========================================
