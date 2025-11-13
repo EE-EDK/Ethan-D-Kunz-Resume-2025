@@ -137,10 +137,31 @@
             padding: 35px 50px;
             position: relative;
             background: #ffffff;
+            transition: background 0.3s ease;
         }
 
         .section:nth-child(even) {
             background: #fafbfc;
+        }
+
+        /* Active section on hover - enhance headers */
+        .section.active-section.section-hovered .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(30, 44, 76, 0.2);
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+
+        .section.active-section.section-hovered .competency-group h4,
+        .section.active-section.section-hovered .company-name,
+        .section.active-section.section-hovered .position-name,
+        .section.active-section.section-hovered .tech-category h4,
+        .section.active-section.section-hovered .award-category h4 {
+            font-size: 120%;
+            font-weight: 700;
+            color: #1e2c4c;
+            transition: all 0.3s ease;
         }
         
         .section-title {
@@ -1105,6 +1126,58 @@
 
         titles.forEach(title => {
             titleObserver.observe(title);
+        });
+
+        // ========================================
+        // ACTIVE SECTION TRACKING WITH HOVER ENHANCEMENT
+        // ========================================
+
+        const sections = document.querySelectorAll('.section');
+        let currentActiveSection = null;
+
+        // Intersection Observer to track which section is in view
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+                    // Remove active from previous section
+                    if (currentActiveSection && currentActiveSection !== entry.target) {
+                        currentActiveSection.classList.remove('active-section');
+                        currentActiveSection.classList.remove('section-hovered'); // Clear enhancement
+                    }
+
+                    // Mark this section as active
+                    entry.target.classList.add('active-section');
+                    currentActiveSection = entry.target;
+                } else if (entry.target === currentActiveSection && !entry.isIntersecting) {
+                    // Remove active when section leaves viewport
+                    entry.target.classList.remove('active-section');
+                    entry.target.classList.remove('section-hovered'); // Clear enhancement
+                    currentActiveSection = null;
+                }
+            });
+        }, {
+            threshold: [0, 0.3, 0.5, 0.7],
+            rootMargin: '-10% 0px -10% 0px'
+        });
+
+        // Observe all sections
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+
+            // Add hover listener - enhancement persists until section changes
+            section.addEventListener('mouseenter', () => {
+                if (section.classList.contains('active-section')) {
+                    // Remove enhancement from any other section
+                    sections.forEach(s => {
+                        if (s !== section) {
+                            s.classList.remove('section-hovered');
+                        }
+                    });
+
+                    // Add enhancement to this section (persists after hover)
+                    section.classList.add('section-hovered');
+                }
+            });
         });
 
         // ========================================
