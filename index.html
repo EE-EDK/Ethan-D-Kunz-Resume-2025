@@ -1279,11 +1279,75 @@
             }
         }
 
+        // Glowing hexagons
+        class GlowingHex {
+            constructor() {
+                const hexSize = 20;
+                const hexHeight = hexSize * Math.sqrt(3);
+
+                // Random position aligned to grid
+                const col = Math.floor(Math.random() * (canvas.width / (hexSize * 1.5)));
+                const row = Math.floor(Math.random() * (canvas.height / hexHeight));
+
+                this.x = col * hexSize * 1.5;
+                this.y = row * hexHeight + (col % 2) * (hexHeight / 2);
+                this.size = hexSize;
+                this.glow = 0;
+                this.targetGlow = 0;
+                this.nextChangeTime = Date.now() + Math.random() * 3000;
+            }
+
+            update() {
+                // Check if it's time to change state
+                if (Date.now() > this.nextChangeTime) {
+                    this.targetGlow = this.targetGlow > 0 ? 0 : 1;
+                    this.nextChangeTime = Date.now() + 2000 + Math.random() * 4000;
+                }
+
+                // Smooth transition
+                this.glow += (this.targetGlow - this.glow) * 0.02;
+            }
+
+            draw() {
+                if (this.glow < 0.01) return;
+
+                // Draw glowing fill
+                ctx.fillStyle = `rgba(100, 200, 255, ${this.glow * 0.15})`;
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angle = (Math.PI / 3) * i;
+                    const hx = this.x + this.size * Math.cos(angle);
+                    const hy = this.y + this.size * Math.sin(angle);
+                    if (i === 0) ctx.moveTo(hx, hy);
+                    else ctx.lineTo(hx, hy);
+                }
+                ctx.closePath();
+                ctx.fill();
+
+                // Draw brighter outline
+                ctx.strokeStyle = `rgba(100, 200, 255, ${this.glow * 0.4})`;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+        }
+
+        // Create glowing hexagons
+        const glowingHexes = [];
+        for (let i = 0; i < 25; i++) {
+            glowingHexes.push(new GlowingHex());
+        }
+
         function animateCircuitBoard() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Draw hex grid (static)
             drawHexGrid();
+
+            // Update and draw glowing hexagons
+            glowingHexes.forEach(hex => {
+                hex.update();
+                hex.draw();
+            });
 
             // Draw all circuit traces
             traces.forEach(trace => trace.draw());
