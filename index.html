@@ -1253,23 +1253,21 @@
             const hexSize = 20;
             const hexHeight = hexSize * Math.sqrt(3);
 
-            ctx.strokeStyle = 'rgba(100, 180, 220, 0.03)';
+            ctx.strokeStyle = 'rgba(100, 180, 220, 0.033)';
             ctx.lineWidth = 0.5;
 
-            // Only draw on edges
+            // Draw across entire background
             const drawHex = (x, y) => {
-                if ((x < edgeWidth) || (x > canvas.width - edgeWidth)) {
-                    ctx.beginPath();
-                    for (let i = 0; i < 6; i++) {
-                        const angle = (Math.PI / 3) * i;
-                        const hx = x + hexSize * Math.cos(angle);
-                        const hy = y + hexSize * Math.sin(angle);
-                        if (i === 0) ctx.moveTo(hx, hy);
-                        else ctx.lineTo(hx, hy);
-                    }
-                    ctx.closePath();
-                    ctx.stroke();
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angle = (Math.PI / 3) * i;
+                    const hx = x + hexSize * Math.cos(angle);
+                    const hy = y + hexSize * Math.sin(angle);
+                    if (i === 0) ctx.moveTo(hx, hy);
+                    else ctx.lineTo(hx, hy);
                 }
+                ctx.closePath();
+                ctx.stroke();
             };
 
             for (let row = 0; row < canvas.height / hexHeight + 2; row++) {
