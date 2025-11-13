@@ -1106,6 +1106,11 @@
             </div>
 
         </section>
+
+        <!-- 3D Showcase Section -->
+        <section class="section" style="padding: 0; margin-top: 40px; border-top: 2px solid #e0e0e0;">
+            <canvas id="metallic-scene" style="width: 100%; height: 400px; display: block;"></canvas>
+        </section>
     </div>
 
 
@@ -1212,6 +1217,8 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
     <script>
         // Initialize AOS
         AOS.init({
@@ -1667,6 +1674,114 @@
         // PDF Download Functionality
         document.getElementById('download-pdf-btn').addEventListener('click', function() {
             window.print();
+        });
+
+        // ========================================
+        // METALLIC TORUS KNOT SCENE (Bottom of Resume)
+        // ========================================
+        window.addEventListener('load', () => {
+            const metallicCanvas = document.getElementById('metallic-scene');
+            if (!metallicCanvas) return;
+
+            // Scene setup
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(
+                45,
+                metallicCanvas.clientWidth / metallicCanvas.clientHeight,
+                0.1,
+                1000
+            );
+            camera.position.set(0, 0, 5);
+
+            const renderer = new THREE.WebGLRenderer({
+                canvas: metallicCanvas,
+                antialias: true,
+                alpha: false
+            });
+            renderer.setSize(metallicCanvas.clientWidth, metallicCanvas.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 0.65;
+            renderer.outputEncoding = THREE.sRGBEncoding;
+
+            // Create torus knot geometry
+            const geometry = new THREE.TorusKnotGeometry(1, 0.4, 120, 32);
+            const material = new THREE.MeshStandardMaterial({
+                metalness: 1.0,
+                roughness: 0.0,
+                envMapIntensity: 1.0
+            });
+
+            const torusKnot = new THREE.Mesh(geometry, material);
+            scene.add(torusKnot);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(5, 5, 5);
+            scene.add(directionalLight);
+
+            // Try to load HDR environment
+            const rgbeLoader = new THREE.RGBELoader();
+            rgbeLoader.load(
+                'https://threejs.org/examples/textures/equirectangular/spruit_sunrise_4k.hdr.jpg',
+                function(texture) {
+                    texture.mapping = THREE.EquirectangularReflectionMapping;
+                    scene.environment = texture;
+                    scene.background = texture;
+                },
+                undefined,
+                function(error) {
+                    // Fallback: Create procedural gradient environment
+                    console.log('HDR load failed, using fallback environment');
+                    const gradientCanvas = document.createElement('canvas');
+                    gradientCanvas.width = 2048;
+                    gradientCanvas.height = 1024;
+                    const ctx = gradientCanvas.getContext('2d');
+
+                    const gradient = ctx.createLinearGradient(0, 0, 0, 1024);
+                    gradient.addColorStop(0, '#87CEEB');
+                    gradient.addColorStop(0.5, '#FFE4B5');
+                    gradient.addColorStop(1, '#FFA500');
+
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(0, 0, 2048, 1024);
+
+                    const fallbackTexture = new THREE.CanvasTexture(gradientCanvas);
+                    fallbackTexture.mapping = THREE.EquirectangularReflectionMapping;
+                    scene.environment = fallbackTexture;
+                    scene.background = fallbackTexture;
+                }
+            );
+
+            // Orbit Controls
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 2;
+            controls.enableZoom = true;
+            controls.enablePan = false;
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Handle resize
+            function onWindowResize() {
+                const width = metallicCanvas.clientWidth;
+                const height = metallicCanvas.clientHeight;
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+            }
+            window.addEventListener('resize', onWindowResize);
         });
 
     </script>
