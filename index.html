@@ -1088,128 +1088,101 @@
     </div>
 
 
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-        }
-    }
-    </script>
-
-    <script type="module">
-        import * as THREE from 'three';
-        import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js';
-
-        // Wait for DOM to be ready
+    <script>
+        // Canvas-based lens flare effect (no Three.js required)
         window.addEventListener('DOMContentLoaded', () => {
-            // Header lens flare effect
             const headerCanvas = document.getElementById('header-canvas');
-            if (!headerCanvas) {
-                console.error('Header canvas not found');
-                return;
-            }
+            if (!headerCanvas) return;
 
             const headerContainer = headerCanvas.parentElement;
+            const ctx = headerCanvas.getContext('2d');
 
             // Set canvas size
             function resizeHeaderCanvas() {
                 headerCanvas.width = headerContainer.offsetWidth;
                 headerCanvas.height = headerContainer.offsetHeight;
-                if (camera) {
-                    camera.aspect = headerCanvas.width / headerCanvas.height;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(headerCanvas.width, headerCanvas.height);
-                }
             }
             resizeHeaderCanvas();
 
-            // Three.js scene setup
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(
-                50,
-                headerCanvas.width / headerCanvas.height,
-                1,
-                3000
-            );
-            camera.position.set(0, 0, 100);
+            // Lens flare position
+            let flareX = headerCanvas.width * 0.85;
+            let flareY = headerCanvas.height * 0.35;
 
-            const renderer = new THREE.WebGLRenderer({
-                canvas: headerCanvas,
-                alpha: true,
-                antialias: true
-            });
-            renderer.setSize(headerCanvas.width, headerCanvas.height);
+            // Draw a single flare element
+            function drawFlare(x, y, size, intensity, color) {
+                ctx.save();
+                ctx.globalCompositeOperation = 'lighter';
 
-            // Create lens flare texture using canvas
-            function createLensFlareTexture() {
-                const size = 512;
-                const canvas = document.createElement('canvas');
-                canvas.width = size;
-                canvas.height = size;
-                const ctx = canvas.getContext('2d');
-
-                // Create radial gradient
-                const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-                gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-                gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.8)');
-                gradient.addColorStop(0.4, 'rgba(150, 220, 255, 0.5)');
-                gradient.addColorStop(0.7, 'rgba(100, 200, 255, 0.2)');
-                gradient.addColorStop(1, 'rgba(100, 200, 255, 0)');
+                // Main glow
+                const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+                gradient.addColorStop(0, `rgba(${color}, ${intensity})`);
+                gradient.addColorStop(0.2, `rgba(${color}, ${intensity * 0.6})`);
+                gradient.addColorStop(0.5, `rgba(${color}, ${intensity * 0.2})`);
+                gradient.addColorStop(1, `rgba(${color}, 0)`);
 
                 ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, size, size);
+                ctx.fillRect(x - size, y - size, size * 2, size * 2);
 
-                return new THREE.CanvasTexture(canvas);
+                ctx.restore();
             }
 
-            function createSecondaryFlareTexture() {
-                const size = 128;
-                const canvas = document.createElement('canvas');
-                canvas.width = size;
-                canvas.height = size;
-                const ctx = canvas.getContext('2d');
+            // Draw hexagonal flare element
+            function drawHexFlare(x, y, size, intensity) {
+                ctx.save();
+                ctx.globalCompositeOperation = 'lighter';
 
-                // Create smaller flare element
-                const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-                gradient.addColorStop(0, 'rgba(150, 220, 255, 0.8)');
-                gradient.addColorStop(0.5, 'rgba(100, 200, 255, 0.4)');
-                gradient.addColorStop(1, 'rgba(100, 200, 255, 0)');
+                // Draw hexagon
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                    const angle = (Math.PI / 3) * i;
+                    const hx = x + size * Math.cos(angle);
+                    const hy = y + size * Math.sin(angle);
+                    if (i === 0) ctx.moveTo(hx, hy);
+                    else ctx.lineTo(hx, hy);
+                }
+                ctx.closePath();
+
+                const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+                gradient.addColorStop(0, `rgba(150, 220, 255, ${intensity * 0.4})`);
+                gradient.addColorStop(0.5, `rgba(100, 200, 255, ${intensity * 0.2})`);
+                gradient.addColorStop(1, `rgba(100, 200, 255, 0)`);
 
                 ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, size, size);
+                ctx.fill();
 
-                return new THREE.CanvasTexture(canvas);
+                ctx.restore();
             }
 
-            const textureFlare0 = createLensFlareTexture();
-            const textureFlare3 = createSecondaryFlareTexture();
+            // Animate lens flare
+            function animateLensFlare() {
+                ctx.clearRect(0, 0, headerCanvas.width, headerCanvas.height);
 
-            // Create light with lens flare positioned in top right area
-            const light = new THREE.PointLight(0xffffff, 1.5, 2000);
-            light.position.set(200, 80, -50);
-            scene.add(light);
-
-            const lensflare = new Lensflare();
-            lensflare.addElement(new LensflareElement(textureFlare0, 500, 0));
-            lensflare.addElement(new LensflareElement(textureFlare3, 80, 0.6));
-            lensflare.addElement(new LensflareElement(textureFlare3, 100, 0.7));
-            lensflare.addElement(new LensflareElement(textureFlare3, 150, 0.9));
-            lensflare.addElement(new LensflareElement(textureFlare3, 90, 1));
-            light.add(lensflare);
-
-            // Animate
-            function animateHeader() {
-                requestAnimationFrame(animateHeader);
-
-                // Gentle movement
+                // Calculate animated position
                 const time = Date.now() * 0.0003;
-                light.position.x = Math.cos(time) * 30 + 200;
-                light.position.y = Math.sin(time * 0.7) * 15 + 70;
+                const centerX = headerCanvas.width * 0.85;
+                const centerY = headerCanvas.height * 0.35;
+                flareX = centerX + Math.cos(time) * 15;
+                flareY = centerY + Math.sin(time * 0.7) * 10;
 
-                renderer.render(scene, camera);
+                // Main bright flare
+                drawFlare(flareX, flareY, 120, 0.8, '255, 255, 255');
+                drawFlare(flareX, flareY, 80, 0.6, '200, 230, 255');
+                drawFlare(flareX, flareY, 50, 0.4, '150, 220, 255');
+
+                // Secondary flare elements along a line from center
+                const dx = (headerCanvas.width / 2) - flareX;
+                const dy = (headerCanvas.height / 2) - flareY;
+
+                // Small colorful flares
+                drawFlare(flareX + dx * 0.3, flareY + dy * 0.3, 25, 0.4, '100, 200, 255');
+                drawHexFlare(flareX + dx * 0.5, flareY + dy * 0.5, 15, 0.5);
+                drawFlare(flareX + dx * 0.6, flareY + dy * 0.6, 30, 0.3, '120, 210, 255');
+                drawHexFlare(flareX + dx * 0.8, flareY + dy * 0.8, 20, 0.4);
+                drawFlare(flareX + dx * 1.0, flareY + dy * 1.0, 35, 0.25, '100, 200, 255');
+
+                requestAnimationFrame(animateLensFlare);
             }
-            animateHeader();
+            animateLensFlare();
 
             // Handle resize
             window.addEventListener('resize', resizeHeaderCanvas);
