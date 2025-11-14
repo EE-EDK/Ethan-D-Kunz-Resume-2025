@@ -221,61 +221,6 @@
             to { transform: rotate(360deg); }
         }
 
-        .icon-sphere {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: #4a90e2;
-            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3), 0 0 10px rgba(74,144,226,0.5);
-        }
-
-        .icon-bolt {
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 20px solid #ffd700;
-            position: relative;
-            box-shadow: 0 0 10px rgba(255,215,0,0.5);
-        }
-
-        .icon-bolt::after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-bottom: 15px solid #ffd700;
-            position: absolute;
-            top: 20px;
-            left: -6px;
-        }
-
-        .icon-box {
-            width: 25px;
-            height: 20px;
-            background: #8b4513;
-            box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3), 0 0 10px rgba(139,69,19,0.5);
-            border: 2px solid #6b3513;
-        }
-
-        .icon-torus {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            border: 5px solid #32cd32;
-            box-shadow: 0 0 10px rgba(50,205,50,0.5);
-        }
-
-        .icon-target {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            border: 3px solid #ff4500;
-            box-shadow: 0 0 0 2px #fff, 0 0 0 5px #ff4500, 0 0 10px rgba(255,69,0,0.5);
-            background: transparent;
-        }
-
         .icon-star {
             width: 0;
             height: 0;
@@ -283,7 +228,7 @@
             border-right: 12px solid transparent;
             border-bottom: 20px solid #c41e3a;
             position: relative;
-            box-shadow: 0 0 10px rgba(196,30,58,0.5);
+            box-shadow: 0 0 15px rgba(196,30,58,0.8);
         }
 
         .icon-star::after {
@@ -296,93 +241,6 @@
             position: absolute;
             top: 8px;
             left: -12px;
-        }
-
-        .icon-pyramid {
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 25px solid #9b59b6;
-            box-shadow: 0 0 10px rgba(155,89,182,0.5);
-        }
-
-        .icon-gear {
-            width: 20px;
-            height: 20px;
-            background: #708090;
-            border-radius: 3px;
-            box-shadow: 0 0 10px rgba(112,128,144,0.5);
-            position: relative;
-        }
-
-        .icon-gear::before,
-        .icon-gear::after {
-            content: '';
-            position: absolute;
-            background: #708090;
-        }
-
-        .icon-gear::before {
-            width: 8px;
-            height: 20px;
-            left: 6px;
-            top: -3px;
-        }
-
-        .icon-gear::after {
-            width: 20px;
-            height: 8px;
-            top: 6px;
-            left: -3px;
-        }
-
-        .icon-trophy {
-            width: 20px;
-            height: 18px;
-            background: #ffd700;
-            border-radius: 0 0 5px 5px;
-            box-shadow: 0 0 10px rgba(255,215,0,0.5);
-            position: relative;
-        }
-
-        .icon-trophy::before {
-            content: '';
-            width: 16px;
-            height: 3px;
-            background: #ffd700;
-            position: absolute;
-            bottom: -5px;
-            left: 2px;
-        }
-
-        .icon-heart {
-            width: 20px;
-            height: 18px;
-            background: #ff69b4;
-            position: relative;
-            transform: rotate(-45deg);
-            box-shadow: 0 0 10px rgba(255,105,180,0.5);
-        }
-
-        .icon-heart::before,
-        .icon-heart::after {
-            content: '';
-            width: 20px;
-            height: 18px;
-            background: #ff69b4;
-            border-radius: 50%;
-            position: absolute;
-        }
-
-        .icon-heart::before {
-            top: -10px;
-            left: 0;
-        }
-
-        .icon-heart::after {
-            left: 10px;
-            top: 0;
         }
 
         /* Title Animation */
@@ -1394,38 +1252,14 @@
 
         // Initialize 2D Section Icons
         window.addEventListener('DOMContentLoaded', () => {
-            const iconConfig = {
-                'summary-title': 'sphere',
-                'competencies': 'bolt',
-                'experience': 'box',
-                'leadership': 'torus',
-                'work-style': 'target',
-                'military': 'star',
-                'education': 'pyramid',
-                'technical': 'gear',
-                'awards': 'trophy',
-                'volunteer': 'heart'
-            };
-
             document.querySelectorAll('.section-title').forEach(title => {
-                // Find which class this title has
-                let iconType = null;
-                for (let key in iconConfig) {
-                    if (title.classList.contains(key)) {
-                        iconType = iconConfig[key];
-                        break;
-                    }
-                }
-
-                if (!iconType) return;
-
                 // Create icon container
                 const iconContainer = document.createElement('div');
                 iconContainer.className = 'section-icon-2d';
 
-                // Create the specific icon shape
+                // Create red glowing star icon
                 const icon = document.createElement('div');
-                icon.className = `icon-${iconType}`;
+                icon.className = 'icon-star';
                 iconContainer.appendChild(icon);
 
                 title.insertBefore(iconContainer, title.firstChild);
