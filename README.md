@@ -1,5 +1,3 @@
-Here’s a professional README template for your resume HTML GitHub repo, tailored for technical and engineering portfolios:
-
 Ethan D. Kunz – Resume (2025 Edition)
 Welcome to the repository for my up-to-date professional resume, published in both HTML and PDF formats. I am an electrical and software engineer focused on embedded systems, AI development, and innovative product design.
 
