@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethan Kunz - Engineering Leader</title>
+    <meta name="description" content="Ethan Kunz — Senior Electrical Engineer, R&D Leader, and U.S. Army Veteran. MBA, B.S. EE (Cum Laude), Active Security Clearance. Specializing in pulse power, embedded systems, and rapid prototyping for national security programs.">
+    <meta name="author" content="Ethan Kunz">
+    <meta property="og:title" content="Ethan Kunz — Engineering Leader | R&D Prototyping">
+    <meta property="og:description" content="Senior Electrical Engineer at Honeywell FM&T / KCNSC. Decade of experience in pulse power, embedded systems, and national security R&D. MBA, B.S. EE, Active Security Clearance.">
+    <meta property="og:type" content="website">
+    <title>Ethan Kunz — Engineering Leader | R&D Prototyping</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
+        html { scroll-behavior: smooth; }
+
         * {
             margin: 0;
             padding: 0;
@@ -576,7 +583,7 @@
         @media print {
             body { background: white; }
             .resume-container { box-shadow: none; margin: 0; border-radius: 0; }
-            .download-btn, #edge-particles { display: none !important; }
+            .download-btn, #edge-particles, .nav-sidebar, .back-to-top { display: none !important; }
             .header {
                 background: #1e2c4c !important;
                 -webkit-print-color-adjust: exact;
@@ -593,6 +600,95 @@
             .page-break { page-break-before: always; }
         }
 
+        /* --- Floating Navigation --- */
+        .nav-sidebar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .nav-sidebar.visible { opacity: 1; }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            border: 2px solid rgba(196,30,58,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-dot:hover, .nav-dot.active {
+            background: #c41e3a;
+            border-color: #c41e3a;
+            transform: scale(1.3);
+        }
+        .nav-dot .nav-label {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30,44,76,0.95);
+            color: #fff;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .nav-dot:hover .nav-label { opacity: 1; }
+
+        /* --- Back to Top Button --- */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 24px;
+            z-index: 100;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #c41e3a;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            line-height: 42px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+            pointer-events: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            background: #a3182f;
+            transform: translateY(-2px);
+        }
+
+        /* --- Skip Link (a11y) --- */
+        .skip-link:focus {
+            left: 10px !important;
+            top: 10px !important;
+            width: auto !important;
+            height: auto !important;
+            overflow: visible !important;
+            border-radius: 4px;
+        }
+
         /* --- Edge Particles Canvas --- */
         #edge-particles {
             position: fixed;
@@ -607,12 +703,31 @@
     </style>
 </head>
 <body>
+    <a href="#summary-section" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:200;background:#c41e3a;color:#fff;padding:10px 20px;font-size:16px;text-decoration:none;">Skip to content</a>
     <!-- Minimal edge particle canvas -->
-    <canvas id="edge-particles"></canvas>
+    <canvas id="edge-particles" aria-hidden="true"></canvas>
+
+    <!-- Floating Navigation Dots -->
+    <nav class="nav-sidebar" aria-label="Section navigation">
+        <div class="nav-dot" data-target="summary-section"><span class="nav-label">Summary</span></div>
+        <div class="nav-dot" data-target="competencies-section"><span class="nav-label">Competencies</span></div>
+        <div class="nav-dot" data-target="experience-section"><span class="nav-label">Experience</span></div>
+        <div class="nav-dot" data-target="leadership-section"><span class="nav-label">Leadership</span></div>
+        <div class="nav-dot" data-target="workstyle-section"><span class="nav-label">Work Style</span></div>
+        <div class="nav-dot" data-target="military-section"><span class="nav-label">Military</span></div>
+        <div class="nav-dot" data-target="education-section"><span class="nav-label">Education</span></div>
+        <div class="nav-dot" data-target="certs-section"><span class="nav-label">Certifications</span></div>
+        <div class="nav-dot" data-target="skills-section"><span class="nav-label">Skills</span></div>
+        <div class="nav-dot" data-target="awards-section"><span class="nav-label">Awards</span></div>
+        <div class="nav-dot" data-target="volunteer-section"><span class="nav-label">Volunteer</span></div>
+    </nav>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" aria-label="Back to top" title="Back to top">&#9650;</button>
 
     <div class="resume-container" id="resume-to-print">
         <header class="header">
-            <canvas id="header-canvas"></canvas>
+            <canvas id="header-canvas" aria-hidden="true"></canvas>
             <div class="header-content">
                 <div class="header-top">
                     <div>
@@ -633,14 +748,14 @@
             </div>
         </header>
         
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="summary-section" data-aos="fade-up">
             <h2 class="section-title summary-title">Professional Summary</h2>
             <div class="summary-content">
-                <p>An accomplished Engineer, Project Lead, and Military Leader with an MBA, a B.S. in Electrical Engineering (Cum Laude), and an Active Security Clearance. Combines a decade of high-stakes technical experience—from extreme industrial environments at Nucor to leading many millions of dollars in national security programs at Honeywell/KCNSC—with a "servant-leader" philosophy. Possesses a proven record of executing complex project work and thrives in fast-paced, demanding QRC (Quick React Contract) environments. A full-scope R&D engineer at heart, passionate about owning the entire project lifecycle, from novel concept and board design to firmware programming, testing, manufacturing, and final delivery with quality paperwork.</p>
+                <p>Engineering Leader and R&D specialist with an MBA, a B.S. in Electrical Engineering (Cum Laude), an Active Security Clearance, and a decade of high-stakes technical experience — ranging from the extreme industrial environments of steel manufacturing to directing multi-million dollar national security programs at Honeywell FM&T / KCNSC. Driven by a "servant-leader" philosophy, I thrive in high-pressure Quick React Contract (QRC) environments where agility and precision are paramount. A hands-on innovator passionate about the entire product lifecycle, I bridge the gap between strategic program management and deep technical execution — from board-level design and firmware programming to final system delivery and quality documentation.</p>
             </div>
         </section>
 
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="competencies-section" data-aos="fade-up">
             <h2 class="section-title competencies">Core Competencies</h2>
             <div class="competencies-grid">
                 <div class="competency-group">
@@ -682,7 +797,7 @@
             </div>
         </section>
         
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="experience-section" data-aos="fade-up">
             <h2 class="section-title experience">Professional Experience</h2>
             
             <div class="experience-item">
@@ -705,25 +820,25 @@
                     </div>
                     
                     <ul class="achievements">
-                        <li>Serves as a technical and project leader for Special Projects, directing project execution and R&D for critical national security partners.</li>
-                        
+                        <li>Serves as the primary technical and project leader for Special Projects, directing execution and R&D for multi-million dollar pulse power initiatives supporting critical national security partners.</li>
+
                         <li class="list-header"><strong>Financial & Programmatic Impact:</strong></li>
-                        <li>Contributed <strong>thousands</strong> of direct hours and <strong>many millions</strong> of dollars in project execution to the pulse power team.</li>
-                        <li>Served as the technical or sub-component lead on numerous key projects (including an NNSA program modernization effort), executing <strong>millions</strong> of dollars in successful product deliveries.</li>
-                        <li>Led multiple projects from initial concept to full CDR or final product delivery.</li>
-                        <li>Successfully delivered a significant <strong>six-figure project</strong> (requiring over a thousand personal hours), which built sponsor confidence and led directly to a follow-on <strong>multi-million dollar QRC</strong>.</li>
+                        <li>Contributed <strong>thousands</strong> of direct engineering hours and orchestrated <strong>many millions</strong> of dollars in project execution across the pulse power portfolio.</li>
+                        <li>Served as the technical or sub-component lead on numerous key projects (including an NNSA program modernization effort), driving <strong>millions</strong> of dollars in successful on-time product deliveries.</li>
+                        <li>Owned multiple projects end-to-end, from initial concept through full CDR to final product delivery.</li>
+                        <li>Delivered a significant <strong>six-figure project</strong> (requiring 1,000+ personal hours), building sponsor confidence and directly securing a follow-on <strong>multi-million dollar QRC</strong>.</li>
 
                         <li class="list-header"><strong>Leadership & Mentorship:</strong></li>
-                        <li>Acts as the technical lead for a highly technical, <strong>significant six-figure</strong> bi-annual training program, coordinating over 50 internal personnel and managing engagement with up to 50 executive-level sponsors per year.</li>
-                        <li>Led an NNSA program's design and testing for three legacy components, successfully navigating nine milestones past Final Design Review (FDR) to a complete design hand-off.</li>
-                        <li>Successfully cross-trained <strong>7 teammates</strong> for critical program roles by carefully budgeting and justifying the cost to the sponsor.</li>
-                        <li>Mentored multiple junior engineers by integrating them into critical projects, including unit testing for a major QRC.</li>
-                        
+                        <li>Technical lead for a <strong>significant six-figure</strong> bi-annual training program, coordinating 50+ internal personnel and managing engagement with up to 50 executive-level sponsors per year.</li>
+                        <li>Spearheaded design and testing modernization for three legacy NNSA components, navigating nine distinct milestones past Final Design Review (FDR) and managing a complete design hand-off with full technical data packages.</li>
+                        <li>Cross-trained <strong>7 teammates</strong> for critical program roles by developing curriculum and justifying budget allocations to sponsors.</li>
+                        <li>Mentored multiple junior engineers by integrating them into high-stakes projects, including unit testing for a major QRC.</li>
+
                         <li class="list-header"><strong>Initiative & Problem-Solving:</strong></li>
-                        <li>Proactively took control of a strategic <strong>six-figure R&D project</strong> as the electrical lead, driving a major collaboration with the Micro-Electronics team that resulted in novel designs and three alternate designs beyond the original scope.</li>
-                        <li>Stepped in to assist another program by fixing critical software, filling a personnel gap, saving weeks of troubleshooting, and keeping a rapid delivery project on schedule.</li>
-                        <li><strong>Saved an estimated hundreds of labor hours</strong> on efforts valued at over a <strong>million dollars</strong> by assisting in the design of a security-compliant local network setup for a CMM room.</li>
-                        <li>Executed a grueling multi-month QRC working 11-hour days to deliver 30 full-scale systems and worked almost 200 hours in less than two weeks on another QRC to conduct critical testing, saving half of the products.</li>
+                        <li>Proactively seized control of a strategic <strong>six-figure R&D project</strong> as electrical lead, driving a major collaboration with Micro-Electronics that produced novel designs and three alternate functional prototypes beyond the original scope.</li>
+                        <li>Stepped in to rescue another program by resolving critical software defects, filling a personnel gap, saving weeks of troubleshooting, and keeping a rapid delivery project on schedule.</li>
+                        <li>Architected a security-compliant local network setup for a CMM room, <strong>saving thousands of labor hours</strong> on efforts valued at over <strong>$1M</strong> by streamlining data transfer workflows.</li>
+                        <li>Executed a grueling multi-month QRC (11-hour days) to manufacture, test, and deliver 30 full-scale systems; in a separate QRC, personally logged nearly 200 hours in under two weeks conducting critical testing that saved 50% of the product deliverable.</li>
                         <li>Led R&D across 5 projects, resulting in <strong>2 patent disclosures</strong> in Li-Fi technology.</li>
                     </ul>
                 </div>
@@ -739,8 +854,8 @@
                         <span class="position-date">Dec 2019 – Apr 2020</span>
                     </div>
                     <ul class="achievements">
-                        <li>Responsible for modernization projects across three departments of 200 people at a 100,000 ton/year plate steel facility.</li>
-                        <li>Specific Projects: Added a steel Quench process, redesigned power feed to 9 furnaces, implemented a new ABB drive system.</li>
+                        <li>Directed electrical modernization projects across three departments (200 personnel) at a massive 100,000 ton/year plate steel facility.</li>
+                        <li><strong>Key Projects:</strong> Integration of a new steel Quench process, full redesign of the power feed system for 9 heavy industrial furnaces, and implementation of a modern ABB drive system to replace aging infrastructure.</li>
                     </ul>
                 </div>
                 <div class="position-block">
@@ -749,7 +864,7 @@
                         <span class="position-date">May 2018 – Dec 2019</span>
                     </div>
                     <ul class="achievements">
-                        <li>Worked long 12-hour rotating shifts as the sole electrical technician for the rolling mill and finishing departments.</li>
+                        <li>Worked grueling 12-hour rotating shifts as the sole electrical technician responsible for the rolling mill and finishing departments, maintaining uptime in extreme environmental conditions.</li>
                     </ul>
                 </div>
                 <div class="position-block">
@@ -770,13 +885,13 @@
                         <span class="position-date">Aug 2017 – Mar 2018</span>
                     </div>
                     <ul class="achievements">
-                        <li>Worked as a non-profit consultant to design life-saving devices for various systems.</li>
+                        <li>Non-profit consultant designing ruggedized life-saving devices.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="leadership-section" data-aos="fade-up">
             <h2 class="section-title leadership">Leadership & Mentorship</h2>
             <div class="summary-content" style="margin-bottom: 30px;">
                 Core Philosophy: A "servant leader" model inspired by family and exceptional military commanders. This philosophy is built on a foundation of being down-to-earth, human, caring, and empathetic, with integrity as a paramount value.
@@ -803,7 +918,7 @@
             </div>
         </section>
 
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="workstyle-section" data-aos="fade-up">
             <h2 class="section-title work-style">Work Style & Environment</h2>
             <div class="competencies-grid">
                 <div class="competency-group">
@@ -825,7 +940,7 @@
             </div>
         </section>
         
-        <section class="section page-break" data-aos="fade-up">
+        <section class="section page-break" id="military-section" data-aos="fade-up">
             <h2 class="section-title military">Military Service</h2>
             <div class="experience-item">
                 <div class="company-header">
@@ -837,17 +952,17 @@
                         <span class="position-date">May 2011 – Jun 2021</span>
                     </div>
                     <ul class="achievements">
-                        <li>Served 10 years, several of which were active, in key leadership roles including:</li>
-                        <li class="indented-li"><strong>1st Platoon Sergeant (2020 – 2021):</strong> Oversaw a platoon of 22 soldiers.</li>
-                        <li class="indented-li"><strong>NCOIC of Biomedical Section (Feb 2018 – Jun 2021):</strong> Oversaw a shop of 8 soldiers.</li>
-                        <li>Completed a 9-month deployment to Honduras, supporting JTF-B and humanitarian missions.</li>
-                        <li>Coordinated missions, funding, scheduling, training, and personnel issues for a 325th Combat Hospital.</li>
+                        <li>Served 10 years (including active duty) in critical leadership roles:</li>
+                        <li class="indented-li"><strong>1st Platoon Sergeant (2020 – 2021):</strong> Led and oversaw a platoon of 22 soldiers.</li>
+                        <li class="indented-li"><strong>NCOIC of Biomedical Section (Feb 2018 – Jun 2021):</strong> Managed a section of 8 technicians.</li>
+                        <li><strong>Deployment Impact:</strong> Completed a 9-month deployment to Honduras supporting JTF-B. Served as Subject Matter Expert (SME) for the U.S. Embassy and drafted CAD layouts for a hospital expansion project.</li>
+                        <li>Coordinated missions, funding, scheduling, training, and personnel operations for the 325th Combat Hospital.</li>
                     </ul>
                 </div>
             </div>
         </section>
         
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="education-section" data-aos="fade-up">
             <h2 class="section-title education">Education</h2>
             <div class="education-grid">
                 <div class="education-item">
@@ -865,7 +980,7 @@
             </div>
         </section>
         
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="certs-section" data-aos="fade-up">
             <h2 class="section-title technical">Licenses & Certifications</h2>
             <div class="awards-grid">
                 <div class="award-category" style="grid-column: 1 / -1;">
@@ -933,7 +1048,7 @@
             </div>
         </section>
         
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="comprehensive-skills-section" data-aos="fade-up">
             <h2 class="section-title competencies">Comprehensive Skills & Expertise</h2>
             <div class="competencies-grid">
                 <div class="competency-group">
@@ -1011,7 +1126,7 @@
             </div>
         </section>
 
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="awards-section" data-aos="fade-up">
             <h2 class="section-title awards">Honors & Awards</h2>
             <div class="awards-grid">
                 <div class="award-category">
@@ -1047,7 +1162,7 @@
             </div>
         </section>
 
-        <section class="section" data-aos="fade-up">
+        <section class="section" id="volunteer-section" data-aos="fade-up">
             <h2 class="section-title volunteer">Volunteer & Community Involvement</h2>
             
             <div class="experience-item">
@@ -1234,9 +1349,7 @@
     </script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
+    <!-- Three.js removed: not used; lens flare is canvas-based -->
     <script>
         // Initialize AOS
         AOS.init({
@@ -1531,6 +1644,61 @@
         // PDF Download Functionality
         document.getElementById('download-pdf-btn').addEventListener('click', function() {
             window.print();
+        });
+
+        // ========================================
+        // FLOATING NAV SIDEBAR
+        // ========================================
+        const navSidebar = document.querySelector('.nav-sidebar');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const navSections = [];
+
+        navDots.forEach(dot => {
+            const targetId = dot.getAttribute('data-target');
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) navSections.push({ dot, el: targetEl });
+
+            dot.addEventListener('click', () => {
+                if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Show/hide nav sidebar based on scroll position
+        function updateNavSidebar() {
+            const scrollY = window.scrollY;
+            if (scrollY > 300) {
+                navSidebar.classList.add('visible');
+            } else {
+                navSidebar.classList.remove('visible');
+            }
+
+            // Highlight active dot
+            let activeIdx = 0;
+            navSections.forEach((item, idx) => {
+                const rect = item.el.getBoundingClientRect();
+                if (rect.top <= window.innerHeight * 0.4) activeIdx = idx;
+            });
+            navDots.forEach(d => d.classList.remove('active'));
+            if (navSections[activeIdx]) navSections[activeIdx].dot.classList.add('active');
+        }
+
+        window.addEventListener('scroll', updateNavSidebar, { passive: true });
+        updateNavSidebar();
+
+        // ========================================
+        // BACK TO TOP BUTTON
+        // ========================================
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }, { passive: true });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
     </script>
