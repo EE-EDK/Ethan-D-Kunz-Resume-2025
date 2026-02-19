@@ -1,6 +1,6 @@
 # ETHAN KUNZ
 
-## Technical Manager | Engineering Leadership
+## Senior Engineer | Engineering Leadership
 
 **Pleasant Hill, MO 64080** | cell: on request | ethan.douglas.kunz@gmail.com | [linkedin.com/in/ethan-douglas-kunz](https://linkedin.com/in/ethan-douglas-kunz)
 
