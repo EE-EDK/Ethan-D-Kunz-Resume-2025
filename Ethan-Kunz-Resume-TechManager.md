@@ -165,6 +165,7 @@ flowchart LR
 - The structure matters first, then creativity falls within that framework. I create requirements, build mental models, and enable fact-based conversations about performance and direction.
 - Maintains a professional-grade home laboratory ($10K+ investment) for continuous learning and prototyping — embedded systems, sensor fusion, PCB design, AI/ML experimentation, and full-stack hardware/firmware/software development.
 - Deploys and manages local AI infrastructure (Ollama, Open WebUI, LM Studio, CUDA-accelerated inference) and builds n8n automation workflows integrating multiple LLMs to accelerate engineering productivity.
+- Experienced with agentic AI workflows, AI-integrated CLI/IDE tooling, embedded AI in browser (Perplexity), edge AI (ST MEMS Studio with Random Forest, Neural Networks), and Linux-based AI development environments.
 ---
 ## Personal AI & R&D Projects
 | Project | Description | Tech Stack |
@@ -267,9 +268,11 @@ flowchart TB
     subgraph AI["AI & Machine Learning"]
         A1["Local LLM Deployment — Ollama, Open WebUI, LM Studio"]
         A2["CUDA-Accelerated Inference"]
-        A3["n8n AI Automation Pipelines"]
-        A4["Prompt Engineering & AI-Assisted Dev"]
-        A5["Claude, DeepSeek, Gemini, Grok, ChatGPT"]
+        A3["n8n AI Automation & Agentic AI Pipelines"]
+        A4["Prompt Engineering & AI CLI/IDE Integrations"]
+        A5["Claude, DeepSeek, Gemini, Grok, ChatGPT, Perplexity"]
+        A6["Edge AI — ST MEMS Studio, Random Forest, Neural Networks"]
+        A7["Linux AI Development Environments"]
     end
     subgraph SPEC["Specialized Domains"]
         SP1["Safety Critical Systems"]
@@ -296,12 +299,14 @@ flowchart TB
 | Staffing Plans & Resource Forecast | Business Metrics & Quality Assurance | MS Office, Cisco Tech, Docker | Visual Studio, Keil, STM32Cube |
 | Technical Writing & Training | MS SQL Server, T-SQL, MySQL | | |
 
-| AI, Models & Platforms | Embedded Systems & MCUs | Industrial Controls | Specialized Domains |
+| AI, Models & Platforms | Edge AI & ML Algorithms | Embedded Systems & MCUs | Industrial Controls |
 |---|---|---|---|
-| LM Studio, Ollama, Open WebUI | ESP32, STM32, MSP TI | Wonderware, Proficy ME | Safety Critical Systems |
-| CUDA, Docker, n8n AI Pipelines | RP2040, Atmega / Attiny | FactoryTalk, Portal S7 Siemens | Pulse Power & High-Voltage |
-| Claude (Opus/Sonnet/Haiku) | Teensy 4.1, Beaglebone Black | Controllogix 5000, SLC500 | Li-Fi, Biomedical, Fiber Optics |
-| DeepSeek, Gemini Pro, Grok, ChatGPT | Sensor Fusion, mmWave Radar | | Prompt Engineering, Local LLM |
+| LM Studio, Ollama, Open WebUI | ST MEMS Studio (Edge AI) | ESP32, STM32, MSP TI | Wonderware, Proficy ME |
+| CUDA, Docker, n8n AI Pipelines | Random Forest, Neural Networks | RP2040, Atmega / Attiny | FactoryTalk, Portal S7 Siemens |
+| Claude (Opus/Sonnet/Haiku) | On-Device Inference & Classification | Teensy 4.1, Beaglebone Black | Controllogix 5000, SLC500 |
+| DeepSeek, Gemini Pro, Grok, ChatGPT | SVG-based ML Visualization | Sensor Fusion, mmWave Radar | Safety Critical Systems |
+| Agentic AI, Perplexity | Signal Processing with ML | | Pulse Power & High-Voltage |
+| AI CLI/IDE Integrations | Linux AI Development Environments | | Li-Fi, Biomedical, Fiber Optics |
 ---
 ## Honors & Awards
 ### Civilian Honors
