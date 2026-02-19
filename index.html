@@ -598,6 +598,39 @@
             .animate-title { animation: none; transform: none; color: #1e2c4c !important; }
             [data-aos] { opacity: 1 !important; transform: none !important; }
             .page-break { page-break-before: always; }
+
+            /* Comprehensive Skills — compact 4-column grid for PDF */
+            #comprehensive-skills-section {
+                page-break-inside: avoid;
+                padding: 20px 30px !important;
+            }
+            #comprehensive-skills-section .section-title {
+                margin-bottom: 12px;
+            }
+            #comprehensive-skills-section .competencies-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px 16px;
+                padding: 10px;
+            }
+            #comprehensive-skills-section .competencies-grid:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            #comprehensive-skills-section .competency-group h4 {
+                font-size: 11px;
+                margin-bottom: 6px;
+                padding-bottom: 3px;
+            }
+            #comprehensive-skills-section .competency-group li {
+                font-size: 10px;
+                padding: 1px 0 1px 12px;
+                line-height: 1.4;
+                margin-bottom: 1px;
+            }
+            #comprehensive-skills-section .competency-group li:before {
+                top: 2px;
+                font-size: 10px;
+            }
         }
 
         /* --- Floating Navigation --- */
@@ -1050,7 +1083,7 @@
             </div>
         </section>
         
-        <section class="section" id="comprehensive-skills-section" data-aos="fade-up">
+        <section class="section page-break" id="comprehensive-skills-section" data-aos="fade-up">
             <h2 class="section-title competencies">Comprehensive Skills & Expertise</h2>
             <div class="competencies-grid">
                 <div class="competency-group">
