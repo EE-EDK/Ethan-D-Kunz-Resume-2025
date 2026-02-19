@@ -582,7 +582,7 @@
         /* Print-specific styles */
         @media print {
             body { background: white; }
-            .resume-container { box-shadow: none; margin: 0; border-radius: 0; }
+            .resume-container { box-shadow: none; margin: 0; border-radius: 0; max-width: 100% !important; }
             .download-btn, #edge-particles, .nav-sidebar, .back-to-top { display: none !important; }
             .header {
                 background: #1e2c4c !important;
@@ -597,7 +597,16 @@
             .experience-item:hover { transform: none; box-shadow: none; }
             .animate-title { animation: none; transform: none; color: #1e2c4c !important; }
             [data-aos] { opacity: 1 !important; transform: none !important; }
-            .page-break { page-break-before: always; }
+
+            /* Every section starts on its own page */
+            .section {
+                page-break-before: always;
+            }
+
+            /* Override the responsive 1fr so grids stay multi-column in print */
+            .competencies-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
 
             /* Comprehensive Skills — compact 4-column grid for PDF */
             #comprehensive-skills-section {
@@ -608,7 +617,7 @@
                 margin-bottom: 12px;
             }
             #comprehensive-skills-section .competencies-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(4, 1fr) !important;
                 gap: 10px 16px;
                 padding: 10px;
             }
