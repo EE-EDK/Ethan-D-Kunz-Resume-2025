@@ -30,18 +30,12 @@ mindmap
       Quality, Flow & Prod
       Surety & Risk Mit
 ```
-| Technical Team Management | People Strategy & Communication |
-|---|---|
-| Staff Development & Accountability | Employee Development & Retention |
-| Staffing Plans & Resource Forecasting | Mentorship & Cross-Training Programs |
-| Interviewing, Hiring & Training | Internal & External Teamwork Facilitation |
-| Performance Evaluation & Coaching | Sr. Leadership Liaison & Information Flow |
-| Strategic & Financial Oversight | Mission Execution & Innovation |
-|---|---|
-| Budget Proposals & Financial Management | Vision & Strategy for Mission Objectives |
-| Equipment & Resource Requirements | Full Program Lifecycle Management |
-| Business Process Improvement | Improving Quality, Flowtime & Productivity |
-| Quality Metrics & Total Quality Assurance | Operational Surety & Risk Mitigation |
+| Technical Team Management | People Strategy & Communication | Strategic & Financial Oversight | Mission Execution & Innovation |
+|---|---|---|---|
+| Staff Development & Accountability | Employee Development & Retention | Budget Proposals & Financial Mgmt | Vision & Strategy for Mission Objectives |
+| Staffing Plans & Resource Forecasting | Mentorship & Cross-Training Programs | Equipment & Resource Requirements | Full Program Lifecycle Management |
+| Interviewing, Hiring & Training | Internal & External Teamwork Facilitation | Business Process Improvement | Improving Quality, Flowtime & Productivity |
+| Performance Evaluation & Coaching | Sr. Leadership Liaison & Info Flow | Quality Metrics & Total Quality Assurance | Operational Surety & Risk Mitigation |
 ---
 ## Professional Experience
 ### Honeywell FM&T / KCNSC — Kansas City, MO
@@ -184,14 +178,10 @@ quadrantChart
     Embedded Systems: [0.75, 0.50]
     Hardware Design - EDA: [0.65, 0.45]
 ```
-| Technical Management | Quality & Data Analytics |
-|---|---|
-| Staff Development, Hiring & Training — 90% | Statistical Process Control & Quality Metrics — 75% |
-| Budgeting, Staffing & Resource Forecasting — 85% | Data Visualization (Python, VBA, SQL) — 70% |
-| Engineering Disciplines | Program & Project Tools |
-|---|---|
-| Pulsed Power & High-Voltage Systems — 85% | PM Methodologies (JIRA, MS Project) — 90% |
-| Embedded Systems (ESP/STM/MSP) — 75% | Hardware Design (Altium, KiCad, LTSpice) — 65% |
+| Technical Management | Quality & Data Analytics | Engineering Disciplines | Program & Project Tools |
+|---|---|---|---|
+| Staff Dev, Hiring & Training — 90% | Statistical Process Control — 75% | Pulsed Power & HV Systems — 85% | PM Methodologies (JIRA, MS Project) — 90% |
+| Budgeting & Resource Forecast — 85% | Data Visualization (Python, VBA, SQL) — 70% | Embedded Systems (ESP/STM/MSP) — 75% | Hardware Design (Altium, KiCad, LTSpice) — 65% |
 ---
 ## Comprehensive Skills & Expertise
 ```mermaid
@@ -234,26 +224,18 @@ flowchart TB
     style HW fill:#555,color:#fff
     style SPEC fill:#c41e3a,color:#fff
 ```
-| Technical Management & Leadership | Data Analytics & Quality |
-|---|---|
-| Direct Supervision & Staff Development | Statistical Modeling & Process Control |
-| Complex Program & Project Management | Data Visualization (Python, SQL, VBA) |
-| Staffing Plans & Resource Forecasting | Business Metrics & Quality Assurance |
-| Technical Writing, Training & Curriculum Development | MS SQL Server, T-SQL, MySQL |
-| Software & Programming | Hardware Design & Analysis (EDA) |
-|---|---|
-| C++, C#, Python, VBA | Altium, KiCad, LTSpice |
-| **Web/DB:** HTML/JS/CSS, ASP.NET Web API | Logic 2.4, Mentor Graphics |
-| **DevOps/IT:** MS Office, Cisco Tech, Docker | Visual Studio, Keil uVision5, STM32Cube |
-| AI, Models & Platforms | Embedded Systems & MCUs |
-|---|---|
-| **Tools:** LM Studio, Docker, n8n, ollama, cuda | ESP32, STM32, MSP TI |
-| **Models:** DeepSeek, Sonnet, Opus, Haiku, Gemini Pro, Grok, ChatGPT | RP2040, Atmega / Attiny, Teensy 4.1, Beaglebone Black |
-| Industrial Controls | Specialized Domains |
-|---|---|
-| Wonderware, Proficy Machine Edition | Safety Critical Systems |
-| FactoryTalk, Portal S7 Siemens | Pulse Power & High-Voltage |
-| Controllogix 5000, SLC500 | Li-Fi Technology, Biomedical Electronics, Fiber Optics |
+| Management & Leadership | Data Analytics & Quality | Software & Programming | Hardware & EDA |
+|---|---|---|---|
+| Direct Supervision & Staff Dev | Statistical Modeling & Process Control | C++, C#, Python, VBA | Altium, KiCad, LTSpice |
+| Complex Program & Project Mgmt | Data Visualization (Python, SQL, VBA) | HTML/JS/CSS, ASP.NET Web API | Logic 2.4, Mentor Graphics |
+| Staffing Plans & Resource Forecast | Business Metrics & Quality Assurance | MS Office, Cisco Tech, Docker | Visual Studio, Keil, STM32Cube |
+| Technical Writing & Training | MS SQL Server, T-SQL, MySQL | | |
+
+| AI, Models & Platforms | Embedded Systems & MCUs | Industrial Controls | Specialized Domains |
+|---|---|---|---|
+| LM Studio, Docker, n8n, ollama | ESP32, STM32, MSP TI | Wonderware, Proficy ME | Safety Critical Systems |
+| DeepSeek, Sonnet, Opus, Haiku | RP2040, Atmega / Attiny | FactoryTalk, Portal S7 Siemens | Pulse Power & High-Voltage |
+| Gemini Pro, Grok, ChatGPT | Teensy 4.1, Beaglebone Black | Controllogix 5000, SLC500 | Li-Fi, Biomedical, Fiber Optics |
 ---
 ## Honors & Awards
 ### Civilian Honors
