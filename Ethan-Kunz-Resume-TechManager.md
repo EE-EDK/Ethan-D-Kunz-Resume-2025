@@ -1,3 +1,58 @@
+---
+puppeteer:
+  format: "Letter"
+  margin:
+    top: "0.4in"
+    bottom: "0.4in"
+    left: "0.4in"
+    right: "0.4in"
+---
+
+<style>
+/* Keep headers with their content — never orphan at bottom of page */
+h2 {
+  page-break-after: avoid;
+  break-after: avoid;
+  margin-top: 0.3in;
+}
+
+/* Tables stay together on one page */
+table {
+  page-break-inside: avoid;
+  break-inside: avoid;
+  width: 100%;
+  font-size: 11px;
+}
+
+th, td {
+  padding: 3px 6px;
+  vertical-align: top;
+}
+
+/* Mermaid diagrams stay with their section */
+.mermaid {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Prevent breaks inside list groups */
+h4, h3 {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+ul {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Blockquotes stay together */
+blockquote {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+</style>
+
 # ETHAN KUNZ
 ## Senior Engineer | Engineering Leadership
 **Pleasant Hill, MO 64080** | cell: on request | ethan.douglas.kunz@gmail.com
