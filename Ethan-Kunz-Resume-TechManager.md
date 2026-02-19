@@ -163,7 +163,17 @@ flowchart LR
 #### What I Bring to a Management Role
 - A hands-on technical leader who has been in the trenches — board-level design, firmware programming, system integration, final delivery. I understand what I'm asking my team to do because I've done it.
 - The structure matters first, then creativity falls within that framework. I create requirements, build mental models, and enable fact-based conversations about performance and direction.
-- Maintains a professional-grade home laboratory ($10K+ investment) for continuous learning and prototyping — embedded systems, sensor fusion, PCB design, and full-stack hardware/firmware/software development.
+- Maintains a professional-grade home laboratory ($10K+ investment) for continuous learning and prototyping — embedded systems, sensor fusion, PCB design, AI/ML experimentation, and full-stack hardware/firmware/software development.
+- Deploys and manages local AI infrastructure (Ollama, Open WebUI, LM Studio, CUDA-accelerated inference) and builds n8n automation workflows integrating multiple LLMs to accelerate engineering productivity.
+---
+## Personal AI & R&D Projects
+| Project | Description | Tech Stack |
+|---|---|---|
+| **EchoFlux** | Desk-mounted, contactless gesture controller using TI AWR6843AOPEVM mmWave radar and RP2350 MCU — embedded C firmware with real-time signal processing and AI-driven gesture classification | mmWave, Embedded C, Sensor Fusion |
+| **Financial Hub Automation** | Python-based AI system to automate the processing and intelligent visualization of financial documents using LLM-powered extraction and analysis | Python, LLM Integration, Data Viz |
+| **Human Presence Detector** | IoT detection system utilizing DFRobot C4001 mmWave sensor and Raspberry Pi Pico for smart home automation with AI-enhanced occupancy detection | IoT, mmWave, RPi Pico |
+| **Local AI Infrastructure** | Deployed containerized LLM stack (Ollama, Open WebUI, LM Studio) with CUDA acceleration; built n8n automation workflows integrating multiple AI models for engineering productivity | Docker, CUDA, n8n, LLM |
+| **mmWave Radar Patent** | Personal patent (released by Honeywell, currently in process) for novel mmWave radar technology applications | Radar, IP, R&D |
 ---
 ## Military Service
 ### US Army Reserves — Kansas City, MO & Honduras
@@ -219,6 +229,7 @@ quadrantChart
     PM Methodologies: [0.90, 0.80]
     Statistical Process Control: [0.75, 0.85]
     Data Visualization: [0.70, 0.70]
+    AI/ML & Local LLM Deployment: [0.70, 0.75]
     Pulsed Power Systems: [0.85, 0.60]
     Embedded Systems: [0.75, 0.50]
     Hardware Design - EDA: [0.65, 0.45]
@@ -253,6 +264,13 @@ flowchart TB
         H2["ESP32, STM32, MSP TI, RP2040, Teensy 4.1"]
         H3["Industrial Controls — FactoryTalk, Siemens, Controllogix"]
     end
+    subgraph AI["AI & Machine Learning"]
+        A1["Local LLM Deployment — Ollama, Open WebUI, LM Studio"]
+        A2["CUDA-Accelerated Inference"]
+        A3["n8n AI Automation Pipelines"]
+        A4["Prompt Engineering & AI-Assisted Dev"]
+        A5["Claude, DeepSeek, Gemini, Grok, ChatGPT"]
+    end
     subgraph SPEC["Specialized Domains"]
         SP1["Safety Critical Systems"]
         SP2["Pulse Power & High-Voltage"]
@@ -261,11 +279,13 @@ flowchart TB
     end
     MGT --- DATA
     DATA --- SW
-    SW --- HW
+    SW --- AI
+    AI --- HW
     HW --- SPEC
     style MGT fill:#1e2c4c,color:#fff
     style DATA fill:#2c3e5f,color:#fff
     style SW fill:#34495e,color:#fff
+    style AI fill:#0d47a1,color:#fff
     style HW fill:#555,color:#fff
     style SPEC fill:#c41e3a,color:#fff
 ```
@@ -278,9 +298,10 @@ flowchart TB
 
 | AI, Models & Platforms | Embedded Systems & MCUs | Industrial Controls | Specialized Domains |
 |---|---|---|---|
-| LM Studio, Docker, n8n, ollama | ESP32, STM32, MSP TI | Wonderware, Proficy ME | Safety Critical Systems |
-| DeepSeek, Sonnet, Opus, Haiku | RP2040, Atmega / Attiny | FactoryTalk, Portal S7 Siemens | Pulse Power & High-Voltage |
-| Gemini Pro, Grok, ChatGPT | Teensy 4.1, Beaglebone Black | Controllogix 5000, SLC500 | Li-Fi, Biomedical, Fiber Optics |
+| LM Studio, Ollama, Open WebUI | ESP32, STM32, MSP TI | Wonderware, Proficy ME | Safety Critical Systems |
+| CUDA, Docker, n8n AI Pipelines | RP2040, Atmega / Attiny | FactoryTalk, Portal S7 Siemens | Pulse Power & High-Voltage |
+| Claude (Opus/Sonnet/Haiku) | Teensy 4.1, Beaglebone Black | Controllogix 5000, SLC500 | Li-Fi, Biomedical, Fiber Optics |
+| DeepSeek, Gemini Pro, Grok, ChatGPT | Sensor Fusion, mmWave Radar | | Prompt Engineering, Local LLM |
 ---
 ## Honors & Awards
 ### Civilian Honors
