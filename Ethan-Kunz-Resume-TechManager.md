@@ -1,13 +1,3 @@
----
-puppeteer:
-  format: "Letter"
-  margin:
-    top: "0.4in"
-    bottom: "0.4in"
-    left: "0.4in"
-    right: "0.4in"
----
-
 <style>
 /* Keep headers with their content — never orphan at bottom of page */
 h2 {
