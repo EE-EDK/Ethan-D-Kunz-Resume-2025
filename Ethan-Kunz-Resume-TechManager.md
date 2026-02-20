@@ -45,10 +45,10 @@ blockquote {
 
 # ETHAN KUNZ
 ## Senior Engineer | Engineering Leadership
-**Pleasant Hill, MO 64080** | cell: on request | ethan.douglas.kunz@gmail.com
+**Pleasant Hill, MO 64080** | cell: on request | office: 816-488-5162 | ethan.douglas.kunz@gmail.com
 ---
 ## Professional Summary
-Hands-on technical leader with an MBA (4.0 GPA), a B.S. in Electrical Engineering (Cum Laude, ABET), an Active DOE Q Security Clearance with SCI, and a decade of high-stakes engineering experience — from the extreme industrial environments of steel manufacturing to directing multi-million dollar national security programs at Honeywell FM&T / KCNSC. I lead from the front as a servant leader: I practice what I preach, tear down barriers for my team, hold people accountable, and give them the tools I didn't have. I've managed budgets, staffing plans, and resource forecasts across programs worth many millions of dollars, cross-trained 7 teammates for critical roles, and mentored junior engineers through high-pressure QRC deliveries. U.S. Citizen with 7+ years of continuous engineering experience who thrives on building team capability, improving quality and flowtime, and driving mission objectives to completion.
+Hands-on technical leader with an MBA (4.0 GPA), a B.S. in Electrical Engineering (Cum Laude, ABET), an Active DOE Q Security Clearance with SCI, and a decade of high-stakes engineering experience — from the extreme industrial environments of steel manufacturing to directing multi-million dollar programs at Honeywell FM&T / KCNSC — an engineering, manufacturing, and operational national asset safeguarding the nation through proliferation deterrence, supply chain assurance, and responsiveness to global threats in support of the safety, security, and reliability of the nation's nuclear deterrent. I lead from the front as a servant leader: I practice what I preach, tear down barriers for my team, hold people accountable, and give them the tools I didn't have. I've managed budgets, staffing plans, and resource forecasts across programs worth many millions of dollars, cross-trained 7 teammates for critical roles, and mentored junior engineers through high-pressure QRC deliveries. U.S. Citizen with 7+ years of continuous engineering experience who thrives on building team capability, improving quality, flow-time, and productivity, and driving mission objectives to completion.
 ---
 ## Core Competencies
 ```mermaid
@@ -79,7 +79,7 @@ mindmap
 |---|---|---|---|
 | Staff Development & Accountability | Employee Development & Retention | Budget Proposals & Financial Mgmt | Vision & Strategy for Mission Objectives |
 | Staffing Plans & Resource Forecasting | Mentorship & Cross-Training Programs | Equipment & Resource Requirements | Full Program Lifecycle Management |
-| Interviewing, Hiring & Training | Internal & External Teamwork Facilitation | Business Process Improvement | Improving Quality, Flowtime & Productivity |
+| Interviewing, Hiring & Training | Internal & External Teamwork Facilitation | Business Process Improvement & Lean Six Sigma | Improving Quality, Flowtime & Productivity |
 | Performance Evaluation & Coaching | Sr. Leadership Liaison & Info Flow | Quality Metrics & Total Quality Assurance | Operational Surety & Risk Mitigation |
 ---
 ## Professional Experience
@@ -99,12 +99,13 @@ gantt
 **Electrical Engineer II** | May 2020 – May 2022
 Serves as a primary technical and project leader for Special Projects and Warfighter Support, organizing, coordinating, and managing the execution of multi-million dollar pulse power initiatives alongside PM, supporting critical national security mission objectives.
 #### Team Leadership & Staff Development
-- Technical lead for a **significant six-figure** bi-annual training program, coordinating **50+ internal personnel** and managing engagement with up to **10 executive-level sponsors** per year — directly responsible for planning, assigning, and directing work.
-- Cross-trained **7 teammates** for critical program roles by developing curriculum, justifying budget allocations to sponsors, and holding individuals accountable to committed objectives.
+- Technical lead for a **significant six-figure** bi-annual training program, managing both direct and matrixed personnel — coordinating **50+ internal participants** and up to **10 executive-level sponsors** per year through planning, assigning, and directing work.
+- Developed technical talent by cross-training **7 teammates** for critical program roles — designing curriculum, justifying budget allocations to sponsors, and holding individuals accountable to committed objectives.
 - Mentored multiple junior engineers by integrating them directly into high-stakes projects — giving them real responsibility, not busy work — including unit testing for a major QRC delivery.
 - Consistently engages across science and engineering disciplines, cross-pollinating ideas that seed new R&D concepts and bring new work to the team and visibility to DoD and NNSA.
 #### Budget, Resource & Programmatic Management
 - Orchestrated **many millions** of dollars in project execution across the pulse power portfolio — personally developing or supporting staffing plans, budget proposals, and resource forecasts for each effort.
+- As a full cost recovery operation, developed a keen understanding of how long tasks actually take and how difficult they are in real execution — understanding the local team, people's strengths, and the customer's true needs. Acutely aware of how to manage scope uniquely within specific use cases, proactively re-baselining resource forecasts when actuals diverge from plan to ensure accurate financial reporting and sustained sponsor confidence.
 - Served as the technical or sub-component lead on numerous key projects (including an NNSA program modernization effort), driving **millions** in successful on-time deliveries and correcting resource forecasts when actuals diverged from plan.
 - Owned multiple projects end-to-end — from initial concept through full CDR to final product delivery — because I believe in accountability through the entire lifecycle, not just the design phase.
 - Delivered a significant TTN->HSH **six-figure project** (1,000+ personal hours), building sponsor confidence and directly securing a follow-on **multi-million dollar QRC**.
@@ -114,7 +115,7 @@ Serves as a primary technical and project leader for Special Projects and Warfig
 - Proactively seized control of a strategic **six-figure R&D project** as electrical lead, driving a major collaboration with Micro-Electronics that produced novel designs and three alternate functional prototypes beyond the original scope.
 - Stepped in to rescue a Special Projects 3 program by resolving critical software defects, filling a personnel gap, saving weeks of troubleshooting, and keeping a rapid delivery project on schedule.
 - Executed a grueling multi-month QRC (11-hour days) to manufacture, test, and deliver 30 full-scale systems; in a separate QRC, personally logged nearly 200 hours in under two weeks conducting critical testing that saved 50% of the product deliverable with a partner.
-- Led R&D across 5 projects, resulting in **2 patent disclosures** in Li-Fi technology and **1 patent disclosure** in Software Firesets, with 1 personal patent released by Honeywell and currently in process for mmwave radar technology.
+- Led R&D across 5 projects, applying DFSS Green Belt methodology — resulting in **2 patent disclosures** in Li-Fi technology and successive work that led to a major expansion in Li-Fi R&D, plus **1 patent disclosure** in Software Firesets, with 1 personal patent released by Honeywell and currently in process for mmWave radar technology.
 ---
 ### Nucor Corporation — Longview, TX & Blytheville, AR
 **Electrical Projects Lead** | Dec 2019 – Apr 2020
@@ -145,15 +146,17 @@ flowchart LR
 ```
 #### Direct Supervision & Staff Development
 - Led a platoon of 22 soldiers as 1st Platoon Sergeant; managed a section of 8 technicians as NCOIC — directly responsible for planning, assigning, directing work, and evaluating performance.
-- Cross-trained 7 teammates for critical program roles by developing curriculum, budgeting training costs, and justifying allocations to sponsors.
+- Developed technical talent by cross-training 7 teammates for critical program roles — designing curriculum, budgeting training costs, and justifying allocations to sponsors.
 - Integrated a new Software Engineer II into unit testing on a major QRC; mentored multiple Engineer I teammates across research and rapid projects.
 - Actively invests in each person's growth — providing them with the tools I didn't have and integrating them into real work, not simulations.
 - Acts as a judge and mentor for FIRST Robotics teams.
+- Continuously identifies and pulls in new or external engineers to support constrained missions — matches individuals with the right programs and mentors to ensure growth and skill absorption at a pace they're comfortable with, and identifies alternate resources in advance to fill anticipated gaps in rapid prototype work.
 #### Team Dynamics & Organizational Influence
 - Works to "level load" team responsibilities, taking direct ownership of tasks to reduce cost and balance workloads across the unit.
 - Consistently "touches base" with diverse groups across science and engineering — lots of touch points, gathering information in advance, building mental structure before meetings to enable fact-based conversations.
 - This cross-pollination of ideas (e.g., material science, micro-electronics) directly seeds new concepts for rapid prototyping and brings new work to the team.
 - Bridges the gap between senior leadership and the working level — translating organizational priorities into clear direction while escalating ground-truth issues upward.
+- Approaches every team member on merit alone — personal differences in background and belief are separate from the technical work. Values diverse technical perspectives because there is no bias in technical evolution, only the right path forward. Meets people where they are and engages comfortably on any topic.
 ---
 ## Work Style & Environment
 #### Pace & Resilience
@@ -161,11 +164,13 @@ flowchart LR
 - Accustomed to grueling, non-stop work schedules (multi-month QRCs working 11-hour days, 200 testing hours in under two weeks) and delivering under extreme pressure.
 - Forged in environments like Nucor — 16+ hour days in extreme heat, dust, and danger — and Army deployments. These experiences built the resilience I bring to every leadership challenge.
 #### What I Bring to a Management Role
-- A hands-on technical leader who has been in the trenches — board-level design, firmware programming, system integration, final delivery. I understand what I'm asking my team to do because I've done it.
+- A hands-on technical leader with a bias for action who has been in the trenches — board-level design, firmware programming, system integration, final delivery. I understand what I'm asking my team to do because I've done it.
 - The structure matters first, then creativity falls within that framework. I create requirements, build mental models, and enable fact-based conversations about performance and direction.
 - Maintains a professional-grade home laboratory ($10K+ investment) for continuous learning and prototyping — embedded systems, sensor fusion, PCB design, AI/ML experimentation, and full-stack hardware/firmware/software development.
 - Deploys and manages local AI infrastructure (Ollama, Open WebUI, LM Studio, CUDA-accelerated inference) and builds n8n automation workflows integrating multiple LLMs to accelerate engineering productivity.
 - Experienced with agentic AI workflows, AI-integrated CLI/IDE tooling, embedded AI in browser (Perplexity), edge AI (ST MEMS Studio with Random Forest, Neural Networks), and Linux-based AI development environments.
+- Manages work execution through ADAMs, JIRA, risk matrices, requirements documents and traceability mapping, and RAILs — ensuring structured oversight from concept through delivery.
+- Believes metrics serve the team, not the other way around — uses data to identify obstacles and allocate resources, not to assign blame. Accountability means giving people what they need to succeed, then holding them to the standard.
 ---
 ## Personal AI & R&D Projects
 | Project | Description | Tech Stack |
